@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Database Context 
-builder.Services.AddDbContext<DatabaseContext>(options =>
+builder.Services.AddDbContext<ProjectS3Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDB"));
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
