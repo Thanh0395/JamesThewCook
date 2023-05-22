@@ -18,7 +18,7 @@ namespace JamesThewAPI.Entities
         public string Email { get; set; } = null!;
         public string UserName { get; set; } = null!;
         public string? Avatar { get; set; }
-        public string? Password { get; set; }
+        public string Password { get; set; } = null!;
         public string? Role { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

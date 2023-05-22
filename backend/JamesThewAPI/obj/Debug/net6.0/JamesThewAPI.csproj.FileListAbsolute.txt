@@ -64,3 +64,4 @@ F:\Fpt-aptech\Project_S3\JamesThewCook\backend\JamesThewAPI\obj\Debug\net6.0\ref
 F:\Fpt-aptech\Project_S3\JamesThewCook\backend\JamesThewAPI\obj\Debug\net6.0\JamesThewAPI.pdb
 F:\Fpt-aptech\Project_S3\JamesThewCook\backend\JamesThewAPI\obj\Debug\net6.0\JamesThewAPI.genruntimeconfig.cache
 F:\Fpt-aptech\Project_S3\JamesThewCook\backend\JamesThewAPI\obj\Debug\net6.0\ref\JamesThewAPI.dll
+F:\Fpt-aptech\Project_S3\JamesThewCook\backend\JamesThewAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

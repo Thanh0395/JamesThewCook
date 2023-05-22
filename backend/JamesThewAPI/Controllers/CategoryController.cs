@@ -15,7 +15,7 @@ namespace JamesThewAPI.Controllers
             _cateRepo = cateRepo;
         }
         [HttpGet]
-        public Task<IEnumerable<Category>> GetAllCategory()
+        public Task<IEnumerable<Category>> GetAllCategories()
         {
             return _cateRepo.GetCategoriesAsync();
         }
