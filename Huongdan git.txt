@@ -2,3 +2,7 @@ To see all remote branch names, run git branch -r
 To see all local and remote branches, run git branch -a
 You can see detailed information such as the local or remote branches in use, commit ids, and commit messages by running 
 	git branch -vv or git branch -vva
+
+Gop code tu nhanh <branch name> ve main: 
+	git checkout main
+	git merge <branch name>
