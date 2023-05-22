@@ -5,6 +5,7 @@ namespace JamesThewAPI.Entities
 {
     public partial class Feedback
     {
+        //asdfg
         public int FbId { get; set; }
         public int? UId { get; set; }
         public int? PId { get; set; }
