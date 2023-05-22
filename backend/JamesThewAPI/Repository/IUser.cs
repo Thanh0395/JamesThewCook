@@ -5,6 +5,7 @@ namespace JamesThewAPI.Repository
 {
     public interface IUser
     {
+        //test git cho Hung
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(int UId);
         Task<User> AddUserAsync(User user);
