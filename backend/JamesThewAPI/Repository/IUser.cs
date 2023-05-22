@@ -5,7 +5,7 @@ namespace JamesThewAPI.Repository
 {
     public interface IUser
     {
-        
+        //sua tren nhanh main
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(int UId);
         Task<User> AddUserAsync(User user);
