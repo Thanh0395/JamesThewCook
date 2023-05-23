@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Database Context 
-builder.Services.AddDbContext<DatabaseContext>(options =>
+builder.Services.AddDbContext<ProjectS3Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDB"));
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -35,6 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
+builder.Services.AddScoped<ICountry, CountryImp>();
 
 var app = builder.Build();
 

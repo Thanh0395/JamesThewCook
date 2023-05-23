@@ -6,8 +6,8 @@ namespace JamesThewAPI.Repository
 {
     public class CategoryImp : ICategory
     {
-        private readonly DatabaseContext _dbContext;
-        public CategoryImp(DatabaseContext dbContext)
+        private readonly ProjectS3Context _dbContext;
+        public CategoryImp(ProjectS3Context dbContext)
         {
             _dbContext = dbContext;
         }

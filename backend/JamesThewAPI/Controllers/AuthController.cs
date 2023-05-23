@@ -15,10 +15,10 @@ namespace JamesThewAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly DatabaseContext _dbContext;
+        private readonly ProjectS3Context _dbContext;
         private readonly IConfiguration _configuration;
 
-        public AuthController(DatabaseContext dbContext, IConfiguration configuration)
+        public AuthController(ProjectS3Context dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
             _configuration = configuration;
