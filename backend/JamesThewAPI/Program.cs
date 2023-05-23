@@ -2,6 +2,7 @@ using JamesThewAPI.Entities;
 using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -48,6 +49,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles(new StaticFileOptions
+{
+	FileProvider = new PhysicalFileProvider
+(Path.Combine(builder.Environment.ContentRootPath, "Public/Uploads")),
+	RequestPath = "Public/Uploads"
+
+});
 
 app.MapControllers();
 
