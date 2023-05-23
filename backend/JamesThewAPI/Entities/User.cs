@@ -11,6 +11,9 @@ namespace JamesThewAPI.Entities
             Feedbacks = new HashSet<Feedback>();
             Memberships = new HashSet<Membership>();
             Posts = new HashSet<Post>();
+            Ratings = new HashSet<Rating>();
+            RecipeFeedbacks = new HashSet<RecipeFeedback>();
+            Recipes = new HashSet<Recipe>();
             SubmissionContests = new HashSet<SubmissionContest>();
         }
 
@@ -27,6 +30,9 @@ namespace JamesThewAPI.Entities
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Membership> Memberships { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<RecipeFeedback> RecipeFeedbacks { get; set; }
+        public virtual ICollection<Recipe> Recipes { get; set; }
         public virtual ICollection<SubmissionContest> SubmissionContests { get; set; }
     }
 }
