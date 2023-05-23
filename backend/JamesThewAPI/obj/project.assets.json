@@ -2273,19 +2273,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MSI\\.nuget\\packages\\": {}
+    "C:\\Users\\tanhu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Fpt-aptech\\Project_S3\\JamesThewCook\\backend\\JamesThewAPI\\JamesThewAPI.csproj",
+      "projectUniqueName": "D:\\projectHKIII\\JamesThewCook\\backend\\JamesThewAPI\\JamesThewAPI.csproj",
       "projectName": "JamesThewAPI",
-      "projectPath": "F:\\Fpt-aptech\\Project_S3\\JamesThewCook\\backend\\JamesThewAPI\\JamesThewAPI.csproj",
-      "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-      "outputPath": "F:\\Fpt-aptech\\Project_S3\\JamesThewCook\\backend\\JamesThewAPI\\obj\\",
+      "projectPath": "D:\\projectHKIII\\JamesThewCook\\backend\\JamesThewAPI\\JamesThewAPI.csproj",
+      "packagesPath": "C:\\Users\\tanhu\\.nuget\\packages\\",
+      "outputPath": "D:\\projectHKIII\\JamesThewCook\\backend\\JamesThewAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tanhu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
