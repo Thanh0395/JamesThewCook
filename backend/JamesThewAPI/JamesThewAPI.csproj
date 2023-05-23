@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Public\Uploads\" />
+    <Folder Include="Public\Images\Post\" />
+    <Folder Include="Public\Images\Recipe\" />
   </ItemGroup>
 
 </Project>
