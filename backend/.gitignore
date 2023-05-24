@@ -28,6 +28,7 @@ bld/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+JamesThewCook/backend/JamesThewAPI/obj/Debug/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -271,4 +272,8 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore
+=======
+# End of https://www.toptal.com/developers/gitignore/api/aspnetcore
+>>>>>>> f5e7a4a8605cc824422e6669709361aeb2e7fa9f
