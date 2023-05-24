@@ -36,6 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 builder.Services.AddScoped<IFileUpload, UploadFileImp>();
+builder.Services.AddScoped<ISubmissionContest, SCImp>();
 builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
 builder.Services.AddScoped<ICountry, CountryImp>();

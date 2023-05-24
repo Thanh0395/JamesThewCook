@@ -87,7 +87,6 @@ namespace JamesThewAPI.Repository
                         {
                             if (fileName != null)
                             {
-                                contest.StartDate = contestdb.StartDate;
                                 contest.FeatureImage = "/Public" + componentPath + "/" + fileName;
                                 context.Entry(contest).State = EntityState.Modified;
                                 await context.SaveChangesAsync();
