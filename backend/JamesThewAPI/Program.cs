@@ -2,6 +2,7 @@ using JamesThewAPI.Entities;
 using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -35,6 +36,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
+builder.Services.AddScoped<ICountry, CountryImp>();
+builder.Services.AddScoped<IPost, PostImp>();
 
 var app = builder.Build();
 
@@ -47,6 +50,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//	FileProvider = new PhysicalFileProvider
+//(Path.Combine(builder.Environment.ContentRootPath, "Public/Uploads")),
+//	RequestPath = "Public/Uploads"
+
+//});
 
 app.MapControllers();
 

@@ -17,7 +17,7 @@ namespace JamesThewAPI.Controllers
     {
         private readonly ProjectS3Context _dbContext;
         private readonly IConfiguration _configuration;
-        //asdfg
+
         public AuthController(ProjectS3Context dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
