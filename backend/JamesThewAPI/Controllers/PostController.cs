@@ -10,6 +10,7 @@ namespace JamesThewAPI.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
+        //test lan nua
         private readonly  IPost _postRepo;
         public PostController(IPost postRepo)
         {
