@@ -16,7 +16,7 @@
 			//File path thuc the cua may
 			string filePathDir = _uploadFolder + componentPath;
 			//Chuoi can lay la gi
-			string targetSubstring = @"Public/Images" + componentPath;
+			string targetSubstring = @"Public" + componentPath;
 			//cat chuoi filePathDir tu dau start index de cat chuoi
 			int startIndex = filePath.IndexOf(targetSubstring);
 			// extractedSubstring chuoi sau khi cat duoc

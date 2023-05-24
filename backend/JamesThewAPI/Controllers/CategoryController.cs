@@ -17,6 +17,7 @@ namespace JamesThewAPI.Controllers
         {
             _cateRepo = cateRepo;
         }
+
         [HttpGet]
         public async Task<ActionResult<CustomRespone<IEnumerable<Category>>>> GetAllCategories()
         {
@@ -75,7 +76,7 @@ namespace JamesThewAPI.Controllers
 				if (resources != null)
 				{
 					var response = new CustomRespone<Category>
-							(StatusCodes.Status200OK, "Category created", resources, null);
+							(StatusCodes.Status201Created, "Category created", resources, null);
 					return Ok(response);
 				}
 				else

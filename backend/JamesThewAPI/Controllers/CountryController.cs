@@ -73,7 +73,7 @@ namespace JamesThewAPI.Controllers
 				if (resources != null)
 				{
 					var response = new CustomRespone<Country>
-							(StatusCodes.Status200OK, "Country created", resources, null);
+							(StatusCodes.Status201Created, "Country created", resources, null);
 					return Ok(response);
 				}
 				else

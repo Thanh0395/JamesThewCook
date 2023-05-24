@@ -39,6 +39,7 @@ builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
 builder.Services.AddScoped<ICountry, CountryImp>();
 builder.Services.AddScoped<IFileUpload, UploadFileImp>();
+builder.Services.AddScoped<IRecipe, RecipeImp>();
 
 var app = builder.Build();
 
