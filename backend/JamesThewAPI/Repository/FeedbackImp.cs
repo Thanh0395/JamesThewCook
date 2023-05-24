@@ -1,32 +1,75 @@
 ﻿using JamesThewAPI.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace JamesThewAPI.Repository
 {
     public class FeedbackImp : IFeedback
     {
-        public Task<Feedback> CreateFeedback(Feedback feedback)
+        private readonly ProjectS3Context _context;
+        public FeedbackImp(ProjectS3Context context)
         {
-            throw new NotImplementedException();
+            this._context = context;
+        }
+        public async Task<Feedback> AddFeedback(Feedback feedback)
+        {
+            if (feedback != null) {
+                _context.Feedbacks.Add(feedback);
+                await _context.SaveChangesAsync();
+                return feedback;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<Feedback> DeleteFeedback(int id)
+        public async Task<bool> DeleteFeedback(int fbId)
         {
-            throw new NotImplementedException();
+            var result = await _context.Feedbacks.FindAsync(fbId);
+            if (result != null)
+            {
+                 _context.Remove(result);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public Task<IEnumerable<Feedback>> GetAllFeedbacks()
+        public async Task<IEnumerable<Feedback>> GetAllFeedbacks()
         {
-            throw new NotImplementedException();
+           return await _context.Feedbacks.ToListAsync();
         }
 
-        public Task<Feedback> GetFeedback(int id)
+        public async Task<Feedback> GetFeedback(int fbId)
         {
-            throw new NotImplementedException();
+            var feedbackDB = await _context.Feedbacks.FindAsync(fbId);
+            if (feedbackDB != null)
+            {
+                return feedbackDB;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<Feedback> UpdateFeedback(Feedback feedback)
+        public async Task<Feedback> UpdateFeedback(Feedback feedback)
         {
-            throw new NotImplementedException();
+            var feedbackDB = await _context.Feedbacks.FindAsync(feedback.FbId);
+            if (feedbackDB != null)
+            {
+                _context.Entry(feedback).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return feedback;
+            }
+            else
+            {   
+                return null;
+            }
         }
     }
 }
