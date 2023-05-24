@@ -11,7 +11,7 @@ namespace JamesThewAPI.Repository
         {
             this._context = context;
         }
-        public async Task<Post> AddPost(Post post)
+        public async Task<Post> AddPostAsync(Post post)
         {
             if(post != null)
             {
@@ -25,7 +25,7 @@ namespace JamesThewAPI.Repository
             }
         }
 
-        public async Task<bool> DeletePost(int pId)
+        public async Task<bool> DeletePostAsync(int pId)
         {
             var postDB = await _context.Posts.FindAsync(pId);
             if(postDB != null)
@@ -40,12 +40,12 @@ namespace JamesThewAPI.Repository
             }
         }
 
-        public async Task<IEnumerable<Post>> GetAllPosts()
+        public async Task<IEnumerable<Post>> GetAllPostsAsync()
         {
             return await _context.Posts.ToListAsync();
         }
 
-        public async Task<Post> GetPost(int pId)
+        public async Task<Post> GetPostAsync(int pId)
         {
             var postDB = await _context.Posts.FindAsync(pId);
             //if( postDB != null)
@@ -59,7 +59,7 @@ namespace JamesThewAPI.Repository
             return (postDB != null) ? postDB : null;
         }
 
-        public async Task<Post> UpdatePost(Post post)
+        public async Task<Post> UpdatePostAsync(Post post)
         {
             var postDB = await _context.Posts.FindAsync(post.PId);
             if(postDB != null)
