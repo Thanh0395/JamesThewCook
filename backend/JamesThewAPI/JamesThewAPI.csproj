@@ -20,5 +20,6 @@
   <ItemGroup>
     <Folder Include="Public\Images\Post\" />
     <Folder Include="Public\Images\Recipe\" />
+    <Folder Include="Public\Images\Contest\" />
   </ItemGroup>
 </Project>
