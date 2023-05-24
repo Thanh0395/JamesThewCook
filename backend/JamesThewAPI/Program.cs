@@ -35,11 +35,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+
+builder.Services.AddScoped<IFileUpload, UploadFileImp>();
 builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
 builder.Services.AddScoped<ICountry, CountryImp>();
-
+builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
+builder.Services.AddScoped<IRecipe, RecipeImp>();
+
 
 var app = builder.Build();
 
@@ -54,9 +58,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles(new StaticFileOptions
 {
-	FileProvider = new PhysicalFileProvider
-(Path.Combine(builder.Environment.ContentRootPath, "Public")),
-	RequestPath = "/Public"
+    FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Public")),
+    RequestPath = "/Public"
 });
 
 app.MapControllers();
