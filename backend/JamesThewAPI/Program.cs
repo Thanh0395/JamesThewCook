@@ -35,11 +35,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+builder.Services.AddScoped<IFileUpload, UploadFileImp>();
 builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
 builder.Services.AddScoped<ICountry, CountryImp>();
-
+builder.Services.AddScoped<IRecipe, RecipeImp>();
+builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
+
 
 var app = builder.Build();
 
