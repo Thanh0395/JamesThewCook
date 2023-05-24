@@ -1,24 +1,45 @@
 ﻿using JamesThewAPI.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace JamesThewAPI.Repository
 {
     public class CategoryImp : ICategory
     {
-        private readonly DatabaseContext _dbContext;
-        public CategoryImp(DatabaseContext dbContext)
+        private readonly ProjectS3Context _dbContext;
+        public CategoryImp(ProjectS3Context dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public Task<Category> AddCategoryAsync(Category category)
+        public async Task<Category> AddCategoryAsync(Category category)
         {
-            throw new NotImplementedException();
+            if(category != null)
+            {
+                await _dbContext.Categories.AddAsync(category);
+                await _dbContext.SaveChangesAsync();
+                return category;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<bool> DeleteCategoryAsync(int CId)
+        public async Task<bool> DeleteCategoryAsync(int cId)
         {
-            throw new NotImplementedException();
+            var cateDb = await _dbContext.Categories.FindAsync(cId);
+            if(cateDb != null)
+            {
+                _dbContext.Categories.Remove(cateDb);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
@@ -26,14 +47,25 @@ namespace JamesThewAPI.Repository
             return await _dbContext.Categories.ToListAsync();
         }
 
-        public Task<Category> GetCategoryAsync(int CId)
+        public async Task<Category> GetCategoryAsync(int cId)
         {
-            throw new NotImplementedException();
+            var cateDb = await _dbContext.Categories.FindAsync(cId);
+            return (cateDb != null) ? cateDb : null;
         }
 
-        public Task<Category> UpdateCategoryAsync(Category category)
+        public async Task<Category> UpdateCategoryAsync(Category category)
         {
-            throw new NotImplementedException();
-        }
+            var cateDb = await _dbContext.Categories.FindAsync(category.CId);
+            if (cateDb != null)
+            {
+                _dbContext.Entry(cateDb).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+                return category;
+            }
+            else
+            {
+                return null;
+            }
+		}
     }
 }

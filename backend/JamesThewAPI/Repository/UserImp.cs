@@ -8,8 +8,8 @@ namespace JamesThewAPI.Repository
 {
     public class UserImp : IUser
     {
-        private readonly DatabaseContext _dbContext;
-        public UserImp(DatabaseContext dbContext)
+        private readonly ProjectS3Context _dbContext;
+        public UserImp(ProjectS3Context dbContext)
         {
             _dbContext = dbContext;
         }
