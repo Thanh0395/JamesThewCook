@@ -1,7 +1,10 @@
 ﻿using JamesThewAPI.Entities;
+using JamesThewAPI.ModelUtility;
 using JamesThewAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Security.Principal;
 
 namespace JamesThewAPI.Controllers
@@ -16,6 +19,7 @@ namespace JamesThewAPI.Controllers
             _userRepo = userRepo;  
         }
         [HttpGet]
+        [Authorize(Roles = $"{UserRole.Admin}")]
         public Task<IEnumerable<User>> GetAllUsers()
         {
             return _userRepo.GetUsersAsync();
@@ -40,6 +44,7 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpDelete("{UId}")]
+        [Authorize(Roles = $"{UserRole.Admin}")]
         public async Task<bool> DeleteUser(int UId)
         {
             return await _userRepo.DeleteUserAsync(UId);

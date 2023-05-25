@@ -42,6 +42,7 @@ builder.Services.AddScoped<ICountry, CountryImp>();
 builder.Services.AddScoped<IRecipe, RecipeImp>();
 builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
+builder.Services.AddScoped<IMembership, MembershipImp>();
 
 
 var app = builder.Build();

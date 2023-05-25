@@ -8,7 +8,7 @@ namespace JamesThewAPI.Entities
         public int MsId { get; set; }
         public int? UId { get; set; }
         public bool? IsMembership { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public virtual User? UIdNavigation { get; set; }
     }
