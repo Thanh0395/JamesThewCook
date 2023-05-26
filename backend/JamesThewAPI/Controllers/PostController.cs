@@ -97,11 +97,11 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomRespone<Post>>> AddPost(Post Post)
+        public async Task<ActionResult<CustomRespone<Post>>> AddPost([FromForm]Post Post, IFormFile? file)
         {
             try
             {
-                var result = await _postRepo.AddPostAsync(Post);
+                var result = await _postRepo.AddPostAsync(Post,file);
                 if (result != null)
                 {
                     var response = new CustomRespone<Post>(
@@ -176,11 +176,11 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<CustomRespone<Post>>> Update(Post Post)
+        public async Task<ActionResult<CustomRespone<Post>>> Update([FromForm]Post Post, IFormFile? file)
         {
             try
             {
-                var result = await _postRepo.UpdatePostAsync(Post);
+                var result = await _postRepo.UpdatePostAsync(Post, file);
                 if (result != null)
                 {
                     var response = new CustomRespone<Post>(

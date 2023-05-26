@@ -1,4 +1,5 @@
 ﻿using JamesThewAPI.Entities;
+using JamesThewAPI.ModelUtility.FIleService;
 using Microsoft.EntityFrameworkCore;
 
 namespace JamesThewAPI.Repository
@@ -6,15 +7,34 @@ namespace JamesThewAPI.Repository
     public class PostImp : IPost
     {
         //test push 
+        private readonly IFileUpload _formFile;   
         private readonly ProjectS3Context _context;
-        public PostImp(ProjectS3Context context)
+        private string componentPath = "/Images/Post";
+
+        public PostImp(ProjectS3Context context, IFileUpload formFile)
         {
             this._context = context;
+            this._formFile = formFile;
         }
-        public async Task<Post> AddPostAsync(Post post)
+        public async Task<Post> AddPostAsync(Post post, IFormFile file)
         {
-            if(post != null)
-            {
+            if(post != null) { 
+                if (file != null)
+                {
+                    var fileName = await _formFile.UploadFile(file, componentPath);
+                    if (fileName != null)
+                    {
+                        post.FeatureImage = "/Public" + componentPath + "/" + fileName;
+                    }
+                    else
+                    {
+                        post.FeatureImage = "defaultImage";
+                    }
+                }
+                else
+                {
+                    post.FeatureImage = "/Public" + componentPath + "/" + "defaultavt.png";
+                }
                 await _context.Posts.AddAsync(post);
                 await _context.SaveChangesAsync();
                 return post;
@@ -59,15 +79,30 @@ namespace JamesThewAPI.Repository
             return (postDB != null) ? postDB : null;
         }
 
-        public async Task<Post> UpdatePostAsync(Post post)
+        public async Task<Post> UpdatePostAsync(Post post, IFormFile file)
         {
             var postDB = await _context.Posts.FindAsync(post.PId);
-            if(postDB != null)
-            {
-                _context.Entry(post).State = EntityState.Modified;
-                await _context.SaveChangesAsync();  
-                return post;
-            }
+            if (postDB != null) { 
+                if (file != null)
+                {
+                    var fileName = await _formFile.UploadFile(file, componentPath);
+                    if (fileName != null)
+                    {
+                        post.FeatureImage = "/Public" + componentPath + "/" + fileName;
+                    }
+                    else
+                    {
+                        post.FeatureImage = "defaultImage";
+                    }
+                }
+                else
+                {
+                    post.FeatureImage = "/Public" + componentPath + "/" + "defaultavt.png";
+                }
+            _context.Entry(post).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return post;
+        }
             else
             {
                 return null;
