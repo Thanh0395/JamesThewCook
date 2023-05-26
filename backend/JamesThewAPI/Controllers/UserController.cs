@@ -1,7 +1,11 @@
 ﻿using JamesThewAPI.Entities;
+using JamesThewAPI.ModelUtility;
+using JamesThewAPI.ModelUtility.CustomResult;
 using JamesThewAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Security.Principal;
 
 namespace JamesThewAPI.Controllers
@@ -16,39 +20,155 @@ namespace JamesThewAPI.Controllers
             _userRepo = userRepo;  
         }
         [HttpGet]
-        public Task<IEnumerable<User>> GetAllUsers()
+        [Authorize(Roles = $"{UserRole.Admin}")]
+        public async Task<ActionResult<CustomRespone<IEnumerable<User>>>> GetAllUsers()
         {
-            return _userRepo.GetUsersAsync();
+            try
+            {
+                var resources = await _userRepo.GetUsersAsync();
+                if (resources != null && resources.Any())
+                {
+                    var response = new CustomRespone<IEnumerable<User>>
+                            (StatusCodes.Status200OK, "All User", resources, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<IEnumerable<User>>(StatusCodes.Status404NotFound, "Failed!!!!!!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while view all user", null, ex.Message);
+                return BadRequest(response);
+            }
         }
 
         [HttpGet("{UId}")]
-        public Task<User> GetUserById(int UId)
+        public async Task<ActionResult<CustomRespone<Recipe>>> GetUserById(int UId)
         {
-            return _userRepo.GetUserAsync(UId);
+            try
+            {
+                var resources = await _userRepo.GetUserAsync(UId);
+                if (resources != null)
+                {
+                    var response = new CustomRespone<User>
+                            (StatusCodes.Status200OK, "View User", resources, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "View User failed!!!!!!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while view user", null, ex.Message);
+                return BadRequest(response);
+            }
         }
 
         [HttpPost]
-        public Task<User> PostUser(User user)
+        public async Task<ActionResult<CustomRespone<User>>> PostUser(User user, IFormFile file)
         {
-            return _userRepo.AddUserAsync(user);
+            try
+            {
+                var resources = await _userRepo.AddUserAsync(user, file);
+                if (resources != null)
+                {
+                    var response = new CustomRespone<User>
+                            (StatusCodes.Status200OK, "User updated", resources, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Add User failed!!!!!!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while add model", null, ex.Message);
+                return BadRequest(response);
+            }
         }
 
-        [HttpPut("{UId}")]
-        public Task<User> UpdateUser(User user)
+        [HttpPut]
+        public async Task<ActionResult<CustomRespone<User>>> UpdateUser(User user, IFormFile file)
         {
-            return _userRepo.UpdateUserAsync(user);
+            try
+            {
+                var resources = await _userRepo.UpdateUserAsync(user,file);
+                if (resources != null)
+                {
+                    var response = new CustomRespone<User>
+                            (StatusCodes.Status200OK, "User updated", resources, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Update User failed!!!!!!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while update model", null, ex.Message);
+                return BadRequest(response);
+            }
         }
 
         [HttpDelete("{UId}")]
-        public async Task<bool> DeleteUser(int UId)
+        [Authorize(Roles = $"{UserRole.Admin}")]
+        public async Task<ActionResult<CustomRespone<User>>> DeleteUser(int UId)
         {
-            return await _userRepo.DeleteUserAsync(UId);
+            try
+            {
+                var resources = await _userRepo.DeleteUserAsync(UId);
+                if (resources != false)
+                {
+                    var response = new CustomRespone<User>
+                            (StatusCodes.Status200OK, "Delete successfully", null, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Delete User failed!!!!!!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while delete model", null, ex.Message);
+                return BadRequest(response);
+            }
         }
 
-        //[HttpGet("{email}/{pass}")]
-        //public Task<User> CheckLogin(string email, string pass)
-        //{
-        //    return _userRepo.CheckLogin(email,pass);
-        //}
+        [HttpPut("changepass")]
+        public async Task<ActionResult<CustomRespone<User>>> ChangePass(string email, string oldPass, string newPass)
+        {
+            try
+            {
+                var resources = await _userRepo.ChangeUserPassAsync(email,oldPass,newPass);
+                if (resources != null)
+                {
+                    var response = new CustomRespone<User>
+                            (StatusCodes.Status200OK, "Change password successfully", null, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Wrong email or password!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while change password", null, ex.Message);
+                return BadRequest(response);
+            }
+        }
     }
 }

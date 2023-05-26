@@ -1,5 +1,6 @@
 ﻿using JamesThewAPI.Entities;
 using JamesThewAPI.ModelUtility;
+using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,13 @@ namespace JamesThewAPI.Controllers
     {
         private readonly ProjectS3Context _dbContext;
         private readonly IConfiguration _configuration;
+        private readonly IMembership _membership;
 
-        public AuthController(ProjectS3Context dbContext, IConfiguration configuration)
+        public AuthController(ProjectS3Context dbContext, IConfiguration configuration, IMembership membership)
         {
             _dbContext = dbContext;
             _configuration = configuration;
+            _membership = membership;
         }
 
         [HttpPost]
@@ -31,8 +34,20 @@ namespace JamesThewAPI.Controllers
             var user = Authenticate(userLogin);
             if (user != null)
             {
+                int UId = user.UId;
+                string Email = user.Email;
+                string UserName = user.UserName;
+                string Role = user.Role;
+                string Avatar = user.Avatar;
+                
+                string IsMembership;
+                if (_membership.UpdateMembershipStatus(user.Email))
+                {
+                    IsMembership = "Membership";
+                }
+                else IsMembership = "NotMembership";
                 var token = GenerateToken(user);
-                return Ok(new { token });
+                return Ok(new { token, UId, Email, UserName, Role, Avatar, IsMembership });
             }
             return NotFound();
         }
