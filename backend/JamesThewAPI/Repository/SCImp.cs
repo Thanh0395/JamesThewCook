@@ -18,7 +18,7 @@ namespace JamesThewAPI.Repository
 
         public async Task<SubmissionContest> AddSC(SubmissionContest sc, IFormFile file)
         {
-            var scdb = await context.SubmissionContests.FirstOrDefaultAsync(p => p.UId.Equals(sc.UId));
+            var scdb = await context.SubmissionContests.FirstOrDefaultAsync(p => p.UId.Equals(sc.UId) && p.ContestId.Equals(sc.ContestId));
             if (scdb == null)
             {
                 if (sc != null)
