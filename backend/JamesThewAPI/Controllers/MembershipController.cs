@@ -19,7 +19,7 @@ namespace JamesThewAPI.Controllers
             _membershipRepo = membershipRepo;
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = $"{UserRole.Admin},{UserRole.User}")]
         //[Authorize(Roles = $"{UserRole.Admin},{UserRole.User},{UserRole.Membership}")]
         public async Task<ActionResult<Membership>> ChargeMembership(int UserID, int month)
         {
