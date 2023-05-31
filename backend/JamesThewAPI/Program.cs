@@ -44,6 +44,7 @@ builder.Services.AddScoped<IContest, ContestImp>();
 builder.Services.AddScoped<IRecipe, RecipeImp>();
 builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
+builder.Services.AddScoped<IMembership, MembershipImp>();
 
 //config localhost to use UI
 builder.Services.AddCors(options =>
