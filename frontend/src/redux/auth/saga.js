@@ -40,7 +40,6 @@ function* loginWithEmailPassword({ payload }) {
   try {
     const loginUser = yield call(axios.post,"http://localhost:5013/api/Auth", {email,password});
     if (!loginUser.email) {
-      console.log(loginUser);
       
       const item = { uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
         img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };

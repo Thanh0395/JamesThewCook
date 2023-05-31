@@ -1,4 +1,4 @@
-import { adminRoot } from './defaultValues';
+import { UserRole, adminRoot } from './defaultValues';
 
 const data = [
   {
@@ -6,19 +6,19 @@ const data = [
     icon: 'iconsminds-shop-4',
     label: 'menu.dashboards',
     to: `${adminRoot}/dashboards`,
-    // roles: [UserRole.Admin, UserRole.Editor],
+    // roles: [UserRole.Admin,UserRole.User],
     subs: [
       {
         icon: 'simple-icon-briefcase',
         label: 'menu.default',
         to: `${adminRoot}/dashboards/default`,
-        // roles: [UserRole.Admin],
+        // roles: [UserRole.Admin,UserRole.User],
       },
       {
         icon: 'simple-icon-pie-chart',
         label: 'menu.analytics',
         to: `${adminRoot}/dashboards/analytics`,
-        // roles: [UserRole.Admin],
+        roles: [UserRole.Admin],
       },
       {
         icon: 'simple-icon-basket-loaded',
