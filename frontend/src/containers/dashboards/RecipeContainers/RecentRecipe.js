@@ -6,10 +6,9 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Card, CardBody, CardTitle, Badge } from 'reactstrap';
 
 import IntlMessages from 'helpers/IntlMessages';
-// import data from 'data/products';
 import { adminRoot } from 'constants/defaultValues';
 
-const RecentOrders = () => {
+const RecentRecipe = () => {
   const [recipies, setRecipies] = useState([]);
   useEffect(()=>{
     axios
@@ -25,7 +24,7 @@ const RecentOrders = () => {
       </div>
       <CardBody>
         <CardTitle>
-          <IntlMessages id="dashboards.recipe" />
+          <IntlMessages id="dashboards.recent-recipe" />
         </CardTitle>
         <div className="scroll dashboard-list-with-thumbs">
           <PerfectScrollbar
@@ -75,4 +74,4 @@ const RecentOrders = () => {
     </Card>
   );
 };
-export default RecentOrders;
+export default RecentRecipe;

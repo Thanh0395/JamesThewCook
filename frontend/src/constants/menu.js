@@ -1,4 +1,4 @@
-import { UserRole, adminRoot } from './defaultValues';
+import { adminRoot } from './defaultValues';
 
 const data = [
   {
@@ -6,19 +6,19 @@ const data = [
     icon: 'iconsminds-shop-4',
     label: 'menu.dashboards',
     to: `${adminRoot}/dashboards`,
-    // roles: [UserRole.Admin,UserRole.User],
+    // roles: [UserRole.Admin, UserRole.Editor],
     subs: [
       {
         icon: 'simple-icon-briefcase',
         label: 'menu.default',
         to: `${adminRoot}/dashboards/default`,
-        // roles: [UserRole.Admin,UserRole.User],
+        // roles: [UserRole.Admin],
       },
       {
         icon: 'simple-icon-pie-chart',
         label: 'menu.analytics',
         to: `${adminRoot}/dashboards/analytics`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin],
       },
       {
         icon: 'simple-icon-basket-loaded',
@@ -31,6 +31,30 @@ const data = [
         label: 'menu.content',
         to: `${adminRoot}/dashboards/content`,
         // roles: [UserRole.Editor],
+      },
+      {
+        icon: 'simple-icon-book-open',
+        label: 'menu.recipes',
+        to: `${adminRoot}/dashboards/recipes`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.recipes.default',
+            to: `${adminRoot}/dashboards/recipes/default`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.recipes.list-recipe',
+            to: `${adminRoot}/dashboards/recipes/list-recipe`,
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.create-recipe',
+            to: `${adminRoot}/dashboards/recipes/create-recipe`,
+          },
+        ]
       },
     ],
   },
