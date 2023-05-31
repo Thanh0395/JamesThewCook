@@ -1,4 +1,5 @@
-import { adminRoot } from './defaultValues';
+
+import { UserRole, adminRoot } from './defaultValues';
 
 const data = [
   {
@@ -18,7 +19,7 @@ const data = [
         icon: 'simple-icon-pie-chart',
         label: 'menu.analytics',
         to: `${adminRoot}/dashboards/analytics`,
-        // roles: [UserRole.Admin],
+        roles: [UserRole.Admin],
       },
       {
         icon: 'simple-icon-basket-loaded',
