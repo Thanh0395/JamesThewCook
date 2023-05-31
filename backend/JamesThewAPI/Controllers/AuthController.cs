@@ -1,5 +1,6 @@
 ﻿using JamesThewAPI.Entities;
 using JamesThewAPI.ModelUtility;
+using JamesThewAPI.ModelUtility.CustomResult;
 using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -49,7 +50,11 @@ namespace JamesThewAPI.Controllers
                 var token = GenerateToken(user);
                 return Ok(new { token, UId, Email, UserName, Role, Avatar, IsMembership });
             }
-            return NotFound();
+            else
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "You are not register yet", null, null);
+                return NotFound(response);
+            }
         }
         //To validate user
         private User Authenticate(UserLogin userLogin)

@@ -71,7 +71,7 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomRespone<User>>> PostUser(User user, IFormFile file)
+        public async Task<ActionResult<CustomRespone<User>>> PostUser([FromForm] User user, IFormFile? file)
         {
             try
             {
@@ -79,12 +79,12 @@ namespace JamesThewAPI.Controllers
                 if (resources != null)
                 {
                     var response = new CustomRespone<User>
-                            (StatusCodes.Status200OK, "User updated", resources, null);
+                            (StatusCodes.Status200OK, "User added", resources, null);
                     return Ok(response);
                 }
                 else
                 {
-                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Add User failed!!!!!!", null, null);
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email already used!!!!!!", null, null);
                     return NotFound(response);
                 }
             }
@@ -96,7 +96,7 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<CustomRespone<User>>> UpdateUser(User user, IFormFile file)
+        public async Task<ActionResult<CustomRespone<User>>> UpdateUser([FromForm] User user, IFormFile? file)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace JamesThewAPI.Controllers
                 }
                 else
                 {
-                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Update User failed!!!!!!", null, null);
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email already used!!!!!!", null, null);
                     return NotFound(response);
                 }
             }

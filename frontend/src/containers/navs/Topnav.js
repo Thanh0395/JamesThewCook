@@ -202,9 +202,11 @@ const TopNav = ({
   const { messages } = intl;
   // set hinh avatar
   const [avatar, setAvatar] = useState();
-  useEffect(()=>{
-    setAvatar(getCurrentUser().img)
-  },[]);
+  const [userName, setUserName] = useState();
+  useEffect(() => {
+    setAvatar(getCurrentUser().img);
+    setUserName(getCurrentUser().userName);
+  }, [userName]);
   return (
     <nav className="navbar fixed-top">
       <div className="d-flex align-items-center navbar-left">
@@ -304,7 +306,7 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">Sarah Kortney</span>
+              <span className="name mr-1">{userName}</span>
               <span>
                 <img alt="Profile" src={avatar} />
               </span>

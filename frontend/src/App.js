@@ -67,7 +67,7 @@ const App = ({ locale }) => {
                 <ProtectedRoute
                   path={adminRoot}
                   component={ViewApp}
-                  roles={[UserRole.Admin, UserRole.Editor]}
+                  roles={[UserRole.Admin, UserRole.User]}
                 />
                 <Route
                   path="/user"
