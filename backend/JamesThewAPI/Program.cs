@@ -46,6 +46,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         });
 });
 builder.Services.AddScoped<IFileUpload, UploadFileImp>();
+builder.Services.AddScoped<ISubmissionContest, SCImp>();
 builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
 builder.Services.AddScoped<ICountry, CountryImp>();
@@ -53,10 +54,22 @@ builder.Services.AddScoped<IContest, ContestImp>();
 builder.Services.AddScoped<IRecipe, RecipeImp>();
 builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
+builder.Services.AddScoped<IMembership, MembershipImp>();
 
+//config localhost to use UI
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(
+		policy =>
+		{
+			policy.AllowAnyOrigin();
+			policy.AllowAnyHeader();
+			policy.AllowAnyMethod();
+		});
+});
 
 var app = builder.Build();
-
+app.UseCors();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
