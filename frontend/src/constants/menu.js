@@ -32,6 +32,30 @@ const data = [
         to: `${adminRoot}/dashboards/content`,
         // roles: [UserRole.Editor],
       },
+      {
+        icon: 'simple-icon-book-open',
+        label: 'menu.recipes',
+        to: `${adminRoot}/dashboards/recipes`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.recipes.default',
+            to: `${adminRoot}/dashboards/recipes/default`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.recipes.list-recipe',
+            to: `${adminRoot}/dashboards/recipes/list-recipe`,
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.create-recipe',
+            to: `${adminRoot}/dashboards/recipes/create-recipe`,
+          },
+        ]
+      },
     ],
   },
   {

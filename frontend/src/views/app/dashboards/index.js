@@ -14,6 +14,10 @@ const AnalyticsDefault = React.lazy(() =>
 const EcommerceDefault = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-ecommerce" */ './ecommerce')
 );
+/* Them o day */
+const RecipesDefault = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-ecommerce" */ './recipes')
+);
 
 const Dashboards = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -34,6 +38,10 @@ const Dashboards = ({ match }) => (
       <Route
         path={`${match.url}/analytics`}
         render={(props) => <AnalyticsDefault {...props} />}
+      />
+      <Route
+        path={`${match.url}/recipes`}
+        render={(props) => <RecipesDefault {...props} />}
       />
       {/* 
       <ProtectedRoute

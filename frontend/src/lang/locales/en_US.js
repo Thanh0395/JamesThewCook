@@ -147,6 +147,13 @@ module.exports = {
   'menu.layouts': 'Layouts',
   'menu.validations': 'Validations',
   'menu.wizard': 'Wizard',
+  /* Them o day */
+  'menu.recipes': 'Recipies',
+  'menu.recipes.default': 'Recipe Default',
+  'menu.recipes.list-recipe': 'List Recipe',
+  'menu.list-recipe': 'List Recipe',
+  'menu.create-recipe': 'Create Recipe',
+  'menu.detail-recipe':'Detail Recipe',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -200,6 +207,13 @@ module.exports = {
   'dashboards.keyword': 'Keyword',
   'dashboards.search': 'Search',
   'dashboards.top-rated-items': 'Top Rated Items',
+  /* Them o day */
+  'dashboards.recipe': 'Recipe',
+  'dashboards.recipes': 'Recipes',
+  'dashboards.recent-recipe': 'Recent Recipe',
+  // Cac trang con cua Recipe
+  'dashboards.recipes.default': 'Recipe Default',
+  'dashboards.recipes.list-recipe': 'List Recipe',
 
   /* 05.Pages */
   'pages.add-new': 'ADD NEW',
@@ -533,6 +547,13 @@ module.exports = {
   'form-components.start': 'Start',
   'form-components.end': 'End',
   'form-components.tables': 'Tables',
+  /* sua cho nay */
+  'form-recipe-create.title': 'Title',
+  'form-recipe-create.ingredient': 'Ingredient',
+  'form-recipe-create.directions': 'Directions',
+  'form-recipe-create.categoty': 'Category',
+  'form-recipe-create.isfree': 'IsFree',
+  'form-recipe-create.portion': 'Portion',
   /* 07.12.Icons */
   'icons.simplelineicons': 'Simple Line Icons',
   'icons.iconsmind': 'Iconsmind Icons',
@@ -580,6 +601,7 @@ module.exports = {
   'modal.size': 'Size',
   'modal.launch-large-modal': 'Launch Large Modal',
   'modal.launch-small-modal': 'Launch Small Modal',
+  'modal.detail-recipe': 'Detail Recipe',
 
   /* 07.16.Navigation */
   'nav.basic': 'Nav Basic',
@@ -633,6 +655,8 @@ module.exports = {
   'table.react-scrollable': 'Scrollable',
   'table.react-advanced': 'Filter, Length and Jump',
   'table.divided': 'Divided Table',
+  /* them o day */
+  'table.list-recipe': 'Table Recipies',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',
