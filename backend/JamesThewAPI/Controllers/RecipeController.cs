@@ -91,7 +91,7 @@ namespace JamesThewAPI.Controllers
 			}
 		}
 		[HttpPut]
-		public async Task<ActionResult<CustomRespone<Recipe>>> UpdateRecipe([FromForm] Recipe Recipe, IFormFile file)
+		public async Task<ActionResult<CustomRespone<Recipe>>> UpdateRecipe([FromForm] Recipe Recipe, IFormFile ? file)
 		{
 			try
 			{

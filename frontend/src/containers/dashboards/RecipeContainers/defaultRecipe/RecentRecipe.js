@@ -16,7 +16,7 @@ const RecentRecipe = () => {
   const [categories, setCategories] = useState([])
   useEffect(() => {
     axios
-      .get("http://localhost:5013/api/Recipe")
+      .get("http://localhost:5013/api/Recipe/recent-recipe")
       .then(res => setRecipies(res.data.data))
       .then(GetListCountry().then(rs => setCountries(rs))
         .then(GetListCategory().then(rs => setCategories(rs))))
