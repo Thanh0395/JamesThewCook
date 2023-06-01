@@ -51,7 +51,7 @@ const data = [
             to: `${adminRoot}/dashboards/recipes/list-recipe`,
           },
           {
-            icon: 'simple-icon-book-open',
+            icon: 'simple-icon-plus',
             label: 'menu.create-recipe',
             to: `${adminRoot}/dashboards/recipes/create-recipe`,
           },

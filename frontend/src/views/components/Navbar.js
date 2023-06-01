@@ -22,7 +22,7 @@ function Navbar(props) {
                 <a
                   className="c-pointer"
                   href="#scroll"
-                  onClick={(event) => scrollTo(event, 'features')}
+                  onClick={(event) => scrollTo(event, 'home')}
                 >
                   AUTHOR
                 </a>
@@ -31,7 +31,7 @@ function Navbar(props) {
                 <a
                   className="c-pointer"
                   href="#scroll"
-                  onClick={(event) => scrollTo(event, 'layouts')}
+                  onClick={(event) => scrollTo(event, 'recipies')}
                 >
                   RECIPE
                 </a>
@@ -40,7 +40,7 @@ function Navbar(props) {
                 <a
                   className="c-pointer"
                   href="#scroll"
-                  onClick={(event) => scrollTo(event, 'components')}
+                  onClick={(event) => scrollTo(event, 'contest')}
                 >
                   CONTEST
                 </a>
@@ -49,18 +49,18 @@ function Navbar(props) {
                 <a
                   className="c-pointer"
                   href="#scroll"
-                  onClick={(event) => scrollTo(event, 'apps')}
+                  onClick={(event) => scrollTo(event, 'post')}
                 >
-                  WINNER
+                  POST
                 </a>
               </li>
               <li className="nav-item">
                 <a
                   className="c-pointer"
                   href="#scroll"
-                  onClick={(event) => scrollTo(event, 'themes')}
+                  onClick={(event) => scrollTo(event, 'member')}
                 >
-                  SUBSCRIPTION
+                  MEMBER
                 </a>
               </li>
               <Link to="/login" className="nav-item pl-4">

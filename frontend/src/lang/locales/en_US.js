@@ -148,7 +148,7 @@ module.exports = {
   'menu.validations': 'Validations',
   'menu.wizard': 'Wizard',
   /* Them o day */
-  'menu.recipes': 'Recipies',
+  'menu.recipes': 'Recipes',
   'menu.recipes.default': 'Recipe Default',
   'menu.recipes.list-recipe': 'List Recipe',
   'menu.list-recipe': 'List Recipe',
