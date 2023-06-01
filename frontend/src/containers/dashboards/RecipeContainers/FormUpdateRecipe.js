@@ -6,7 +6,6 @@ import { GetListCountry } from 'services/Hung_Api/CountryApi';
 import { getCurrentUser, getDateWithFormat } from 'helpers/Utils';
 import { PutRecipe } from 'services/Hung_Api/RecipeApi';
 import { Formik, Form, Field } from 'formik';
-import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
@@ -44,8 +43,7 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
         formData.append('cId', values.select);
         formData.append('countryId', values.customRadioGroup);
         formData.append('uId', getCurrentUser().uid);
-        formData.append('portion', values.portion)
-        formData.append('updatedAt', getDateWithFormat());
+        formData.append('portion', values.portion);
         formData.append('file', inputFile);
         setTimeout(() => {
             PutRecipe(formData).then(res =>{
