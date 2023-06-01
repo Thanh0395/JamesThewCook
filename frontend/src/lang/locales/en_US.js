@@ -155,6 +155,7 @@ module.exports = {
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
   'menu.test-recipe':'Test Recipe',
+  'menu.recipes.update-recipe':'Update Recipe',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',

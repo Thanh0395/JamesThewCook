@@ -1,12 +1,12 @@
 import React from 'react';
 import { Row } from 'reactstrap';
-import IntlMessages from 'helpers/IntlMessages';
+// import IntlMessages from 'helpers/IntlMessages';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
-import FormCreateRecipe from 'containers/dashboards/RecipeContainers/FormCreateRecipe';
+import FormCreateRecipe from 'containers/dashboards/RecipeContainers/formsRecipe/FormCreateRecipe';
 
 
-const ListRecipe = ({ match }) => {
+const CreateRecipe = ({ match }) => {
   return (
     <>
       <Row>
@@ -16,11 +16,11 @@ const ListRecipe = ({ match }) => {
         </Colxx>
       </Row>
       <Row>
-        <Colxx xxs="12">
+        {/* <Colxx xxs="12">
           <h3 className="mb-4">
             <IntlMessages id="table.list-recipe" />
           </h3>
-        </Colxx>
+        </Colxx> */}
 
         <Colxx xxs="12">
           <FormCreateRecipe />
@@ -33,4 +33,4 @@ const ListRecipe = ({ match }) => {
     </>
   );
 };
-export default ListRecipe;
+export default CreateRecipe;

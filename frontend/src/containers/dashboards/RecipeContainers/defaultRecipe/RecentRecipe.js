@@ -7,13 +7,19 @@ import { Card, CardBody, CardTitle, Badge } from 'reactstrap';
 
 import IntlMessages from 'helpers/IntlMessages';
 import { adminRoot } from 'constants/defaultValues';
+import { GetListCountry } from 'services/Hung_Api/CountryApi';
+import { GetListCategory } from 'services/Hung_Api/CategoryApi';
 
 const RecentRecipe = () => {
   const [recipies, setRecipies] = useState([]);
-  useEffect(()=>{
+  const [countries, setCountries] = useState([])
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
     axios
-    .get("http://localhost:5013/api/Recipe")
-    .then(res => setRecipies(res.data.data))
+      .get("http://localhost:5013/api/Recipe")
+      .then(res => setRecipies(res.data.data))
+      .then(GetListCountry().then(rs => setCountries(rs))
+        .then(GetListCategory().then(rs => setCategories(rs))))
   }, [])
   return (
     <Card>
@@ -38,26 +44,38 @@ const RecentRecipe = () => {
                     className="d-block position-relative"
                   >
                     <img
-                      src=''
+                      src={`http://localhost:5013${item.featureImage}`}
                       alt=''
                       className="list-thumbnail border-0"
                     />
                     <Badge
                       key={index}
                       className="position-absolute badge-top-right"
-                      color='primary'
+                      color="theme-3"
                       pill
                     >
-                      {item.title}
+                      {countries
+                        .filter(country => country.countryId === item.countryId)
+                        .map(filteredCountry => (
+                          <p className="text-muted mb-1 text-small" key={index}>
+                            {filteredCountry.countryName}
+                          </p>
+                        ))}
                     </Badge>
                   </NavLink>
 
                   <div className="pl-3 pt-2 pr-2 pb-2">
                     <NavLink to={`${adminRoot}/pages/product/details`}>
-                      <p className="list-item-heading">{item.content}</p>
+                      <p className="list-item-heading">{item.title}</p>
                       <div className="pr-4">
                         <p className="text-muted mb-1 text-small">
-                          {item.country}
+                          {categories
+                            .filter(cate => cate.cId === item.cId)
+                            .map(filteredCategory => (
+                              <p className="text-muted mb-1 text-small" key={index}>
+                                {filteredCategory.categoryName}
+                              </p>
+                            ))}
                         </p>
                       </div>
                       <div className="text-primary text-small font-weight-medium d-none d-sm-block">

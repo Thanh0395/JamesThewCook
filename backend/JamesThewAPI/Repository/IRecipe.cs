@@ -1,4 +1,5 @@
 ﻿using JamesThewAPI.Entities;
+using JamesThewAPI.ModelUtility.AnalyticsModel;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace JamesThewAPI.Repository
@@ -10,6 +11,8 @@ namespace JamesThewAPI.Repository
 		Task<Recipe> AddRecipeAsync(Recipe recipe, IFormFile file);
 		Task<Recipe> UpdateRecipeAsync(Recipe recipe, IFormFile file);
 		Task<bool> DeleteRecipeAsync(int rId);
+		Task<IEnumerable<Recipe>> GetRecentRecipe();
 
+		Task<IEnumerable<RecipeCategoryModel>> GetCategoryByRecipeCount();
 	}
 }

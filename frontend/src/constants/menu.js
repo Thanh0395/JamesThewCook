@@ -55,11 +55,6 @@ const data = [
             label: 'menu.create-recipe',
             to: `${adminRoot}/dashboards/recipes/create-recipe`,
           },
-          {
-            icon: 'simple-icon-book-open',
-            label: 'menu.test-recipe',
-            to: `${adminRoot}/dashboards/recipes/test-recipe`,
-          },
         ]
       },
     ],

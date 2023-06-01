@@ -14,13 +14,14 @@ import GradientWithRadialProgressCard from 'components/cards/GradientWithRadialP
 import SortableStaticticsRow from 'containers/dashboards/SortableStaticticsRow';
 import AdvancedSearch from 'containers/dashboards/AdvancedSearch';
 import SmallLineCharts from 'containers/dashboards/SmallLineCharts';
-import SalesChartCard from 'containers/dashboards/SalesChartCard';
+// import SalesChartCard from 'containers/dashboards/SalesChartCard';
 import ProductCategoriesPolarArea from 'containers/dashboards/ProductCategoriesPolarArea';
 import WebsiteVisitsChartCard from 'containers/dashboards/WebsiteVisitsChartCard';
 import ConversionRatesChartCard from 'containers/dashboards/ConversionRatesChartCard';
 import TopRatedItems from 'containers/dashboards/TopRatedItems';
-import RecentRecipe from 'containers/dashboards/RecipeContainers/RecentRecipe';
+import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import IconCardsCarouselRecipe from 'containers/dashboards/RecipeContainers/IconCardsCarouselRecipe';
+import ChartRecipeCategory from 'containers/dashboards/RecipeContainers/ChartRecipeCategory';
 
 const DefaultRecipe = ({ intl, match }) => {
   const { messages } = intl;
@@ -38,7 +39,7 @@ const DefaultRecipe = ({ intl, match }) => {
           <IconCardsCarouselRecipe />
           <Row>
             <Colxx md="12" className="mb-4">
-              <SalesChartCard />
+              <ChartRecipeCategory />
             </Colxx>
           </Row>
         </Colxx>

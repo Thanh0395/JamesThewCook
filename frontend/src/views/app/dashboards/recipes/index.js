@@ -16,8 +16,8 @@ const RecipiesDetailRecipe = React.lazy(() =>
 import(/* webpackChunkName: "dashboard-content" */ './detail-recipe')
 );
 
-const RecipiesTestRecipe = React.lazy(() =>
-import(/* webpackChunkName: "dashboard-content" */ './test-recipe')
+const RecipiesUpdateRecipe = React.lazy(() =>
+import(/* webpackChunkName: "dashboard-content" */ './update-recipe')
 );
 
 const Recipes = ({ match }) => (
@@ -41,8 +41,8 @@ const Recipes = ({ match }) => (
         render={(props) => <RecipiesDetailRecipe{...props} />}
       />
       <Route
-        path={`${match.url}/test-recipe`}
-        render={(props) => <RecipiesTestRecipe{...props} />}
+        path={`${match.url}/update-recipe`}
+        render={(props) => <RecipiesUpdateRecipe{...props} />}
       />
       <Redirect to="/error" />
     </Switch>

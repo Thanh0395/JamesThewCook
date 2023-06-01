@@ -12,8 +12,9 @@ import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
 // import axios from 'axios';
 import { DeleteRecipe, GetListRecipe } from 'services/Hung_Api/RecipeApi';
+import UpdateRecipe from 'views/app/dashboards/recipes/update-recipe';
 import UseModal from './UseModal';
-import DetailRecipeModal from './DetailModal';
+import DetailRecipeModal from './detailRecipe/DetailModal';
 // import DetailRecipeModal from './DetailModal';
 // import { NavLink } from 'react-router-dom';
 
@@ -108,17 +109,18 @@ function Table({ columns, data, divided = false, defaultPageSize = 6 }) {
 }
 
 const TableListRecipe = () => {
+  const [selectedRecipeUpdate, setSelectedRecipeUpdate] = useState(null);
   const [initialRecipies, setInitialRecipies] = useState([]);
   const [recipies, setRecipies] = useState([]);
   const { isShow, toggle } = UseModal();
   const [recipeDetail, setRecipeDetail] = useState([])
-  const effectList = useEffect(() => {
+  useEffect(() => {
     console.log("effect getlist");
     GetListRecipe().then(rs => {
       setInitialRecipies(rs);
       setRecipies(rs);
     });
-  }, [])  
+  }, [selectedRecipeUpdate])
 
   const handleDelete = (Id) => {
     DeleteRecipe(Id).then(data => {
@@ -128,7 +130,7 @@ const TableListRecipe = () => {
       } else {
         console.log(data);
       }
-    }).then(effectList)
+    })
   }
 
   // const handleDetail = (recipe)=>{
@@ -143,13 +145,17 @@ const TableListRecipe = () => {
     setRecipeDetail(recipe)
   }, [])
 
+  const onUpdate = (recipe)=>{
+    setSelectedRecipeUpdate(recipe)
+  }
+
   const cols = React.useMemo(
     () => [
       {
         Header: 'Title',
         accessor: 'title',
-        cellClass: 'list-item-heading w-10',
-        Cell: (props) => <>{props.value}</>,
+        cellClass: 'list-item-heading w-40',
+        Cell: (props) => <>{props.value}</>
       },
       {
         Header: 'Photo',
@@ -162,13 +168,17 @@ const TableListRecipe = () => {
         Header: 'Ingredient',
         accessor: 'ingredient',
         cellClass: 'text-muted w-10',
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => (<div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }}>
+        {props.value}
+      </div>),
       },
       {
         Header: 'Content',
         accessor: 'content',
         cellClass: 'text-muted w-10',
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => (<div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }}>
+        {props.value}
+      </div>),
       },
       {
         Header: 'CreatedAt',
@@ -196,6 +206,13 @@ const TableListRecipe = () => {
             >
               Delete
             </button>
+            <button
+              type="button"
+              onClick={() => onUpdate(props.row.original)}
+              className="btn btn-warning"
+            >
+              Update
+            </button>
           </div>
         ),
       },
@@ -209,6 +226,9 @@ const TableListRecipe = () => {
         {/* <CardTitle>
           <IntlMessages id="table.list-recipe" />
         </CardTitle> */}
+        {selectedRecipeUpdate && ( // Render the update component if a recipe is selected
+          <UpdateRecipe recipe={selectedRecipeUpdate} setSelectedRecipeUpdate={setSelectedRecipeUpdate} />
+        )}
         <Table columns={cols} data={recipies} />
         <DetailRecipeModal isShow={isShow} hide={toggle} recipe={recipeDetail} />
       </CardBody>

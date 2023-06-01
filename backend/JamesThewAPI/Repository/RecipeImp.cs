@@ -1,4 +1,5 @@
 ﻿using JamesThewAPI.Entities;
+using JamesThewAPI.ModelUtility.AnalyticsModel;
 using JamesThewAPI.ModelUtility.FIleService;
 using Microsoft.EntityFrameworkCore;
 
@@ -88,7 +89,7 @@ namespace JamesThewAPI.Repository
 			return (recipeDb != null) ? recipeDb : null;
 		}
 
-		public async Task<Recipe> UpdateRecipeAsync(Recipe recipe, IFormFile file)
+		public async Task<Recipe> UpdateRecipeAsync(Recipe recipe, IFormFile ? file)
 		{
 			var recipeDb = await _dbContext.Recipes.FindAsync(recipe.RId);
 			if (recipeDb != null)
@@ -103,6 +104,8 @@ namespace JamesThewAPI.Repository
 						{
 							if (fileName != null)
 							{
+								recipe.CreatedAt = recipeDb.CreatedAt;
+								recipe.UpdatedAt = DateTime.Now;
 								recipe.FeatureImage = "/Public" + componentPath + "/" + fileName;
 								_dbContext.Entry(recipe).State = EntityState.Modified;
 								await _dbContext.SaveChangesAsync();
@@ -115,6 +118,8 @@ namespace JamesThewAPI.Repository
 						}
 						else
 						{
+							recipe.CreatedAt = recipeDb.CreatedAt;
+							recipe.UpdatedAt = DateTime.Now;
 							recipe.FeatureImage = "/Public" + componentPath + "/" + fileName;
 							_dbContext.Entry(recipe).State = EntityState.Modified;
 							await _dbContext.SaveChangesAsync();
@@ -123,6 +128,8 @@ namespace JamesThewAPI.Repository
 					}
 					else
 					{
+						recipe.CreatedAt = recipeDb.CreatedAt;
+						recipe.UpdatedAt = DateTime.Now;
 						recipe.FeatureImage = "/Public" + componentPath + "/" + fileName;
 						_dbContext.Entry(recipe).State = EntityState.Modified;
 						await _dbContext.SaveChangesAsync();
@@ -131,6 +138,9 @@ namespace JamesThewAPI.Repository
 				}
 				else
 				{
+					recipe.CreatedAt = recipeDb.CreatedAt;
+					recipe.UpdatedAt = DateTime.Now;
+					recipe.FeatureImage = recipeDb.FeatureImage;
 					_dbContext.Entry(recipe).State = EntityState.Modified;
 					await _dbContext.SaveChangesAsync();
 					return recipe;
@@ -140,6 +150,36 @@ namespace JamesThewAPI.Repository
 			{
 				return null;
 			}
+		}
+
+		//Get Recent Recipe 6 / 1 / 2023
+		public async Task<IEnumerable<Recipe>> GetRecentRecipe()
+		{
+			return await _dbContext.Recipes
+						.Where(r => r.CreatedAt.HasValue) // Chi lay ra record ma CreatedAt co value
+						.OrderByDescending(r => r.CreatedAt)
+						.Take(5)
+						.ToListAsync();
+		}
+
+		//API do chart categry recipe count
+		public async Task<IEnumerable<RecipeCategoryModel>> GetCategoryByRecipeCount()
+		{
+			var query = await _dbContext.Recipes.Join(_dbContext.Categories,recipe => recipe.CId,category => category.CId,
+			(recipe, category) => new
+			{
+				categoryId = category.CId,
+				categoryName = category.CategoryName,
+				RecipeId = recipe.RId
+			})
+			.GroupBy(x => new { x.categoryId, x.categoryName })
+			.Select(g => new RecipeCategoryModel
+			{
+				categoryId = g.Key.categoryId,
+				categoryName = g.Key.categoryName,
+				recipeCount = g.Count()
+			}).ToListAsync();
+			return query;
 		}
 	}
 }
