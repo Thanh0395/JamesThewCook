@@ -19,6 +19,10 @@ const RecipesDefault = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-ecommerce" */ './recipes')
 );
 
+const PostDefault = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-ecommerce" */ './posts')
+);
+
 const Dashboards = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -42,6 +46,10 @@ const Dashboards = ({ match }) => (
       <Route
         path={`${match.url}/recipes`}
         render={(props) => <RecipesDefault {...props} />}
+      />
+      <Route
+        path={`${match.url}/post`}
+        render={(props) => <PostDefault {...props} />}
       />
       {/* 
       <ProtectedRoute

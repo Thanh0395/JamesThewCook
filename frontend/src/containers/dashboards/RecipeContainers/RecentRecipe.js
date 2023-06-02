@@ -13,7 +13,12 @@ const RecentRecipe = () => {
   useEffect(()=>{
     axios
     .get("http://localhost:5013/api/Recipe")
-    .then(res => setRecipies(res.data.data))
+    .then(res => {
+      setRecipies(res.data.data);
+      return res.data.data;
+    })
+    .then(rs => console.log("Length",rs.length))
+    console.log("recipies.Length", recipies.length)
   }, [])
   return (
     <Card>

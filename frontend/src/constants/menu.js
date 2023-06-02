@@ -57,6 +57,30 @@ const data = [
           },
         ]
       },
+      {
+        icon: 'simple-icon-doc',
+        label: 'menu.post',
+        to: `${adminRoot}/dashboards/post`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.post.default',
+            to: `${adminRoot}/dashboards/post/default`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.post.list-post',
+            to: `${adminRoot}/dashboards/post/list-post`,
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.create-post',
+            to: `${adminRoot}/dashboards/post/create-post`,
+          },
+        ]
+      },
     ],
   },
   {

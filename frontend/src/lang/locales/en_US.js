@@ -154,6 +154,13 @@ module.exports = {
   'menu.list-recipe': 'List Recipe',
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
+  /* Post */
+  'menu.post':'Posts',
+  'menu.post.default': 'Post Default',
+  'menu.post.list-post': 'List Post',
+  'menu.list-post': 'List Posts',
+  'menu.create-post': 'Create Post',
+  'menu.detail-post':'Detail Post',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -656,7 +663,7 @@ module.exports = {
   'table.react-advanced': 'Filter, Length and Jump',
   'table.divided': 'Divided Table',
   /* them o day */
-  'table.list-recipe': 'Table Recipies',
+  'table.list-recipe': 'All Recipies & Tips',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',

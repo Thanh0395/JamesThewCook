@@ -1,3 +1,7 @@
+// const datas = (props) =>{
+//   { title: 'dashboards.recipes.list-recipe', icon: 'simple-icon-list', value: "See More" }
+// }
+
 const data = [
     { title: 'dashboards.recipes.list-recipe', icon: 'simple-icon-list', value: "See More" },
     {
