@@ -43,7 +43,7 @@ function* loginWithEmailPassword({ payload }) {
       
       const item = { uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
         img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };
-
+        
       setCurrentUser(item);
       yield put(loginUserSuccess(item));
       history.push(adminRoot);
