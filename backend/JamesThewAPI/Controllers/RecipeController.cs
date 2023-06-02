@@ -1,4 +1,5 @@
 ﻿using JamesThewAPI.Entities;
+using JamesThewAPI.ModelUtility.AnalyticsModel;
 using JamesThewAPI.ModelUtility.CustomResult;
 using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,7 @@ namespace JamesThewAPI.Controllers
 		private readonly IRecipe _recipeRepo;
 		public RecipeController(IRecipe recipeRepo)
 		{
-			this._recipeRepo = recipeRepo;		
+			this._recipeRepo = recipeRepo;
 		}
 
 		[HttpGet]
@@ -90,7 +91,7 @@ namespace JamesThewAPI.Controllers
 			}
 		}
 		[HttpPut]
-		public async Task<ActionResult<CustomRespone<Recipe>>> UpdateRecipe([FromForm]Recipe Recipe, IFormFile file)
+		public async Task<ActionResult<CustomRespone<Recipe>>> UpdateRecipe([FromForm] Recipe Recipe, IFormFile ? file)
 		{
 			try
 			{
@@ -136,6 +137,58 @@ namespace JamesThewAPI.Controllers
 			{
 				var response = new CustomRespone<Recipe>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
 				return BadRequest(response);
+			}
+		}
+
+		[HttpGet("recent-recipe")]
+		public async Task<ActionResult<CustomRespone<Recipe>>> GetRecentRecipe()
+		{
+			try
+			{
+				var resources = await _recipeRepo.GetRecentRecipe();
+				if (resources != null && resources.Any())
+				{
+					var response = new CustomRespone<IEnumerable<Recipe>>
+							(StatusCodes.Status200OK, "Get list Recent Recipe successfully", resources, null);
+					return Ok(response);
+				}
+				else
+				{
+					var response = new CustomRespone<IEnumerable<Recipe>>(StatusCodes.Status404NotFound, "not found result or result empty", null, null);
+					return NotFound(response);
+				}
+			}
+			catch (Exception ex)
+			{
+				var response = new CustomRespone<IEnumerable<Recipe>>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
+				return BadRequest(response);
+
+			}
+		}
+
+		[HttpGet("categories-by-recipe-count")]
+		public async Task<ActionResult<CustomRespone<RecipeCategoryModel>>> GetCategoryByRecipeCount()
+		{
+			try
+			{
+				var resources = await _recipeRepo.GetCategoryByRecipeCount();
+				if (resources != null && resources.Any())
+				{
+					var response = new CustomRespone<IEnumerable<RecipeCategoryModel>>
+							(StatusCodes.Status200OK, "Get list Category name by recipe count successfully", resources, null);
+					return Ok(response);
+				}
+				else
+				{
+					var response = new CustomRespone<IEnumerable<RecipeCategoryModel>>(StatusCodes.Status404NotFound, "not found result or result empty", null, null);
+					return NotFound(response);
+				}
+			}
+			catch (Exception ex)
+			{
+				var response = new CustomRespone<IEnumerable<RecipeCategoryModel>>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
+				return BadRequest(response);
+
 			}
 		}
 	}

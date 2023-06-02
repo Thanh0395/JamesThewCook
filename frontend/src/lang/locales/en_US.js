@@ -148,7 +148,7 @@ module.exports = {
   'menu.validations': 'Validations',
   'menu.wizard': 'Wizard',
   /* Them o day */
-  'menu.recipes': 'Recipies',
+  'menu.recipes': 'Recipes',
   'menu.recipes.default': 'Recipe Default',
   'menu.recipes.list-recipe': 'List Recipe',
   'menu.list-recipe': 'List Recipe',
@@ -162,6 +162,8 @@ module.exports = {
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
   'menu.test-recipe':'Test Recipe',
+  'menu.recipes.update-recipe':'Update Recipe',
+  'menu.recipes.analytics-recipe':'Analytics Recipe',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',

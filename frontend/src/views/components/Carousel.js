@@ -22,16 +22,16 @@ function Carousel(props) {
           <div className="col-12 col-xl-4 col-lg-5 col-md-6">
             <div className="home-text">
               <div className="display-1">
-                MAGIC IS IN <br />
-                THE DETAILS
+                JAMES THEW <br />
+                COOK
               </div>
               <p className="white mb-5">
-                Gogo is the combination of good design, quality code and
-                attention for details.
+                is one of the famous cook working in one of the five star hotels in the
+                city.
                 <br />
                 <br />
-                We used same design language for components, layouts, apps and
-                other parts of the template. <br />
+                He is so famous that the publishers approach him to write recipes book, and
+                provide some of the tips pertaining to the recipes,... <br />
                 <br />
                 Hope you enjoy it!
               </p>

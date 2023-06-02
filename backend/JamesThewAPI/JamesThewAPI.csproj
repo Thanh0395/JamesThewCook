@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ModelUtility\AnalyticsModel\" />
     <Folder Include="Public\Images\SC\" />
     <Folder Include="Public\Images\Post\" />
     <Folder Include="Public\Images\Recipe\" />

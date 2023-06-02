@@ -11,13 +11,17 @@ import { buyUrl, adminRoot } from 'constants/defaultValues';
 import Navbar from './components/Navbar';
 import NavbarDT from './components/NavbarDT';
 import Carousel from './components/Carousel';
-import FeaturesAtAGlance from './components/FeaturesAtAGlance';
-import Layouts from './components/Layouts';
-import Components from './components/Components';
-import Applications from './components/Applications';
+// import FeaturesAtAGlance from './components/FeaturesAtAGlance';
+// import Layouts from './components/Layouts';
+// import Components from './components/Components';
+// import Applications from './components/Applications';
 import Themes from './components/Themes';
 import Footer from './components/Footer';
 import BuyNow from './components/BuyNow';
+import HomeRecipe from './components/CustomHomePages/Recipe';
+import HomeContest from './components/CustomHomePages/Contest';
+import HomePost from './components/CustomHomePages/Post';
+import HomeMember from './components/CustomHomePages/member';
 
 const slideSettings = {
   type: 'carousel',
@@ -37,143 +41,142 @@ const slideItems = [
     icon: 'iconsminds-mouse-3',
     title: 'Right Click Menu',
     detail:
-      'Increases overall usability of the project by providing additional actions menu.',
+      'Certainly! I can review many of your cooking recipes.',
   },
   {
     icon: 'iconsminds-electric-guitar',
     title: 'Video Player',
     detail:
-      'Carefully themed multimedia players powered by Video.js library with Youtube support.',
+      'Discover Unique Cooking Techniques through Engaging Videos.',
   },
   {
     icon: 'iconsminds-keyboard',
-    title: 'Keyboard Shortcuts',
+    title: 'Social',
     detail:
-      'Easily configurable keyboard shortcuts plugin that highly improves user experience.',
+      'Join Us in Building a Thriving Community for Recipes and Cooking Tips.',
   },
   {
-    icon: 'iconsminds-three-arrow-fork ',
-    title: 'Two Panels Menu',
+    icon: 'simple-icon-trophy ',
+    title: 'Prizes',
     detail:
-      'Three states two panels icon menu that looks good, auto resizes and does the job well.',
+      'Participate in Multiple Cooking Contests and Unleash Your Creativity.',
   },
   {
-    icon: 'iconsminds-deer',
-    title: 'Icons Mind',
+    icon: 'simple-icon-diamond',
+    title: 'Member',
     detail:
-      '1040 icons in 53 different categories, designed pixel perfect and ready for your project.',
+      'Join Us as a Member to Enjoy Delicious Eats.',
   },
-  {
-    icon: 'iconsminds-palette',
-    title: '20 Color Schemes',
-    detail:
-      'Colors, icons and design harmony that creates excellent themes to cover entire project.',
-  },
-  {
-    icon: 'iconsminds-air-balloon-1',
-    title: '3 Applications',
-    detail:
-      'Applications that mostly made of components are the way to get started to create something similar.',
-  },
-  {
-    icon: 'iconsminds-resize',
-    title: 'Extra Responsive',
-    detail:
-      'Custom Bootstrap 4 xxs & xxl classes delivers better experiences for smaller and larger screens.',
-  },
+  // {
+  //   icon: 'iconsminds-palette',
+  //   title: '20 Color Schemes',
+  //   detail:
+  //     'Colors, icons and design harmony that creates excellent themes to cover entire project.',
+  // },
+  // {
+  //   icon: 'iconsminds-air-balloon-1',
+  //   title: '3 Applications',
+  //   detail:
+  //     'Applications that mostly made of components are the way to get started to create something similar.',
+  // },
+  // {
+  //   icon: 'iconsminds-resize',
+  //   title: 'Extra Responsive',
+  //   detail:
+  //     'Custom Bootstrap 4 xxs & xxl classes delivers better experiences for smaller and larger screens.',
+  // },
 ];
 
-const features = [
+const recipies = [
   {
-    title: 'Pleasant Design',
-    img: '/assets/img/landing-page/features/plesant-design.png',
-    detail:
-      'As a web developer we enjoy to work on something looks nice. It is not an absolute necessity but it really motivates us that final product will look good for user point of view. <br /><br />So we put a lot of work into colors, icons, composition and design harmony. Themed components and layouts with same design language. <br /><br />We kept user experience principles always at the heart of the design process.',
+    title: 'Italian recipes',
+    img: '/assets/img/landing-page/recipes/pasta-1.jpg',
+    detail: 'Indulge in the Flavors of Italy<br></br> Unique Italian Recipes from the Land of Pizza and Pasta.',
   },
   {
-    title: 'Extra Responsive',
-    img: '/assets/img/landing-page/features/extra-responsive.png',
+    title: 'Vegetarian recipes,',
+    img: '/assets/img/landing-page/recipes/vegetarian-sala2.jpg',
     detail:
-      'Xxs breakpoint is for smaller screens that has a resolution lower than 420px. Xs works between 576px and 420px. Xxl breakpoint is for larger screens that has a resolution higher than 1440px. Xl works between 1200px and 1440px.<br><br>With this approach we were able to create better experiences for smaller and larger screens.',
+      'Plant-based Delights: Creative Recipes for Vegetarians<br></br>Exciting and Colorful Vegetarian Recipes',
   },
   {
-    title: 'Superfine Charts',
-    img: '/assets/img/landing-page/features/superfine-charts.png',
+    title: 'Quick and Easy Recipes',
+    img: '/assets/img/landing-page/recipes/quick-easy-1.jpg',
     detail:
-      'Using charts is a good way to visualize data but they often look ugly and break the rhythm of design. <br /><br />We concentrated on a single chart library and tried to create charts that look good with color, opacity, border and shadow. <br /><br />Used certain plugins and created some to make charts even more useful and beautiful.',
+      'Explore hundreds of top-rated quick and easy recipes for breakfast, lunch, and dinner.',
   },
   {
-    title: 'Layouts for the Job',
-    img: '/assets/img/landing-page/features/layouts-for-the-job.png',
+    title: 'Dessert Recipes',
+    img: '/assets/img/landing-page/recipes/dessert-1.jpg',
     detail:
-      'Layouts are the real thing, they need to be accurate and right for the job. They should be functional for both user and developer. <br /><br />We created lots of different layouts for different jobs.<br /><br />Listing pages with view mode changing capabilities, shift select and select all functionality, application layouts with an additional menu, authentication and error layouts which has a different design than the other pages were our main focus. We also created details page with tabs that can hold many components.',
+      'Discover more than 16,470 recipes that showcase desserts in all forms, from fresh seasonal fruits to frozen, canned, dried–even freeze-dried!',
   },
-  {
-    title: 'Smart Menu',
-    img: '/assets/img/landing-page/features/smart-menu.png',
-    detail:
-      'Instead of good old single panel menus with accordion structure that looks over complicated, we created 2 panels and categorized pages accordingly.<br><br>The default menu auto hides sub panel when resolution is under some breakpoint to open some space. You may also hide menu completely or use only main panel open only.',
-  },
+  // {
+  //   title: 'Smart Menu',
+  //   img: '/assets/img/landing-page/features/smart-menu.png',
+  //   detail:
+  //     'Instead of good old single panel menus with accordion structure that looks over complicated, we created 2 panels and categorized pages accordingly.<br><br>The default menu auto hides sub panel when resolution is under some breakpoint to open some space. You may also hide menu completely or use only main panel open only.',
+  // },
 ];
 
-const layouts = [
+const contest = [
   {
-    title: 'Menu Default',
-    img: '/assets/img/landing-page/layouts/menu-default.jpg',
+    title: 'California Contest',
+    img: '/assets/img/landing-page/contests/contest-1.jpg',
   },
   {
-    title: 'Menu Subhidden',
-    img: '/assets/img/landing-page/layouts/menu-subhidden.jpg',
+    title: 'Holdiday Contest',
+    img: '/assets/img/landing-page/contests/contest-3.jpg',
   },
   {
-    title: 'Menu Hidden',
-    img: '/assets/img/landing-page/layouts/menu-hidden.jpg',
+    title: 'National Contest',
+    img: '/assets/img/landing-page/contests/contest-7.jpg',
   },
   {
-    title: 'Image List',
-    img: '/assets/img/landing-page/layouts/image-list.jpg',
+    title: 'Newest Contest',
+    img: '/assets/img/landing-page/contests/contest-4.jpg', 
   },
-  {
-    title: 'Thumb List',
-    img: '/assets/img/landing-page/layouts/thumb-list.jpg',
-  },
-  { title: 'Data List', img: '/assets/img/landing-page/layouts/data-list.jpg' },
-  { title: 'Details', img: '/assets/img/landing-page/layouts/details.jpg' },
-  {
-    title: 'Authentication',
-    img: '/assets/img/landing-page/layouts/authentication.jpg',
-  },
-  {
-    title: 'Search Results',
-    img: '/assets/img/landing-page/layouts/search-result.jpg',
-  },
-  {
-    title: 'Single Page Application',
-    img: '/assets/img/landing-page/layouts/spa.jpg',
-  },
-  {
-    title: 'Data List App Menu Hidden',
-    img: '/assets/img/landing-page/layouts/data-list-app-menu-hidden.jpg',
-  },
-  { title: 'Tabs', img: '/assets/img/landing-page/layouts/tabs.jpg' },
+  // {
+  //   title: 'Thumb List',
+  //   img: '/assets/img/landing-page/layouts/thumb-list.jpg',
+  // },
+  // { title: 'Data List', img: '/assets/img/landing-page/layouts/data-list.jpg' },
+  // { title: 'Details', img: '/assets/img/landing-page/layouts/details.jpg' },
+  // {
+  //   title: 'Authentication',
+  //   img: '/assets/img/landing-page/layouts/authentication.jpg',
+  // },
+  // {
+  //   title: 'Search Results',
+  //   img: '/assets/img/landing-page/layouts/search-result.jpg',
+  // },
+  // {
+  //   title: 'Single Page Application',
+  //   img: '/assets/img/landing-page/layouts/spa.jpg',
+  // },
+  // {
+  //   title: 'Data List App Menu Hidden',
+  //   img: '/assets/img/landing-page/layouts/data-list-app-menu-hidden.jpg',
+  // },
+  // { title: 'Tabs', img: '/assets/img/landing-page/layouts/tabs.jpg' },
 ];
 
-const applications = [
+const members = [
   {
-    title: 'Survey',
+    title: 'Free Member',
     path: `${adminRoot}/applications/survey`,
-    img: '/assets/img/landing-page/applications/survey.jpg',
+    img: '/assets/img/landing-page/members/member-1.jpg',
   },
   {
-    title: 'Chat',
+    title: 'One-Year',
     path: `${adminRoot}/applications/chat`,
-    img: '/assets/img/landing-page/applications/chat.jpg',
+    img: '/assets/img/landing-page/members/member-2.jpg',
   },
-  {
-    title: 'Todo',
-    path: `${adminRoot}/applications/todo`,
-    img: '/assets/img/landing-page/applications/todo.jpg',
-  },
+  // {
+  //   title: 'Todo',
+  //   path: `${adminRoot}/applications/todo`,
+  //   img: '/assets/img/landing-page/applications/todo.jpg',
+  // },
 ];
 
 const themes = [
@@ -271,21 +274,21 @@ const Home = () => {
             slideSettings={slideSettings}
           />
           <div className="section">
-            <FeaturesAtAGlance features={features} />
+            <HomeRecipe recipies={recipies} />
           </div>
 
           <div className="section background">
-            <Layouts layouts={layouts} />
+            <HomeContest contest={contest} />
           </div>
 
           <div className="section mb-0">
-            <Components />
+            <HomePost />
           </div>
 
           <div className="section background">
-            <Applications
+            <HomeMember
               toggle={toggle}
-              applications={applications}
+              members={members}
               activeTab={activeTab}
             />
           </div>
