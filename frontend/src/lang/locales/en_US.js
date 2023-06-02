@@ -154,6 +154,13 @@ module.exports = {
   'menu.list-recipe': 'List Recipe',
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
+  /* Sy COntest */
+  'menu.contest': 'Contest',
+  'menu.contest.default': 'Contest Default',
+  'menu.contest.list-contest': 'List Contest',
+  'menu.list-contest': 'List Contest',
+  'menu.create-contest': 'Create Contest',
+  'menu.detail-contest':'Detail Contest',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -424,6 +431,7 @@ module.exports = {
   'cards.image-card-list': 'Image Card List',
   'cards.tab-card': 'Tab Card',
   'cards.user-card': 'User Card',
+  'cards.contest-card': 'List Contest',
 
   /* 07.05.Carousel */
   'carousel.basic': 'Carousel Basic',
@@ -657,6 +665,7 @@ module.exports = {
   'table.divided': 'Divided Table',
   /* them o day */
   'table.list-recipe': 'Table Recipies',
+  'table.list-contest': 'List Contest',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',
