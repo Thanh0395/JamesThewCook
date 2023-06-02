@@ -1,46 +1,37 @@
 const faq = [
   {
-    question: 'Nihil Anim Keffiyeh Helvetica?',
-    answer: `<strong>Moon Tempor</strong><br/>
-                    Aenean non nibh nec nunc aliquam iaculis. Ut quis suscipit nunc. Duis at lectus a est aliquam venenatis vitae eget arcu. Sed egestas felis eget convallis maximus.<br/><br/>
-                 <strong>High Life Accusamus</strong><br/>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborumeiusmod.Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origincoffeenulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beerlaborewes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butchervicelomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synthnesciuntyou probably haven't heard of them accusamus labore sustainable VHS.<br/><br/>
-                 <strong>Curabitur Maximus</strong><br/>Food truck quinoa nesciunt laborumeiusmod.Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origincoffeenulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beerlaborewes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butchervicelomo.<br/><br/>
-                 <ol>
-                    <li>Ut quis suscipit nunc</li>
-                    <li>Duis at lectus a est aliquam</li>
-                    <li>Aenean non nibh nec</li>
-                    <li>Non cupidatat skateboard</li>
-                 </ol>`,
+    question: 'How to become the member of this site?',
+    answer: `Typically, websites have a "Sign Up" or "Create Account" button where you can begin the registration process. Follow the prompts and provide the required information to become a member of the site. If you have a specific website in mind, let me know, and I can provide more specific instructions if available.`,
   },
   {
-    question: 'Adding Content Life Accusamus?',
+    question: 'Will there be any subscription charges?',
     answer:
-      "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terryrichardson ad squid. 3 wolf moon officia aute,non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborumeiusmod.Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origincoffeenulla assumenda shoreditch et.<br/><br/>Nihil anim keffiyeh helvetica, craft beerlaborewes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butchervicelomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synthnesciuntyou probably haven't heard of them accusamus labore sustainable VHS.",
+      "To find out about the subscription charges for a specific website, I recommend visiting the website directly and looking for information on their pricing, membership plans, or terms of service. Usually, websites will have a dedicated section or page that outlines the subscription options and associated costs. It''s always a good idea to review the terms and pricing details before subscribing to any service or website to ensure you have a clear understanding of the charges involved.",
   },
   {
-    question: 'Aenean Researches and Experiments?',
+    question: 'How to view the recipes and tips? Will there be any charges for that?',
     answer:
-      "Sunt aliqua put a bird on it squid single-origincoffeenulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beerlaborewes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butchervice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synthnesciuntyou probably haven't heard of them accusamus labore sustainable VHS.",
+      "To view recipes and tips on a specific website, you''ll need to visit that website directly and navigate to their recipe or tips section. If there are any charges associated with accessing or subscribing to their content, the website should provide information about the pricing and membership options.",
   },
   {
-    question: 'Proident Excepteur Butcher?',
+    question: 'I am not the registered member of the site. Can I participate in the contest held?',
     answer:
-      ' Tellus a sem condimentum, vitae convallis sapien feugiat. Aenean non nibh nec nunc aliquam iaculis. Ut quis suscipit nunc. Duis at lectus a est aliquam venenatis vitae eget arcu. Sed egestas felis eget convallis maximus.<br/><br/>Curabitur maximus, ligula vel sagittis iaculis, risus nisi tincidunt sem, ut ultricies libero nulla eu ligula. Nam ultricies mollis nulla, sed laoreet leo convallis ac. Mauris nisl risus, tincidunt ac diam aliquet, convallis pellentesque nisi. Nam sit amet libero at odio malesuada ultricies a vitae dolor. Cras in viverra felis, non consequat quam. Praesent a orci enim. Vivamus porttitor nisi at nisl egestas iaculis. Nullam commodo eget dui sollicitudin sagittis. Duis id nibh mollis, hendrerit metus consectetur, ullamcorper risus. Morbi elementum ultrices nunc, quis porta nisi ornare sit amet. ',
+      'In general, some contests may be open to everyone regardless of membership status, while others may require registration or membership on the website. It ultimately depends on the specific contest and its requirements.',
   },
   {
-    question: 'Raw Denim Aesthetic?',
+    question: 'How to upload or post the recipes and tips?',
     answer:
-      'Aenean non nibh nec nunc aliquam iaculis. Ut quis suscipit nunc. Duis at lectus a est aliquam venenatis vitae eget arcu. Sed egestas felis eget convallis maximus. Curabitur maximus, ligula vel sagittis iaculis, risus nisi tincidunt sem, ut ultricies libero nulla eu ligula. Nam ultricies mollis nulla, sed laoreet leo convallis ac.<br/><br/>Mauris nisl risus, tincidunt ac diam aliquet, convallis pellentesque nisi. Nam sit amet libero at odio malesuada ultricies a vitae dolor.',
+      `Register or create an account: If you haven't already, you'll typically need to register or create an account on the website or platform where you want to upload or post your recipes and tips. This usually involves providing your email address and choosing a username and password.`,
   },
   {
-    question: 'Aliquam Venenatis Vitae?',
+    question: 'How to post a feedback?',
     answer:
-      "Squid single-origincoffeenulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beerlaborewes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butchervice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synthnesciuntyou probably haven't heard of them accusamus labore sustainable VHS.",
+      `Submit your feedback: Once you have composed your feedback, follow the instructions provided by the website or platform to submit it. This may involve clicking a "Submit" button on a feedback form, sending an email to the designated address, or submitting a support ticket.`,
   },
   {
-    question: 'Venenatis Vitae Eget Arcu?',
+    question: 'I have posted a recipe or a tip with respect to the contest. How can I know who is the winner?',
     answer:
-      ' Tellus a sem condimentum, vitae convallis sapien feugiat. Aenean non nibh nec nunc aliquam iaculis. Ut quis suscipit nunc. Duis at lectus a est aliquam venenatis vitae eget arcu. Sed egestas felis eget convallis maximus. Curabitur maximus, ligula vel sagittis iaculis, risus nisi tincidunt sem, ut ultricies libero nulla eu ligula. Nam ultricies mollis nulla, sed laoreet leo convallis ac. Mauris nisl risus, tincidunt ac diam aliquet, convallis pellentesque nisi. Nam sit amet libero at odio malesuada ultricies a vitae dolor. Cras in viverra felis, non consequat quam. Praesent a orci enim. Vivamus porttitor nisi at nisl egestas iaculis. Nullam commodo eget dui sollicitudin sagittis. Duis id nibh mollis, hendrerit metus consectetur, ullamcorper risus. Morbi elementum ultrices nunc, quis porta nisi ornare sit amet. ',
+      `Announcements on the website: The contest organizer may post an announcement on their website or platform, indicating the winner's name or details. Check the contest page or any dedicated announcement section on the website for updates.`,
   },
 ];
 

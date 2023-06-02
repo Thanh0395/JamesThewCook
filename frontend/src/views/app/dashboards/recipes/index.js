@@ -16,6 +16,10 @@ const RecipiesDetailRecipe = React.lazy(() =>
 import(/* webpackChunkName: "dashboard-content" */ './detail-recipe')
 );
 
+const RecipiesTestRecipe = React.lazy(() =>
+import(/* webpackChunkName: "dashboard-content" */ './test-recipe')
+);
+
 const Recipes = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -35,6 +39,10 @@ const Recipes = ({ match }) => (
       <Route
         path={`${match.url}/detail-recipe`}
         render={(props) => <RecipiesDetailRecipe{...props} />}
+      />
+      <Route
+        path={`${match.url}/test-recipe`}
+        render={(props) => <RecipiesTestRecipe{...props} />}
       />
       <Redirect to="/error" />
     </Switch>

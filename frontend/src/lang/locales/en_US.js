@@ -154,6 +154,7 @@ module.exports = {
   'menu.list-recipe': 'List Recipe',
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
+<<<<<<< HEAD
   /* Sy COntest */
   'menu.contest': 'Contest',
   'menu.contest.default': 'Contest Default',
@@ -161,6 +162,9 @@ module.exports = {
   'menu.list-contest': 'List Contest',
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
+=======
+  'menu.test-recipe':'Test Recipe',
+>>>>>>> 0191b56acb3a75dfb6f3fbb91127e3c5702a0698
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -206,7 +210,7 @@ module.exports = {
   'dashboards.pending-for-print': 'Pending for print',
   'dashboards.logs': 'Logs',
   'dashboards.gogo': 'GOGO',
-  'dashboards.magic-is-in-the-details': 'MAGIC IS IN THE DETAILS',
+  'dashboards.magic-is-in-the-details': 'MAGIC IS IN THE RECIPE',
   'dashboards.yes-it-is-indeed': 'Yes, it is indeed!',
   'dashboards.advanced-search': 'Advanced Search',
   'dashboards.toppings': 'Toppings',
