@@ -62,6 +62,25 @@ const data = [
           },
         ]
       },
+      {
+        icon: 'simple-icon-book-open',
+        label: 'menu.contest',
+        to: `${adminRoot}/dashboards/contests`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.contest.default',
+            to: `${adminRoot}/dashboards/contests/default`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.create-recipe',
+            to: `${adminRoot}/dashboards/contests/create-contest`,
+          }
+        ]
+      },
     ],
   },
   {
