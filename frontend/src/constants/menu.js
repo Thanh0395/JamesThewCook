@@ -74,6 +74,11 @@ const data = [
             to: `${adminRoot}/dashboards/contests/default`,
             // roles: [UserRole.Admin],
           },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.create-recipe',
+            to: `${adminRoot}/dashboards/contests/create-contest`,
+          }
         ]
       },
     ],

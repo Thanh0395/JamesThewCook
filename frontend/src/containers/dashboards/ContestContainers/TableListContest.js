@@ -35,30 +35,15 @@ const TableListContest = () => {
   }, []);
 
   const handleDelete = async (Id) => {
-    await DeleteContest(Id)
-      .then((data) => {
+      DeleteContest(Id).then(data => {
         if (data.status === 200) {
-          setInitialContests(initialContests.filter((item) => item.contestId !== Id));
-          setContests(contests.filter((item) => item.contestId !== Id)
-          );
+          setInitialContests(initialContests.filter(item => item.contestId !== Id));
+          setContests(prevContests => prevContests.filter(item => item.contestId !== Id));
         } else {
           console.log(data);
         }
-      })
-      .then(effectList);
+      }).then(effectList)
   };
-
-  // const handleDetail = (recipe)=>{
-  //   toggle()
-  //   console.log("detail :", recipe);
-  //   setRecipeDetail(recipe)
-  // }
-
-  // const handleDetail = useCallback((recipe) => {
-  //   toggle();
-  //   console.log('detail :', recipe);
-  //   setRecipeDetail(recipe);
-  // }, []);
 
   return (
     <Row>

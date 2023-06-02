@@ -563,6 +563,9 @@ module.exports = {
   'form-recipe-create.categoty': 'Category',
   'form-recipe-create.isfree': 'IsFree',
   'form-recipe-create.portion': 'Portion',
+  'form-contest-create.title': 'Title',
+  'form-contest-create.description': 'Description',
+  'form-contest-create.prize': 'Prize',
   /* 07.12.Icons */
   'icons.simplelineicons': 'Simple Line Icons',
   'icons.iconsmind': 'Iconsmind Icons',

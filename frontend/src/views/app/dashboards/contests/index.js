@@ -5,6 +5,9 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 const ContestDefault = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-default" */ './default')
 );
+const ContestCreate = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-default" */ './create-contest')
+);
 
 const Contest = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -13,6 +16,10 @@ const Contest = ({ match }) => (
       <Route
         path={`${match.url}/default`}
         render={(props) => <ContestDefault {...props} />}
+      />
+      <Route
+        path={`${match.url}/create-contest`}
+        render={(props) => <ContestCreate {...props} />}
       />
       <Redirect to="/error" />
     </Switch>
