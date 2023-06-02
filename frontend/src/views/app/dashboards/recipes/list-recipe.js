@@ -26,7 +26,7 @@ const ListRecipe = ({ match }) => {
         </Colxx>
 
         <Colxx xxs="12">
-          <TableListRecipe />
+          <TableListRecipe match={ match }/>
         </Colxx>
 
         {/* <Colxx xxs="12">

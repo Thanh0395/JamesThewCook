@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { adminRoot } from 'constants/defaultValues';
 import * as Yup from 'yup';
-import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import {
@@ -21,44 +21,46 @@ const SignupSchema = Yup.object().shape({
     email: Yup.string()
         .email('Invalid email address')
         .required('Email is required!'),
+    title: Yup.string().required('Title is required!'),
+    ingredient: Yup.string().required('Ingredient is required!'),
+    content: Yup.string().required('Directions is required!'),
     select: Yup.string().required('Category is required!'),
     customRadioGroup: Yup.string().required('Country is required'),
+    file: Yup.mixed().required('Image is required!'),
+    portion: Yup.number()
+        .min(1, 'Portion must be at least 1')
+        .max(5, 'Portion must be at most 5')
+        .required('Portion is required'),
 });
 
 const FormCreateRecipe = () => {
-    const [ingredients, setIngredients] = useState()
-    const [contents, setContents] = useState()
-    const [inputFile, setInputFile] = useState(null)
-    const history = useHistory(); 
-    const handleFileChange = (e) =>{
-        setInputFile(e.target.files[0]);
-    };
-    console.log("fileee :", inputFile)
+    const history = useHistory();
     const onSubmit = (values) => {
         const payload = {
             title: values.title,
-            ingredient: ingredients,
-            content: contents,
+            ingredient: values.ingredient,
+            content: values.content,
             isFree: values.isFree,
             cId: values.select,
             countryId: values.customRadioGroup,
             uId: getCurrentUser().uid,
-            file:inputFile,
-            portion:values.portion
+            file: values.file,
+            portion: values.portion
         }
+        console.log("FormMik payload :", payload)
         const formData = new FormData()
         formData.append('title', values.title);
-        formData.append('ingredient', ingredients);
-        formData.append('content', contents);
+        formData.append('ingredient', values.ingredient);
+        formData.append('content', values.content);
         formData.append('isFree', values.isFree);
         formData.append('cId', values.select);
         formData.append('countryId', values.customRadioGroup);
         formData.append('uId', getCurrentUser().uid);
         formData.append('portion', values.portion)
-        formData.append('file', inputFile);
+        formData.append('file', values.file);
         setTimeout(() => {
-            console.log("payload:",payload);
-            PostRecipe(formData).then(()=> history.push(`${adminRoot}/dashboards/recipes/list-recipe`))
+            console.log("payload:", payload);
+            PostRecipe(formData).then(() => history.push(`${adminRoot}/dashboards/recipes/list-recipe`))
         }, 1000);
 
     };
@@ -74,8 +76,6 @@ const FormCreateRecipe = () => {
             .then(countries => setCountries(countries))
             .catch(err => console.log("Loi request api country:", err));
     }, [])
-    console.log("List cate :", categories);
-    console.log("List country : ", countries);
     return (
         <Row className="mb-4">
             <Colxx xxs="12">
@@ -91,7 +91,8 @@ const FormCreateRecipe = () => {
                                 isFree: false,
                                 select: '',
                                 customRadioGroup: '',
-                                portion: 1
+                                portion: 1,
+                                file: ''
                             }}
                             validationSchema={SignupSchema}
                             onSubmit={onSubmit}
@@ -124,19 +125,44 @@ const FormCreateRecipe = () => {
                                             <IntlMessages id="form-recipe-create.title" />
                                         </Label>
                                         <Field className="form-control" name="title" />
+                                        {errors.title && touched.title ? (
+                                            <div className="invalid-feedback d-block">
+                                                {errors.title}
+                                            </div>
+                                        ) : null}
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
-                                        <Label>
-                                            <IntlMessages id="form-recipe-create.ingredient" />
-                                        </Label>
-                                        <textarea className="form-control" onChange={e => setContents(e.target.value)} name="ingredient" />
-                                    </FormGroup>
-                                    <FormGroup>
                                         <InputGroup>
                                             <InputGroupAddon addonType="prepend">
-                                                Direction
+                                                Ingredient
                                             </InputGroupAddon>
-                                            <Input type="textarea" onChange={e => setIngredients(e.target.value)} name="content" />
+                                            <Field
+                                                className="form-control"
+                                                name="ingredient"
+                                                component="textarea"
+                                            />
+                                            {errors.ingredient && touched.ingredient ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.ingredient}
+                                                </div>
+                                            ) : null}
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup className="error-l-100">
+                                        <InputGroup>
+                                            <InputGroupAddon addonType="prepend">
+                                                Directions
+                                            </InputGroupAddon>
+                                            <Field
+                                                className="form-control"
+                                                name="content"
+                                                component="textarea"
+                                            />
+                                            {errors.content && touched.content ? (
+                                                <div className="invalid-feedback d-block">
+                                                    {errors.content}
+                                                </div>
+                                            ) : null}
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
@@ -144,6 +170,11 @@ const FormCreateRecipe = () => {
                                             <IntlMessages id="form-recipe-create.portion" />
                                         </Label>
                                         <Field type='number' className="form-control" name="portion" />
+                                        {errors.portion && touched.portion ? (
+                                            <div className="invalid-feedback d-block">
+                                                {errors.portion}
+                                            </div>
+                                        ) : null}
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
                                         <Label>Category </Label>
@@ -201,10 +232,16 @@ const FormCreateRecipe = () => {
                                         <Label>Image</Label>
                                         <input
                                             type="file"
-                                            name="image"
+                                            name="file"
                                             className="form-control-file"
-                                            onChange={handleFileChange}
+                                            onChange={(e) => {
+                                                setFieldValue('file', e.target.files[0]);
+                                                setFieldTouched('file', true);
+                                            }}
                                         />
+                                        {errors.file && touched.file ? (
+                                            <div className="invalid-feedback d-block">{errors.file}</div>
+                                        ) : null}
                                     </FormGroup>
                                     <Button color="primary" type="submit">
                                         Submit

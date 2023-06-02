@@ -13,6 +13,7 @@ import DatatablePagination from 'components/DatatablePagination';
 // import axios from 'axios';
 import { DeleteRecipe, GetListRecipe } from 'services/Hung_Api/RecipeApi';
 import UpdateRecipe from 'views/app/dashboards/recipes/update-recipe';
+// import DetailRecipePage from 'views/app/dashboards/recipes/detail-recipe';
 import UseModal from './UseModal';
 import DetailRecipeModal from './detailRecipe/DetailModal';
 // import DetailRecipeModal from './DetailModal';
@@ -108,7 +109,8 @@ function Table({ columns, data, divided = false, defaultPageSize = 6 }) {
   );
 }
 
-const TableListRecipe = () => {
+const TableListRecipe = ({ match }) => {
+  console.log("match:", match);
   const [selectedRecipeUpdate, setSelectedRecipeUpdate] = useState(null);
   const [initialRecipies, setInitialRecipies] = useState([]);
   const [recipies, setRecipies] = useState([]);

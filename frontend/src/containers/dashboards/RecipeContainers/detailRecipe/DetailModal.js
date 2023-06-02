@@ -24,7 +24,10 @@ const DetailRecipeModal = ({ isShow, hide, recipe }) => {
   }, [hide]);
   const handleSeeDetail = () => {
     toggle();
-    history.push(`${adminRoot}/dashboards/recipes/detail-recipe`);
+    history.push({
+      pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+      state: { recipe }
+    });
   }
   return isShow ? (
     ReactDOM.createPortal(

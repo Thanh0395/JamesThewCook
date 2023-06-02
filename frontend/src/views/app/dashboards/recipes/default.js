@@ -25,7 +25,6 @@ import ChartRecipeCategory from 'containers/dashboards/RecipeContainers/ChartRec
 
 const DefaultRecipe = ({ intl, match }) => {
   const { messages } = intl;
-
   return (
     <>
       <Row>

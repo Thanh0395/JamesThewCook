@@ -7,6 +7,12 @@ import { NavLink } from 'react-router-dom';
 import { adminRoot } from 'constants/defaultValues';
 
 const IconCardsCarouselRecipe = ({ className = 'icon-cards-row' }) => {
+  const navlinkTo = [
+    `${adminRoot}/dashboards/recipes/list-recipe`,
+    `${adminRoot}/dashboards/recipes/analytics-recipe`,
+    `${adminRoot}/dashboards/recipes/list-recipe`,
+    `${adminRoot}/dashboards/recipes/list-recipe`
+  ]
   return (
     <div className={className}>
       <GlideComponent
@@ -26,7 +32,7 @@ const IconCardsCarouselRecipe = ({ className = 'icon-cards-row' }) => {
         {data.map((item, index) => {
           return (
             <div key={`icon_card_${index}`}>
-              <NavLink to={`${adminRoot}/dashboards/recipes/list-recipe`}>
+              <NavLink to={navlinkTo[index]}>
                 <IconCard {...item} className="mb-4" />
               </NavLink>
             </div>

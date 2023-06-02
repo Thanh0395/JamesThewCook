@@ -46,9 +46,9 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
         formData.append('portion', values.portion);
         formData.append('file', inputFile);
         setTimeout(() => {
-            PutRecipe(formData).then(res =>{
+            PutRecipe(formData).then(res => {
                 console.log("Put API :", res);
-                if(res.rId != null){
+                if (res.rId != null) {
                     setSelectedRecipeUpdate(null)
                 }
             })
@@ -121,13 +121,13 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
                                         <Field className="form-control" name="title" />
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
-                                    <InputGroup>
+                                        <InputGroup>
                                             <InputGroupAddon addonType="prepend">
                                                 Ingredient
                                             </InputGroupAddon>
-                                            <Field 
+                                            <Field
                                                 className="form-control"
-                                                name="ingredient" 
+                                                name="ingredient"
                                                 component="textarea"
                                             />
                                         </InputGroup>
@@ -137,9 +137,9 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
                                             <InputGroupAddon addonType="prepend">
                                                 Direction
                                             </InputGroupAddon>
-                                            <Field 
+                                            <Field
                                                 className="form-control"
-                                                name="content" 
+                                                name="content"
                                                 component="textarea"
                                             />
                                         </InputGroup>

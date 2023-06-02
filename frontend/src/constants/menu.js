@@ -55,6 +55,11 @@ const data = [
             label: 'menu.create-recipe',
             to: `${adminRoot}/dashboards/recipes/create-recipe`,
           },
+          {
+            icon: 'simple-icon-graph',
+            label: 'menu.recipes.analytics-recipe',
+            to: `${adminRoot}/dashboards/recipes/analytics-recipe`,
+          },
         ]
       },
     ],
