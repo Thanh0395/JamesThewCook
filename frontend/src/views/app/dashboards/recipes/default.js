@@ -3,28 +3,29 @@ import { injectIntl } from 'react-intl';
 import { Row } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
-import Logs from 'containers/dashboards/Logs';
-import Tickets from 'containers/dashboards/Tickets';
+// import Logs from 'containers/dashboards/Logs';
+// import Tickets from 'containers/dashboards/Tickets';
 import Calendar from 'containers/dashboards/Calendar';
 import BestSellers from 'containers/dashboards/BestSellers';
-import ProfileStatuses from 'containers/dashboards/ProfileStatuses';
-import GradientCardContainer from 'containers/dashboards/GradientCardContainer';
-import Cakes from 'containers/dashboards/Cakes';
-import GradientWithRadialProgressCard from 'components/cards/GradientWithRadialProgressCard';
-import SortableStaticticsRow from 'containers/dashboards/SortableStaticticsRow';
-import AdvancedSearch from 'containers/dashboards/AdvancedSearch';
-import SmallLineCharts from 'containers/dashboards/SmallLineCharts';
+// import ProfileStatuses from 'containers/dashboards/ProfileStatuses';
+// import GradientCardContainer from 'containers/dashboards/GradientCardContainer';
+// import Cakes from 'containers/dashboards/Cakes';
+// import GradientWithRadialProgressCard from 'components/cards/GradientWithRadialProgressCard';
+// import SortableStaticticsRow from 'containers/dashboards/SortableStaticticsRow';
+// import AdvancedSearch from 'containers/dashboards/AdvancedSearch';
+// import SmallLineCharts from 'containers/dashboards/SmallLineCharts';
 // import SalesChartCard from 'containers/dashboards/SalesChartCard';
-import ProductCategoriesPolarArea from 'containers/dashboards/ProductCategoriesPolarArea';
-import WebsiteVisitsChartCard from 'containers/dashboards/WebsiteVisitsChartCard';
-import ConversionRatesChartCard from 'containers/dashboards/ConversionRatesChartCard';
-import TopRatedItems from 'containers/dashboards/TopRatedItems';
+// import ProductCategoriesPolarArea from 'containers/dashboards/ProductCategoriesPolarArea';
+// import WebsiteVisitsChartCard from 'containers/dashboards/WebsiteVisitsChartCard';
+// import ConversionRatesChartCard from 'containers/dashboards/ConversionRatesChartCard';
+// import TopRatedItems from 'containers/dashboards/TopRatedItems';
 import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import IconCardsCarouselRecipe from 'containers/dashboards/RecipeContainers/IconCardsCarouselRecipe';
 import ChartRecipeCategory from 'containers/dashboards/RecipeContainers/ChartRecipeCategory';
+// { intl, match }
 
-const DefaultRecipe = ({ intl, match }) => {
-  const { messages } = intl;
+const DefaultRecipe = ({ match }) => {
+  // const { messages } = intl;
   return (
     <>
       <Row>
@@ -46,7 +47,7 @@ const DefaultRecipe = ({ intl, match }) => {
           <RecentRecipe />
         </Colxx>
       </Row>
-      <Row>
+      {/* <Row>
         <Colxx lg="4" md="12" className="mb-4">
           <ProductCategoriesPolarArea chartClass="dashboard-donut-chart" />
         </Colxx>
@@ -56,7 +57,7 @@ const DefaultRecipe = ({ intl, match }) => {
         <Colxx lg="4" md="6" className="mb-4">
           <Tickets />
         </Colxx>
-      </Row>
+      </Row> */}
       <Row>
         <Colxx xl="6" lg="12" className="mb-4">
           <Calendar />
@@ -65,7 +66,7 @@ const DefaultRecipe = ({ intl, match }) => {
           <BestSellers />
         </Colxx>
       </Row>
-      <Row>
+      {/* <Row>
         <Colxx sm="12" lg="4" className="mb-4">
           <ProfileStatuses />
         </Colxx>
@@ -84,8 +85,8 @@ const DefaultRecipe = ({ intl, match }) => {
         <Colxx sm="12" md="6" className="mb-4">
           <ConversionRatesChartCard />
         </Colxx>
-      </Row>
-      <Row>
+      </Row> */}
+      {/* <Row>
         <Colxx lg="12" md="6" xl="4">
           <Row>
             <Colxx lg="4" xl="12" className="mb-4">
@@ -124,7 +125,7 @@ const DefaultRecipe = ({ intl, match }) => {
           <SmallLineCharts />
           <TopRatedItems />
         </Colxx>
-      </Row>
+      </Row> */}
     </>
   );
 };

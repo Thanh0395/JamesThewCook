@@ -1,7 +1,7 @@
 import axios from 'axios';
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Card, CardBody, CardTitle, Badge } from 'reactstrap';
 
@@ -11,6 +11,7 @@ import { GetListCountry } from 'services/Hung_Api/CountryApi';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
 
 const RecentRecipe = () => {
+  const history = useHistory()
   const [recipies, setRecipies] = useState([]);
   const [countries, setCountries] = useState([])
   const [categories, setCategories] = useState([])
@@ -21,6 +22,13 @@ const RecentRecipe = () => {
       .then(GetListCountry().then(rs => setCountries(rs))
         .then(GetListCategory().then(rs => setCategories(rs))))
   }, [])
+  const handleSeeDetail = (recipe) => {
+    history.push({
+      pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+      state: { recipe }
+    });
+  }
+
   return (
     <Card>
       <div className="position-absolute card-top-buttons">
@@ -39,9 +47,9 @@ const RecentRecipe = () => {
             {recipies.map((item, index) => {
               return (
                 <div key={index} className="d-flex flex-row mb-3">
-                  <NavLink
-                    to={`${adminRoot}/pages/product/details`}
+                  <Card
                     className="d-block position-relative"
+                    onClick={() => handleSeeDetail(item)}
                   >
                     <img
                       src={`http://localhost:5013${item.featureImage}`}
@@ -62,10 +70,12 @@ const RecentRecipe = () => {
                           </p>
                         ))}
                     </Badge>
-                  </NavLink>
+                  </Card>
 
                   <div className="pl-3 pt-2 pr-2 pb-2">
-                    <NavLink to={`${adminRoot}/pages/product/details`}>
+                    <Card
+                      onClick={() => handleSeeDetail(item)}
+                    >
                       <p className="list-item-heading">{item.title}</p>
                       <div className="pr-4">
                         <p className="text-muted mb-1 text-small">
@@ -81,7 +91,7 @@ const RecentRecipe = () => {
                       <div className="text-primary text-small font-weight-medium d-none d-sm-block">
                         {item.createdAt}
                       </div>
-                    </NavLink>
+                    </Card>
                   </div>
                 </div>
               );

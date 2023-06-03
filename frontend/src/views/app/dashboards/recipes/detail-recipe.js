@@ -10,13 +10,16 @@ import SingleLightbox from 'components/pages/SingleLightbox';
 import VideoPlayer from 'components/common/VideoPlayer';
 // import { blogCategories } from 'data/blog';
 // import IntlMessages from 'helpers/IntlMessages';
-import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
+// import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
+import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecipe/ImagesCardRecipe';
+
 
 // const recentPosts = blogData.slice(0, 4);
 // const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
 const DetailRecipePage = ({ match, location }) => {
-  const { recipe } = location.state;
+  // const { recipe } = location.state?.recipe;
+  const recipe = location.state && location.state.recipe;
   console.log("recipe form detail modal :", recipe);
   return (
     <>
@@ -68,7 +71,7 @@ const DetailRecipePage = ({ match, location }) => {
                 poster={`http://localhost:5013${recipe.featureImage}`}
                 sources={[
                   {
-                    src: '/assets/videos/Seafood-pasta.mp4',
+                    src: `/assets/videos/${recipe.cId}.mp4`,
                     type: 'video/mp4',
                   },
                 ]}
@@ -80,13 +83,14 @@ const DetailRecipePage = ({ match, location }) => {
               </p>
               <footer>
                 <p className="text-muted text-small mb-0 font-weight-light">
-                {recipe.createdAt}
+                  {recipe.createdAt}
                 </p>
               </footer>
             </CardBody>
           </Card>
           <Card className="mb-4">
-            <RecentRecipe />
+            {/* <RecentRecipe /> */}
+            <ImagesCardRecipe recipe={recipe} />
           </Card>
         </Colxx>
       </Row>

@@ -40,7 +40,6 @@ const DetailRecipeModal = ({ isShow, hide, recipe }) => {
                   <IntlMessages id="modal.detail-recipe" />
                 </CardTitle>
                 <div>
-                  {console.log('Recipe prop in DetailModal:', recipe)}
                   <Modal
                     isOpen={isShow}
                     toggle={toggle}

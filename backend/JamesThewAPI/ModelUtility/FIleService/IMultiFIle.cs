@@ -5,8 +5,8 @@ namespace JamesThewAPI.ModelUtility.FIleService
 	public interface IMultiFIle
 	{
 		Task<IEnumerable<ImgRecipe>> GetListImageRecipe();
-
-		Task<ImgRecipe> GetImageRecipeByRecipeId(int rId);
-		Task<ImgRecipe> CreateMultiImage(List<IFormFile> files, int rId);
+		Task<IEnumerable<ImgRecipe>> GetImagesByRecipeId(int rId);
+		Task<bool> CreateMultiImage(List<IFormFile> files, int rId);
+		Task<bool> DeleteImagesByRecipeId(int rId);
 	}
 }
