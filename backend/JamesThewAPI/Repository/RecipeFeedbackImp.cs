@@ -82,9 +82,16 @@ namespace JamesThewAPI.Repository
 				.Select(group => new RecipebyFeedbackCountModel
 				{
 					recipeId = group.Key.Value,
+					recipeTitle = string.Empty,
 					recipeIdCount = group.Count()
 				})
 				.ToListAsync();
+			foreach (var item in query)
+			{
+				var recipe = await _dbContext.Recipes.FindAsync(item.recipeId);
+				if (recipe != null)
+					item.recipeTitle = recipe.Title;
+			}
 
 			return query;
 

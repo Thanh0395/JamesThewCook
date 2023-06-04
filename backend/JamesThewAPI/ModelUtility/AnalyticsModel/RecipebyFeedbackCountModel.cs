@@ -3,6 +3,7 @@
 	public class RecipebyFeedbackCountModel
 	{
         public int recipeId { get; set; }
+        public string recipeTitle { get; set; }
         public int recipeIdCount { get; set; }
     }
 }

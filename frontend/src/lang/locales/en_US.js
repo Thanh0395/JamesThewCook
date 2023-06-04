@@ -221,6 +221,8 @@ module.exports = {
   'dashboards.recipe': 'Recipe',
   'dashboards.recipes': 'Recipes',
   'dashboards.recent-recipe': 'Recent Recipe',
+  'dashboards.hot-recipe': 'Hot Recipe',
+
   // Cac trang con cua Recipe
   'dashboards.recipes.default': 'Recipe Default',
   'dashboards.recipes.list-recipe': 'List Recipe',

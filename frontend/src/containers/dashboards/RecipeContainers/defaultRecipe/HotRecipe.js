@@ -3,13 +3,13 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-key */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTable, usePagination, useSortBy } from 'react-table';
 import { Card, CardBody, CardTitle } from 'reactstrap'; //
 import DatatablePagination from 'components/DatatablePagination';
 import IntlMessages from 'helpers/IntlMessages';
 
-import products from 'data/products';
+import { GetListRecipeIdByRIdCount } from 'services/Hung_Api/RecipeFeedbackApi';
 
 function Table({ columns, data }) {
   const {
@@ -97,26 +97,31 @@ function Table({ columns, data }) {
   );
 }
 
-const BestSellers = () => {
+const HotRecipe = () => {
+  const [recipeFeedbackAnalytics, setRecipeFeedbackAnalytics] = useState([])
+  useEffect(()=>{
+    GetListRecipeIdByRIdCount()
+      .then(rs => setRecipeFeedbackAnalytics(rs))
+  }, [])
   const cols = React.useMemo(
     () => [
       {
-        Header: 'Name',
-        accessor: 'title',
+        Header: 'Title Recipe',
+        accessor: 'recipeTitle',
         cellClass: 'text-muted w-50',
         Cell: (props) => <>{props.value}</>,
         sortType: 'basic',
       },
+      // {
+      //   Header: 'Sales',
+      //   // accessor: 'sales',
+      //   cellClass: 'text-muted w-25',
+      //   Cell: (props) => <>{props.value}</>,
+      //   sortType: 'basic',
+      // },
       {
-        Header: 'Sales',
-        accessor: 'sales',
-        cellClass: 'text-muted w-25',
-        Cell: (props) => <>{props.value}</>,
-        sortType: 'basic',
-      },
-      {
-        Header: 'Stock',
-        accessor: 'stock',
+        Header: 'Total Commnents',
+        accessor: 'recipeIdCount',
         cellClass: 'text-muted w-25',
         Cell: (props) => <>{props.value}</>,
         sortType: 'basic',
@@ -129,12 +134,12 @@ const BestSellers = () => {
     <Card className="h-100">
       <CardBody>
         <CardTitle>
-          <IntlMessages id="dashboards.best-sellers" />
+          <IntlMessages id="dashboards.hot-recipe" />
         </CardTitle>
-        <Table columns={cols} data={products} />
+        <Table columns={cols} data={recipeFeedbackAnalytics} />
       </CardBody>
     </Card>
   );
 };
 
-export default BestSellers;
+export default HotRecipe;

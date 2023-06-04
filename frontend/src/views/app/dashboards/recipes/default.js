@@ -6,7 +6,6 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 // import Logs from 'containers/dashboards/Logs';
 // import Tickets from 'containers/dashboards/Tickets';
 import Calendar from 'containers/dashboards/Calendar';
-import BestSellers from 'containers/dashboards/BestSellers';
 // import ProfileStatuses from 'containers/dashboards/ProfileStatuses';
 // import GradientCardContainer from 'containers/dashboards/GradientCardContainer';
 // import Cakes from 'containers/dashboards/Cakes';
@@ -22,6 +21,7 @@ import BestSellers from 'containers/dashboards/BestSellers';
 import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import IconCardsCarouselRecipe from 'containers/dashboards/RecipeContainers/IconCardsCarouselRecipe';
 import ChartRecipeCategory from 'containers/dashboards/RecipeContainers/ChartRecipeCategory';
+import HotRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/HotRecipe';
 // { intl, match }
 
 const DefaultRecipe = ({ match }) => {
@@ -63,7 +63,7 @@ const DefaultRecipe = ({ match }) => {
           <Calendar />
         </Colxx>
         <Colxx xl="6" lg="12" className="mb-4">
-          <BestSellers />
+          <HotRecipe />
         </Colxx>
       </Row>
       {/* <Row>

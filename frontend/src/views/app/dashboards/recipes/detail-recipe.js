@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Card, CardBody } from 'reactstrap';
 // import { NavLink } from 'react-router-dom';
 // import LinesEllipsis from 'react-lines-ellipsis';
@@ -12,6 +12,8 @@ import VideoPlayer from 'components/common/VideoPlayer';
 // import IntlMessages from 'helpers/IntlMessages';
 // import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecipe/ImagesCardRecipe';
+import ComponentShowComment from 'components/Recipe/ComponentShowComment';
+import { GetRecipeFeedbackByRecipeId } from 'services/Hung_Api/RecipeFeedbackApi';
 
 
 // const recentPosts = blogData.slice(0, 4);
@@ -20,7 +22,16 @@ import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecip
 const DetailRecipePage = ({ match, location }) => {
   // const { recipe } = location.state?.recipe;
   const recipe = location.state && location.state.recipe;
-  console.log("recipe form detail modal :", recipe);
+  const [feedbackRecipe, setFeedbackRecipe] = useState([]);
+  useEffect(() => {
+    GetRecipeFeedbackByRecipeId(recipe.rId).then(rs => setFeedbackRecipe(rs))
+  }, [])
+  console.log(" :", feedbackRecipe);
+  const renderComments = (data) => {
+    return data.map((item, index) => {
+      return <ComponentShowComment data={item} key={index} />;
+    });
+  };
   return (
     <>
       <Row>
@@ -91,6 +102,10 @@ const DetailRecipePage = ({ match, location }) => {
           <Card className="mb-4">
             {/* <RecentRecipe /> */}
             <ImagesCardRecipe recipe={recipe} />
+            <div>
+              <h5><strong>Comments</strong></h5>
+            </div>
+            <div className="mt-5 remove-last-border">{renderComments(feedbackRecipe)}</div>
           </Card>
         </Colxx>
       </Row>
