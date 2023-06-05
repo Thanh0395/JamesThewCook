@@ -60,6 +60,11 @@ const data = [
             label: 'menu.recipes.analytics-recipe',
             to: `${adminRoot}/dashboards/recipes/analytics-recipe`,
           },
+          {
+            icon: 'simple-icon-notebook',
+            label: 'menu.recipes.Category-Country',
+            to: `${adminRoot}/dashboards/recipes/category-country`,
+          },
         ]
       },
       {

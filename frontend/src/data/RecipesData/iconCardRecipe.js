@@ -11,8 +11,8 @@ const data = [
   },
   {
     title: 'Country && Category',
-    icon: 'iconsminds-arrow-refresh',
-    value: 2,
+    icon: 'simple-icon-notebook',
+    value: "See More",
   },
   {
     title: 'dashboards.new-comments',

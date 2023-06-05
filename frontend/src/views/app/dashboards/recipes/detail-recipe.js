@@ -102,10 +102,10 @@ const DetailRecipePage = ({ match, location }) => {
           <Card className="mb-4">
             {/* <RecentRecipe /> */}
             <ImagesCardRecipe recipe={recipe} />
-            <div>
+            <div className="mt-5 remove-last-border">
               <h5><strong>Comments</strong></h5>
+              {renderComments(feedbackRecipe)}
             </div>
-            <div className="mt-5 remove-last-border">{renderComments(feedbackRecipe)}</div>
           </Card>
         </Colxx>
       </Row>
