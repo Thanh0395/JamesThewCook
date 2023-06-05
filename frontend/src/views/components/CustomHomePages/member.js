@@ -9,7 +9,7 @@ function HomeMember(props) {
     <div className="container" id="member">
       <div className="row">
         <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center mb-4">
-          <h1>members</h1>
+          <h1>Membership</h1>
           <p className="section-text">
             <strong>Join Our Foodie Community: Register to Unlock a World of Culinary Delights</strong>
           </p>

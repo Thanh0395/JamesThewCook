@@ -58,7 +58,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               <br />
               If you are not a member, please{' '}
               <NavLink to="/user/register" className="white">
-                register
+                <ins>register</ins>
               </NavLink>
               .
             </p>
