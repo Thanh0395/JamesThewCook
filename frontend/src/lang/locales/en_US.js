@@ -154,6 +154,7 @@ module.exports = {
   'menu.list-recipe': 'List Recipe',
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
+
   /* Post */
   'menu.post':'Posts',
   'menu.post.default': 'Post Default',
@@ -161,6 +162,8 @@ module.exports = {
   'menu.list-post': 'List Posts',
   'menu.create-post': 'Create Post',
   'menu.detail-post':'Detail Post',
+
+  'menu.test-recipe':'Test Recipe',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -206,7 +209,7 @@ module.exports = {
   'dashboards.pending-for-print': 'Pending for print',
   'dashboards.logs': 'Logs',
   'dashboards.gogo': 'GOGO',
-  'dashboards.magic-is-in-the-details': 'MAGIC IS IN THE DETAILS',
+  'dashboards.magic-is-in-the-details': 'MAGIC IS IN THE RECIPE',
   'dashboards.yes-it-is-indeed': 'Yes, it is indeed!',
   'dashboards.advanced-search': 'Advanced Search',
   'dashboards.toppings': 'Toppings',
@@ -561,6 +564,9 @@ module.exports = {
   'form-recipe-create.categoty': 'Category',
   'form-recipe-create.isfree': 'IsFree',
   'form-recipe-create.portion': 'Portion',
+  /* For Post */
+  'form-post-create.title': 'Title',
+  'form-post-create.content': 'Content',
   /* 07.12.Icons */
   'icons.simplelineicons': 'Simple Line Icons',
   'icons.iconsmind': 'Iconsmind Icons',
@@ -663,7 +669,8 @@ module.exports = {
   'table.react-advanced': 'Filter, Length and Jump',
   'table.divided': 'Divided Table',
   /* them o day */
-  'table.list-recipe': 'All Recipies & Tips',
+  'table.list-post':'All posts will be there',
+  'table.form-create-post':'Create new post right here!',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',

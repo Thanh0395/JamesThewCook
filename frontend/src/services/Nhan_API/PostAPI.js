@@ -30,3 +30,5 @@ export const DeletePost= async (pId) => {
     const data = await axios.delete(`http://localhost:5013/api/Post/${pId}`)
     return data.data;
 }
+
+

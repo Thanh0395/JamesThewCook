@@ -21,6 +21,7 @@ namespace JamesThewAPI.Entities
         public virtual DbSet<Country> Countries { get; set; } = null!;
         public virtual DbSet<Faq> Faqs { get; set; } = null!;
         public virtual DbSet<Feedback> Feedbacks { get; set; } = null!;
+        public virtual DbSet<ImgRecipe> ImgRecipes { get; set; } = null!;
         public virtual DbSet<Membership> Memberships { get; set; } = null!;
         public virtual DbSet<Post> Posts { get; set; } = null!;
         public virtual DbSet<Rating> Ratings { get; set; } = null!;
@@ -34,7 +35,7 @@ namespace JamesThewAPI.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.;Database=ProjectS3;User Id=sa;password=123;");
+                optionsBuilder.UseSqlServer("Server=THANH-MSILAPTOP;Database=ProjectS3;User Id=sa;password=123;");
             }
         }
 
@@ -73,7 +74,7 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.WinnerNavigation)
                     .WithMany(p => p.Contests)
                     .HasForeignKey(d => d.Winner)
-                    .HasConstraintName("FK__Contest__Winner__4BAC3F29");
+                    .HasConstraintName("FK__Contest__Winner__4E88ABD4");
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -116,12 +117,28 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.PIdNavigation)
                     .WithMany(p => p.Feedbacks)
                     .HasForeignKey(d => d.PId)
-                    .HasConstraintName("FK__Feedback__P_id__3F466844");
+                    .HasConstraintName("FK__Feedback__P_id__37A5467C");
 
                 entity.HasOne(d => d.UIdNavigation)
                     .WithMany(p => p.Feedbacks)
                     .HasForeignKey(d => d.UId)
-                    .HasConstraintName("FK__Feedback__U_id__3E52440B");
+                    .HasConstraintName("FK__Feedback__U_id__36B12243");
+            });
+
+            modelBuilder.Entity<ImgRecipe>(entity =>
+            {
+                entity.ToTable("ImgRecipe");
+
+                entity.Property(e => e.ImgRecipeId).HasColumnName("ImgRecipe_id");
+
+                entity.Property(e => e.FeatureImage).HasMaxLength(200);
+
+                entity.Property(e => e.RId).HasColumnName("R_id");
+
+                entity.HasOne(d => d.RIdNavigation)
+                    .WithMany(p => p.ImgRecipes)
+                    .HasForeignKey(d => d.RId)
+                    .HasConstraintName("FK__ImgRecipe__R_id__4222D4EF");
             });
 
             modelBuilder.Entity<Membership>(entity =>
@@ -140,7 +157,7 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.UIdNavigation)
                     .WithMany(p => p.Memberships)
                     .HasForeignKey(d => d.UId)
-                    .HasConstraintName("FK__Membership__U_id__47DBAE45");
+                    .HasConstraintName("FK__Membership__U_id__4AB81AF0");
             });
 
             modelBuilder.Entity<Post>(entity =>
@@ -196,12 +213,12 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.Sc)
                     .WithMany(p => p.Ratings)
                     .HasForeignKey(d => d.ScId)
-                    .HasConstraintName("FK__Rating__SC_id__5441852A");
+                    .HasConstraintName("FK__Rating__SC_id__571DF1D5");
 
                 entity.HasOne(d => d.UIdNavigation)
                     .WithMany(p => p.Ratings)
                     .HasForeignKey(d => d.UId)
-                    .HasConstraintName("FK__Rating__U_id__534D60F1");
+                    .HasConstraintName("FK__Rating__U_id__5629CD9C");
             });
 
             modelBuilder.Entity<Recipe>(entity =>
@@ -234,17 +251,17 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.CIdNavigation)
                     .WithMany(p => p.Recipes)
                     .HasForeignKey(d => d.CId)
-                    .HasConstraintName("FK__Recipe__C_id__398D8EEE");
+                    .HasConstraintName("FK__Recipe__C_id__3E52440B");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Recipes)
                     .HasForeignKey(d => d.CountryId)
-                    .HasConstraintName("FK__Recipe__Country___3A81B327");
+                    .HasConstraintName("FK__Recipe__Country___3F466844");
 
                 entity.HasOne(d => d.UIdNavigation)
                     .WithMany(p => p.Recipes)
                     .HasForeignKey(d => d.UId)
-                    .HasConstraintName("FK__Recipe__U_id__38996AB5");
+                    .HasConstraintName("FK__Recipe__U_id__3D5E1FD2");
             });
 
             modelBuilder.Entity<RecipeFeedback>(entity =>
@@ -267,12 +284,12 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.RIdNavigation)
                     .WithMany(p => p.RecipeFeedbacks)
                     .HasForeignKey(d => d.RId)
-                    .HasConstraintName("FK__RecipeFeed__R_id__440B1D61");
+                    .HasConstraintName("FK__RecipeFeed__R_id__46E78A0C");
 
                 entity.HasOne(d => d.UIdNavigation)
                     .WithMany(p => p.RecipeFeedbacks)
                     .HasForeignKey(d => d.UId)
-                    .HasConstraintName("FK__RecipeFeed__U_id__4316F928");
+                    .HasConstraintName("FK__RecipeFeed__U_id__45F365D3");
             });
 
             modelBuilder.Entity<SubmissionContest>(entity =>
@@ -299,12 +316,12 @@ namespace JamesThewAPI.Entities
                 entity.HasOne(d => d.Contest)
                     .WithMany(p => p.SubmissionContests)
                     .HasForeignKey(d => d.ContestId)
-                    .HasConstraintName("FK__Submissio__Conte__5070F446");
+                    .HasConstraintName("FK__Submissio__Conte__534D60F1");
 
                 entity.HasOne(d => d.UIdNavigation)
                     .WithMany(p => p.SubmissionContests)
                     .HasForeignKey(d => d.UId)
-                    .HasConstraintName("FK__Submission__U_id__4F7CD00D");
+                    .HasConstraintName("FK__Submission__U_id__52593CB8");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -314,7 +331,7 @@ namespace JamesThewAPI.Entities
 
                 entity.ToTable("User");
 
-                entity.HasIndex(e => e.Email, "UQ__User__A9D105347B8D8E93")
+                entity.HasIndex(e => e.Email, "UQ__User__A9D105346E3352B4")
                     .IsUnique();
 
                 entity.Property(e => e.UId).HasColumnName("U_id");

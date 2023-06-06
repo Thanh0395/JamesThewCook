@@ -8,6 +8,9 @@ const PostDefault = React.lazy(() =>
 const PostList = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-default" */ './list-post')
 );
+const CreatePost = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-default" */ './create-post')
+);
 
 const Posts = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -20,6 +23,10 @@ const Posts = ({ match }) => (
        <Route
         path={`${match.url}/list-post`}
         render={(props) => <PostList {...props} />}
+      />
+         <Route
+        path={`${match.url}/create-post`}
+        render={(props) => <CreatePost {...props} />}
       />
       <Redirect to="/error" />
     </Switch>

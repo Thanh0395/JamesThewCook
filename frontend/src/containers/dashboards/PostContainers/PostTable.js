@@ -15,7 +15,7 @@ import { DeletePost, GetListPost } from 'services/Nhan_API/PostAPI';
 // import DetailRecipeModal from './DetailModal';
 // import { NavLink } from 'react-router-dom';
 
-function Table({ columns, data, divided = false, defaultPageSize = 6 }) {
+function Table({ columns, data, divided = true, defaultPageSize = 6 }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -109,8 +109,37 @@ const TablePost = () => {
   const [initialPosts, setInitialPosts] = useState([]);
   const [posts, setPosts] = useState([]);
  // const [postDetail, setPostDetail] = useState([])
+ // const { isShow, toggle } = UseModal();
+ const fetchAuthorName = async () => {
+  try {
+    const response = await fetch(`http://localhost:5013/api/User/1`);
+    if (response.ok) {
+      const author = await response.json();
+      console.log(author.userName);
+      return author.userName;
+    } 
+      throw new Error('Failed to fetch author');
+  } catch (error) {
+    console.log('Error fetching author:', error);
+    throw error;
+  }
+};
+fetchAuthorName();
+// const AuthorNameCell = ({ value }) => {
+//   const [authorName, setAuthorName] = useState('');
+
+//   useEffect(() => {
+//     fetchAuthorName(value)
+//       .then((name) => setAuthorName(name))
+//       .catch((error) => console.log('Error fetching author:', error));
+//   }, [value]);
+//   console.log(authorName);
+
+//   return <>{authorName}</>;
+// };
+
   const effectList = useEffect(() => {
-    console.log("effect getlist");
+   // console.log("effect getlist");
     GetListPost().then(rs => {
       setInitialPosts(rs);
       setPosts(rs);
@@ -128,17 +157,12 @@ const TablePost = () => {
     }).then(effectList)
   }
 
-  // const handleDetail = (recipe)=>{
-  //   toggle()
-  //   console.log("detail :", recipe);
-  //   setRecipeDetail(recipe)
-  // }
 
-// '  const handleDetail = useCallback((recipe) => {
+//  const handleDetail = useCallback((recipe) => {
 //     toggle()
-//     console.log("detail :", recipe);
-//     setRecipeDetail(recipe)
-//   }, [])'
+//     console.log("Detail:", recipe);
+//     setPostDetail(recipe)
+//   }, [])
 
   const cols = React.useMemo(
     () => [
@@ -149,20 +173,20 @@ const TablePost = () => {
         Cell: (props) => <>{props.value}</>,
       },
       {
+        Header: 'Author',
+        accessor: 'uId',
+        cellClass: 'list-item-heading w-20',
+        Cell: (props) => <>{props.value}</>,
+      },
+      {
         Header: 'Feature Image',
         accessor: 'featureImage',
         cellClass: 'text-muted w-20',
         Cell: (props) =>
-          <img src={`http://localhost:5013${props.value}`} style={{ width: '20px' }} alt="" aria-hidden="true" />,
+          <img src={`http://localhost:5013${props.value}`} style={{ width: '150px', height:'100px' }} alt="" aria-hidden="true" />,
       },
       {
-        Header: 'Ingredient',
-        accessor: 'ingredient',
-        cellClass: 'text-muted w-20',
-        Cell: (props) => <>{props.value}</>,
-      },
-      {
-        Header: 'Cooking Process',
+        Header: 'Description',
         accessor: (row) =>{
             const maxLength = 100; 
             const contents = row.content;
@@ -175,15 +199,15 @@ const TablePost = () => {
         Cell: (props) => <>{props.value}</>,
       },
       {
-        Header: 'CreatedAt',
+        Header: 'Published On',
         accessor:  (row) => {
             const createdAtDate = new Date(row.createdAt);
             const day = createdAtDate.getDate(); // Get the day from the createdAt date
             const month = createdAtDate.getMonth() + 1; // Get the month from the createdAt date (months are zero-based)
             const year = createdAtDate.getFullYear(); // Get the year from the createdAt date
-    
+            const time = createdAtDate.toLocaleTimeString([],{hour: '2-digit', minute:'2-digit'})
             // Format the date as "dd/mm/yyyy"
-            const formattedDate = `${day}/${month}/${year}`;
+            const formattedDate = `${day}/${month}/${year} at ${time}`;
     
             return formattedDate;
           },
@@ -201,7 +225,7 @@ const TablePost = () => {
               onClick={() => alert("ádsad")}
               className="btn btn-success mr-2"
             >
-              Detail
+              Edit
             </button>
             <button
               type="button"
@@ -224,6 +248,7 @@ const TablePost = () => {
           <IntlMessages id="table.list-recipe" />
         </CardTitle> */}
         <Table columns={cols} data={posts} />
+      {/* <DetailRecipeModal isShow={isShow} hide={toggle} recipe={recipeDetail} /> */}
 
       </CardBody>
     </Card>

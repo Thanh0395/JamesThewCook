@@ -7,6 +7,7 @@ namespace JamesThewAPI.Entities
     {
         public Recipe()
         {
+            ImgRecipes = new HashSet<ImgRecipe>();
             RecipeFeedbacks = new HashSet<RecipeFeedback>();
         }
 
@@ -26,6 +27,7 @@ namespace JamesThewAPI.Entities
         public virtual Category? CIdNavigation { get; set; }
         public virtual Country? Country { get; set; }
         public virtual User? UIdNavigation { get; set; }
+        public virtual ICollection<ImgRecipe> ImgRecipes { get; set; }
         public virtual ICollection<RecipeFeedback> RecipeFeedbacks { get; set; }
     }
 }

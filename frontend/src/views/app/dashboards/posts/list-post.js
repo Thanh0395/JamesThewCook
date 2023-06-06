@@ -9,7 +9,7 @@ import TablePost from 'containers/dashboards/PostContainers/PostTable';
 //   ReactTableDivided,
 // } from 'containers/ui/ReactTableCards';
 
-const ListRecipe = ({ match }) => {
+const ListPost = ({ match }) => {
   return (
     <>
       <Row>
@@ -21,7 +21,7 @@ const ListRecipe = ({ match }) => {
       <Row>
         <Colxx xxs="12">
           <h2 className="mb-4">
-            <IntlMessages id="table.list-recipe" />
+            <IntlMessages id="table.list-post" />
           </h2>
         </Colxx>
 
@@ -36,5 +36,5 @@ const ListRecipe = ({ match }) => {
       </Row>
     </>
   );
-};
-export default ListRecipe;
+};  
+export default ListPost;

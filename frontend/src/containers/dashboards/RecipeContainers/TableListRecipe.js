@@ -156,7 +156,7 @@ const TableListRecipe = () => {
         accessor: 'featureImage',
         cellClass: 'text-muted w-40',
         Cell: (props) =>
-          <img src={`http://localhost:5013${props.value}`} style={{ width: '130px' }} alt="" aria-hidden="true" />,
+          <img src={`http://localhost:5013${props.value}`} style={{ width: '200px' }} alt="" aria-hidden="true" />,
       },
       {
         Header: 'Ingredient',

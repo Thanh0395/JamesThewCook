@@ -213,6 +213,44 @@ namespace JamesThewAPI.Controllers
                 return BadRequest(response);
             }
         }
+        [HttpGet("user/{uId}")]
+        public async Task<ActionResult<CustomRespone<User>>> GetUser(int uId)
+        {
+            try
+            {
+                var user = await _postRepo.GetUserNameAsync(uId); // Replace with the appropriate method to retrieve user information
+                if (user != null)
+                {
+                    var response = new CustomRespone<User>(
+                        StatusCodes.Status200OK,
+                        "Get User Successfully!",
+                        user,
+                        null
+                    );
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(
+                        StatusCodes.Status404NotFound,
+                        "User Not Found!",
+                        null,
+                        null
+                    );
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(
+                    StatusCodes.Status500InternalServerError,
+                    "System Error!",
+                    null,
+                    ex.Message
+                );
+                return BadRequest(response);
+            }
+        }
     }
 }
 
