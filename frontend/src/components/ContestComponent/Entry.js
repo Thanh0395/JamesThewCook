@@ -1,14 +1,8 @@
 import { Colxx } from 'components/common/CustomBootstrap';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, CardBody, Row } from 'reactstrap';
-import { GetSc } from 'services/Sy_Api/SCApi';
 
-function Entry({ contestId }) {
-  const [sc, setSc] = useState([]);
-  useEffect(() => {
-    GetSc(contestId).then((rs) => setSc(rs));
-  }, []);
-  console.log(' List Sc', sc);
+function Entry({ sc }) {
   return (
     <Row>
       <Colxx sm="12">
