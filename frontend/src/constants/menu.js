@@ -60,6 +60,11 @@ const data = [
             label: 'menu.recipes.analytics-recipe',
             to: `${adminRoot}/dashboards/recipes/analytics-recipe`,
           },
+          {
+            icon: 'simple-icon-notebook',
+            label: 'menu.recipes.Category-Country',
+            to: `${adminRoot}/dashboards/recipes/category-country`,
+          },
         ]
       },
       {
@@ -101,6 +106,19 @@ const data = [
         ]
       },
     ],
+  },
+  {
+    id:'home-user',
+    icon:'simple-icon-home',
+    label:'menu.home-page-user',
+    to:`${adminRoot}/home-user`,
+    subs: [
+      {
+        id: 'pages-authorization',
+        label: 'menu.home-page',
+        to: `${adminRoot}/home-user/home-page`,
+      }
+    ]
   },
   {
     id: 'pages',

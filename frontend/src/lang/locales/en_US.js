@@ -154,6 +154,14 @@ module.exports = {
   'menu.list-recipe': 'List Recipe',
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
+  'menu.recipes.update-recipe':'Update Recipe',
+  'menu.recipes.analytics-recipe':'Analytics Recipe',
+  'menu.recipes.Category-Country':'Category & Country',
+  'menu.category-country': "Category & Contry",
+  'menu.home-page-user' :" Home",
+  'menu.home-page' :" Home Page",
+  "menu.home-user": "Home Page",
+
   /* Sy COntest */
   'menu.contest': 'Contest',
   'menu.contest.default': 'Contest Default',
@@ -161,9 +169,7 @@ module.exports = {
   'menu.list-contest': 'List Contest',
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
-  'menu.test-recipe':'Test Recipe',
-  'menu.recipes.update-recipe':'Update Recipe',
-  'menu.recipes.analytics-recipe':'Analytics Recipe',
+  
   /* Thanh */
   'menu.user': 'User',
   'menu.user.listuser': 'All User',
@@ -226,6 +232,10 @@ module.exports = {
   'dashboards.recipe': 'Recipe',
   'dashboards.recipes': 'Recipes',
   'dashboards.recent-recipe': 'Recent Recipe',
+  'dashboards.hot-recipe': 'Hot Recipe',
+  'dashboards.form-category': 'Category Form',
+  'dashboards.form-country': 'Country Form',
+
   // Cac trang con cua Recipe
   'dashboards.recipes.default': 'Recipe Default',
   'dashboards.recipes.list-recipe': 'List Recipe',
@@ -677,6 +687,8 @@ module.exports = {
   /* them o day */
   'table.list-recipe': 'Table Recipies',
   'table.list-contest': 'List Contest',
+  'table.list-category': 'List Category',
+  'table.list-country': 'List Country',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',

@@ -57,9 +57,9 @@ namespace JamesThewAPI.Repository
 			var countryDb = await _dbContext.Countries.FindAsync(country.CountryId);
 			if (countryDb != null)
 			{
-				_dbContext.Entry(countryDb).State = EntityState.Modified;
+				_dbContext.Entry(country).State = EntityState.Modified;
 				await _dbContext.SaveChangesAsync();
-				return countryDb;
+				return country;
 			}
 			else
 			{

@@ -1,12 +1,14 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
 import { GetListCountry } from 'services/Hung_Api/CountryApi';
 import { getCurrentUser } from 'helpers/Utils';
 import { PostRecipe } from 'services/Hung_Api/RecipeApi';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
+import { PostMultriFile } from 'services/Hung_Api/MultiFileApi';
 import { adminRoot } from 'constants/defaultValues';
 import * as Yup from 'yup';
 import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon } from 'reactstrap';
@@ -44,10 +46,10 @@ const FormCreateRecipe = () => {
             cId: values.select,
             countryId: values.customRadioGroup,
             uId: getCurrentUser().uid,
-            file: values.file,
-            portion: values.portion
+            file: values.file[0],
+            portion: values.portion,
+            files: values.file
         }
-        console.log("FormMik payload :", payload)
         const formData = new FormData()
         formData.append('title', values.title);
         formData.append('ingredient', values.ingredient);
@@ -57,12 +59,21 @@ const FormCreateRecipe = () => {
         formData.append('countryId', values.customRadioGroup);
         formData.append('uId', getCurrentUser().uid);
         formData.append('portion', values.portion)
-        formData.append('file', values.file);
+        formData.append('file', values.file[0]);
         setTimeout(() => {
             console.log("payload:", payload);
-            PostRecipe(formData).then(() => history.push(`${adminRoot}/dashboards/recipes/list-recipe`))
+            const formMultiImage = new FormData()
+            values.file.forEach((file, index) => {
+                formMultiImage.append(`files`, file);
+            });
+            PostRecipe(formData)
+                .then(result => {
+                    formMultiImage.append('rId', result.rId);
+                    axios.post("http://localhost:5013/api/MultiFile", formMultiImage)
+                        .then(rs => console.log(rs))
+                })
+                .then(() => history.push(`${adminRoot}/dashboards/recipes/list-recipe`))
         }, 1000);
-
     };
     const [categories, setCategories] = useState([])
     const [countries, setCountries] = useState([])
@@ -92,7 +103,7 @@ const FormCreateRecipe = () => {
                                 select: '',
                                 customRadioGroup: '',
                                 portion: 1,
-                                file: ''
+                                file: []
                             }}
                             validationSchema={SignupSchema}
                             onSubmit={onSubmit}
@@ -235,9 +246,11 @@ const FormCreateRecipe = () => {
                                             name="file"
                                             className="form-control-file"
                                             onChange={(e) => {
-                                                setFieldValue('file', e.target.files[0]);
+                                                const files = Array.from(e.target.files);
+                                                setFieldValue('file', files);
                                                 setFieldTouched('file', true);
                                             }}
+                                            multiple
                                         />
                                         {errors.file && touched.file ? (
                                             <div className="invalid-feedback d-block">{errors.file}</div>
