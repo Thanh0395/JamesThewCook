@@ -83,14 +83,18 @@ namespace JamesThewAPI.Repository
 				{
 					recipeId = group.Key.Value,
 					recipeTitle = string.Empty,
-					recipeIdCount = group.Count()
+					recipeIdCount = group.Count(),
+					recipeImg = string.Empty,
 				})
 				.ToListAsync();
 			foreach (var item in query)
 			{
 				var recipe = await _dbContext.Recipes.FindAsync(item.recipeId);
 				if (recipe != null)
+				{
 					item.recipeTitle = recipe.Title;
+					item.recipeImg = recipe.FeatureImage;
+				}
 			}
 
 			return query;

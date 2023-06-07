@@ -158,6 +158,9 @@ module.exports = {
   'menu.recipes.analytics-recipe':'Analytics Recipe',
   'menu.recipes.Category-Country':'Category & Country',
   'menu.category-country': "Category & Contry",
+  'menu.home-page-user' :" Home",
+  'menu.home-page' :" Home Page",
+  "menu.home-user": "Home Page",
 
   /* Sy COntest */
   'menu.contest': 'Contest',

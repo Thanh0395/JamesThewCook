@@ -89,6 +89,19 @@ const data = [
     ],
   },
   {
+    id:'home-user',
+    icon:'simple-icon-home',
+    label:'menu.home-page-user',
+    to:`${adminRoot}/home-user`,
+    subs: [
+      {
+        id: 'pages-authorization',
+        label: 'menu.home-page',
+        to: `${adminRoot}/home-user/home-page`,
+      }
+    ]
+  },
+  {
     id: 'pages',
     icon: 'iconsminds-digital-drawing',
     label: 'menu.pages',
