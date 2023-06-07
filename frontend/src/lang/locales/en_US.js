@@ -169,9 +169,6 @@ module.exports = {
   'menu.list-contest': 'List Contest',
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
-  'menu.test-recipe':'Test Recipe',
-  'menu.recipes.update-recipe':'Update Recipe',
-  'menu.recipes.analytics-recipe':'Analytics Recipe',
   
   /* Thanh */
   'menu.user': 'User',
