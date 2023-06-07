@@ -10,9 +10,9 @@ function Navbar(props) {
   // set button login/logout
   const [userName, setUserName] = useState();
   useEffect(() => {
-    if (getCurrentUser() != null){
+    if (getCurrentUser() != null) {
       setUserName(getCurrentUser().userName);
-    } else {setUserName()}
+    } else { setUserName() }
   }, [userName]);
   const history = useHistory();
   const handleLogout = () => {
@@ -79,21 +79,22 @@ function Navbar(props) {
                   MEMBER
                 </a>
               </li>
-              { userName? (
+              {userName ? (
                 <>
                   <button type="button"
-                      className="nav-item btn btn-outline-semi-light btn-sm pr-4 pl-4 ml-4"
-                      onClick={handleLogout}
-                    ><a 
-                        rel="noopener noreferrer"
-                        href="#foo"
-                    >
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                    onClick={handleLogout}
+                  ><a className="btn btn-outline-semi-light pr-4 pl-4 ml-4"
+                    style={{ fontSize: "12pt" }}
+                    rel="noopener noreferrer"
+                    href="#foo"
+                  >
                       Logout
-                      </a>
+                    </a>
                   </button>
-                  <p style={{color: "white"}} className="nav-item pr-4 pl-4 pt-3">Hi, {userName}</p>
+                  <p style={{ border: "none" }} className="nav-item btn btn-outline-semi-light mt-3">Hi, {userName}</p>
                 </>
-              ):(
+              ) : (
                 <Link to="/login" className="nav-item pl-4">
                   <a
                     className="btn btn-outline-semi-light btn-sm pr-4 pl-4"

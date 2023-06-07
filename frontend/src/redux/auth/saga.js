@@ -41,7 +41,7 @@ function* loginWithEmailPassword({ payload }) {
     const loginUser = yield call(axios.post,"http://localhost:5013/api/Auth", {email,password});
     if (loginUser.status===200) {
       
-      const item = { uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
+      const item = { token: loginUser.data.token, uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
         img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };
         
       setCurrentUser(item);

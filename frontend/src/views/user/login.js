@@ -9,6 +9,7 @@ import { NotificationManager } from 'components/common/react-notifications';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { loginUser } from 'redux/actions';
+import { getCurrentUser } from 'helpers/Utils';
 
 const validatePassword = (value) => {
   let error;
@@ -71,7 +72,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               <IntlMessages id="user.login-title" />
             </CardTitle>
 
-            <Formik initialValues={{email:"",password:""}} onSubmit={onUserLogin}>
+            <Formik initialValues={{email:getCurrentUser()?getCurrentUser().email:"",password:""}} onSubmit={onUserLogin}>
               {({ errors, touched }) => (
                 <Form className="av-tooltip tooltip-label-bottom">
                   <FormGroup className="form-group has-float-label">
