@@ -69,7 +69,7 @@ const data = [
       },
       {
         icon: 'simple-icon-book-open',
-        label: 'menu.contest',
+        label: 'menu.contests',
         to: `${adminRoot}/dashboards/contests`,
         // roles: [UserRole.Editor],
         subs:[
@@ -81,7 +81,7 @@ const data = [
           },
           {
             icon: 'simple-icon-book-open',
-            label: 'menu.create-recipe',
+            label: 'menu.create-contest',
             to: `${adminRoot}/dashboards/contests/create-contest`,
           }
         ]

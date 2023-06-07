@@ -22,7 +22,7 @@ const DefaultContest = ({ match }) => {
           </h3>
         </Colxx>
         <Colxx xxs="12">
-            <TableListContest/>
+          <TableListContest match={match} />
         </Colxx>
       </Row>
     </>

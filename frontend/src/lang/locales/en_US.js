@@ -163,12 +163,16 @@ module.exports = {
   "menu.home-user": "Home Page",
 
   /* Sy COntest */
-  'menu.contest': 'Contest',
+  'menu.contests': 'Contest',
   'menu.contest.default': 'Contest Default',
   'menu.contest.list-contest': 'List Contest',
   'menu.list-contest': 'List Contest',
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
+  'pages.contest-description': 'Description',
+  'pages.contest-sc': 'Entry',
+  'pages.contest-participate': 'Participate',
+
   
   /* Thanh */
   'menu.user': 'User',
@@ -631,6 +635,7 @@ module.exports = {
   'modal.launch-large-modal': 'Launch Large Modal',
   'modal.launch-small-modal': 'Launch Small Modal',
   'modal.detail-recipe': 'Detail Recipe',
+  'modal.detail-contest': 'Detail Contest',
 
   /* 07.16.Navigation */
   'nav.basic': 'Nav Basic',

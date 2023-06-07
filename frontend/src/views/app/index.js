@@ -10,9 +10,9 @@ import { UserRole } from 'constants/defaultValues';
 const Dashboards = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './dashboards')
 );
-const Pages = React.lazy(() =>
-  import(/* webpackChunkName: "pages" */ './pages')
-);
+// const Pages = React.lazy(() =>
+//   import(/* webpackChunkName: "pages" */ './pages')
+// );
 const Applications = React.lazy(() =>
   import(/* webpackChunkName: "applications" */ './applications')
 );
@@ -51,10 +51,10 @@ const App = ({ match }) => {
               component={(props) => <Applications {...props} />}
               roles={[UserRole.Admin]}
             />
-            <Route
+            {/* <Route
               path={`${match.url}/pages`}
               render={(props) => <Pages {...props} />}
-            />
+            /> */}
             <Route
               path={`${match.url}/ui`}
               render={(props) => <Ui {...props} />}
