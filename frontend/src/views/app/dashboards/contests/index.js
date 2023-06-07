@@ -8,6 +8,9 @@ const ContestDefault = React.lazy(() =>
 const ContestCreate = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-default" */ './create-contest')
 );
+const DetailContest = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-default" */ './detail-contest')
+);
 
 const Contest = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -20,6 +23,14 @@ const Contest = ({ match }) => (
       <Route
         path={`${match.url}/create-contest`}
         render={(props) => <ContestCreate {...props} />}
+      />
+      <Route
+        path={`${match.url}/create-contest`}
+        render={(props) => <ContestCreate {...props} />}
+      />
+      <Route
+        path={`${match.url}/detail-contest`}
+        render={(props) => <DetailContest {...props} />}  
       />
       <Redirect to="/error" />
     </Switch>

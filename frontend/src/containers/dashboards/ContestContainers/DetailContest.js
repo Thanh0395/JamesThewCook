@@ -1,48 +1,75 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import ReactDOM from 'react-dom';
+import { useHistory } from 'react-router-dom';
+import { adminRoot } from 'constants/defaultValues';
+import {
+  Row,
+  Card,
+  CardBody,
+  CardTitle,
+  Button,
+  Modal,
+  ModalHeader,
+//   ModalBody,
+  ModalFooter,
+  ModalBody,
+} from 'reactstrap';
+import IntlMessages from 'helpers/IntlMessages';
+import { Colxx } from 'components/common/CustomBootstrap';
+import ImageCardDetailContest from './ImageCardDetailContest';
 
-const DetailContestModal = () => {
-  return ReactDOM.createPortal(
-        <>
-          <div
-            className="modal fade"
-            id="exampleModal"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">
-                    Modal title
-                  </h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >Close</button>
-                </div>
-                <div className="modal-body">...</div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
+const DetailContest = ({ isShow, hide, contest }) => {
+  const history = useHistory();
+  const toggle = useCallback(() => {
+    hide();
+  }, [hide]);
+  const handleSeeDetail = () => {
+    toggle();
+    history.push({
+      pathname: `${adminRoot}/dashboards/contests/detail-contest`,
+      state: { contest }
+    });
+  }
+  return isShow ? (
+    ReactDOM.createPortal(
+      <>
+        <Row>
+          <Colxx xxs="12">
+            <Card className="mb-4">
+              <CardBody>
+                <CardTitle>
+                  <IntlMessages id="modal.detail-contest" />
+                </CardTitle>
+                <div>
+                  {console.log('Recipe prop in DetailModal:', contest)}
+                  <Modal
+                    isOpen={isShow}
+                    toggle={toggle}
+                    wrapClassName="modal-right"
+                    style={{ width: '400px' }}
                   >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
-                  </button>
+                    <ModalHeader>Detail Contest</ModalHeader>
+                    <ModalBody>
+                      <ImageCardDetailContest contest={contest} />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={handleSeeDetail}>
+                        See All Entries
+                      </Button>{" "}
+                      <Button color="secondary" onClick={toggle}>
+                        Cancel
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
                 </div>
-              </div>
-            </div>
-          </div>
-        </>,
-        document.body
-      )
+              </CardBody>
+            </Card>
+          </Colxx>
+        </Row>
+      </>,
+      document.body
+    )
+  ) : null;
 };
 
-export default memo(DetailContestModal);
+export default memo(DetailContest);

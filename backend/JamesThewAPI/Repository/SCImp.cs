@@ -1,5 +1,6 @@
 ﻿using JamesThewAPI.Entities;
 using JamesThewAPI.ModelUtility.FIleService;
+using JamesThewAPI.ModelUtility.Rating;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -71,6 +72,33 @@ namespace JamesThewAPI.Repository
         public async Task<IEnumerable<SubmissionContest>> GetAllSC()
         {
             return await context.SubmissionContests.ToListAsync();
+        }
+
+        public async Task<IEnumerable<TotalRatingModel>> GetAverageScore()
+        {
+            var scdb = await context.SubmissionContests.ToListAsync();
+            var rating = await context.Ratings.ToListAsync();
+            var data = from r in rating
+                       group r by new { r.ScId } into g
+                       select new TotalRatingModel
+                       {
+                           scId = (int) g.Key.ScId,
+                           uIdCount = g.Count(),
+                           avgScore = g.Sum(e => e.Score / g.Count()),
+                       };
+            //lay list sc -> foreach item item.scid == 
+            foreach(var item in data)
+            {
+                foreach(var item2 in scdb)
+                {
+                    if(item.scId == item2.ScId)
+                    {
+                        item2.AverageScore = item.avgScore;
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            return data;
         }
 
         public async Task<SubmissionContest> GetSCById(int id)

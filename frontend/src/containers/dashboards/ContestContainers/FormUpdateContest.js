@@ -1,9 +1,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useHistory } from 'react-router-dom';
-import { adminRoot } from 'constants/defaultValues';
+import { PutContest } from 'services/Sy_Api/ContestApi';
 import {
   Row,
   Card,
@@ -13,35 +12,32 @@ import {
   Button,
   InputGroup,
   InputGroupAddon,
-  Input,
 } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
-import { PostContest } from 'services/Sy_Api/ContestApi';
 
-const FormCreateContest = () => {
-  const history = useHistory();
+const FormUpdateContest = ({ contest, setSelectedContestUpdate }) => {
+  const [inputFile, setInputFile] = useState(null);
+  const handleFileChange = (e) => {
+    setInputFile(e.target.files[0]);
+  };
+  console.log('ContestUpdate :', contest);
   const onSubmit = (values) => {
-    const payload = {
-      title: values.title,
-      description: values.description,
-      startDate: values.startDate,
-      endDate: values.endDate,
-      file: values.file,
-      prize: values.prize,
-    };
     const formData = new FormData();
+    formData.append('contestId', values.contestId);
     formData.append('title', values.title);
     formData.append('description', values.description);
     formData.append('startDate', values.startDate);
     formData.append('endDate', values.endDate);
     formData.append('prize', values.prize);
-    formData.append('file', values.file);
+    formData.append('file', inputFile);
     setTimeout(() => {
-      console.log('payload:', payload);
-      PostContest(formData).then(() =>
-        history.push(`${adminRoot}/dashboards/contests/default`)
-      );
+      PutContest(formData).then((res) => {
+        console.log('Put API :', res);
+        if (res.contestId != null) {
+          setSelectedContestUpdate(null);
+        }
+      });
     }, 1000);
   };
   return (
@@ -49,14 +45,15 @@ const FormCreateContest = () => {
       <Colxx xxs="12">
         <Card>
           <CardBody>
-            <h6 className="mb-4">Create Contest Form</h6>
+            <h6 className="mb-4">Update Contest Form</h6>
             <Formik
               initialValues={{
-                title: '',
-                description: '',
-                startDate: '',
-                endDate: '',
-                prize: 100,
+                contestId: contest.contestId,
+                title: contest.title,
+                description: contest.description,
+                startDate: contest.startDate,
+                endDate: contest.endDate,
+                prize: contest.prize,
               }}
               onSubmit={onSubmit}
             >
@@ -72,20 +69,21 @@ const FormCreateContest = () => {
                 isSubmitting,
               }) => (
                 <Form className="av-tooltip tooltip-label-right">
+                  <Field className="form-control" name="contestId" hidden />
                   <FormGroup className="error-l-100">
                     <Label>
                       <IntlMessages id="form-contest-create.title" />
                     </Label>
                     <Field className="form-control" name="title" />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="error-l-100">
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
                         Description
                       </InputGroupAddon>
-                      <Field 
-                        className="form-control" 
-                        name="description" 
+                      <Field
+                        className="form-control"
+                        name="description"
                         component="textarea"
                       />
                     </InputGroup>
@@ -93,18 +91,20 @@ const FormCreateContest = () => {
                   <FormGroup className="error-l-100">
                     <Label>StartDate</Label>
                     <input
-                      type="date"
-                      className="form-control-file"
+                      type="datetime-local"
+                      className="form-control"
                       name="startDate"
+                      value={values.startDate}
                       onChange={handleChange}
                     />
                   </FormGroup>
                   <FormGroup className="error-l-100">
                     <Label>EndDate</Label>
                     <input
-                      type="date"
-                      className="form-control-file"
+                      type="datetime-local"
+                      className="form-control"
                       name="endDate"
+                      value={values.endDate}
                       onChange={handleChange}
                     />
                   </FormGroup>
@@ -116,19 +116,26 @@ const FormCreateContest = () => {
                       type="number"
                       className="form-control"
                       name="prize"
-                      min="20"
                     />
+                  </FormGroup>
+                  <FormGroup className="error-l-100">
+                    <Label>Image Current</Label>
+                    <div>
+                      <img
+                        src={`http://localhost:5013${contest.featureImage}`}
+                        style={{ width: '130px' }}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </div>
                   </FormGroup>
                   <FormGroup className="error-l-100">
                     <Label>Image</Label>
                     <input
                       type="file"
-                      name="file"
+                      name="image"
                       className="form-control-file"
-                      onChange={(e) => {
-                        setFieldValue('file', e.target.files[0]);
-                        setFieldTouched('file', true);
-                      }}
+                      onChange={handleFileChange}
                     />
                   </FormGroup>
                   <Button color="primary" type="submit">
@@ -143,4 +150,4 @@ const FormCreateContest = () => {
     </Row>
   );
 };
-export default FormCreateContest;
+export default FormUpdateContest;

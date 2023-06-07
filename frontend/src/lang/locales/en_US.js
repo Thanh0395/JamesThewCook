@@ -155,7 +155,7 @@ module.exports = {
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
   /* Sy COntest */
-  'menu.contest': 'Contest',
+  'menu.contests': 'Contest',
   'menu.contest.default': 'Contest Default',
   'menu.contest.list-contest': 'List Contest',
   'menu.list-contest': 'List Contest',
@@ -164,6 +164,9 @@ module.exports = {
   'menu.test-recipe':'Test Recipe',
   'menu.recipes.update-recipe':'Update Recipe',
   'menu.recipes.analytics-recipe':'Analytics Recipe',
+  'pages.contest-description': 'Description',
+  'pages.contest-sc': 'Entry',
+  'pages.contest-participate': 'Participate',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -616,6 +619,7 @@ module.exports = {
   'modal.launch-large-modal': 'Launch Large Modal',
   'modal.launch-small-modal': 'Launch Small Modal',
   'modal.detail-recipe': 'Detail Recipe',
+  'modal.detail-contest': 'Detail Contest',
 
   /* 07.16.Navigation */
   'nav.basic': 'Nav Basic',
