@@ -170,6 +170,14 @@ module.exports = {
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
   'menu.test-recipe':'Test Recipe',
+  'menu.recipes.update-recipe':'Update Recipe',
+  'menu.recipes.analytics-recipe':'Analytics Recipe',
+  
+  /* Thanh */
+  'menu.user': 'User',
+  'menu.user.listuser': 'All User',
+  'menu.user.profile': 'Profile', // Xem profile của mình và sửa dc
+  'menu.user.detail': 'Detail', // Admin dc truy cập xem thông tin user
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',

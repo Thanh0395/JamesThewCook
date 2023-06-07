@@ -130,7 +130,7 @@ namespace JamesThewAPI.Repository
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task<User> UpdateUserAsync(User user, IFormFile file)
+        public async Task<User> UpdateUserAsync(User user, IFormFile? file)
         {
             var userDB = await _dbContext.Users.FindAsync(user.UId);
             if (userDB != null)

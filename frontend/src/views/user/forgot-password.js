@@ -7,6 +7,8 @@ import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { forgotPassword } from 'redux/actions';
 import { NotificationManager } from 'components/common/react-notifications';
+import axios from 'axios';
+import { getCurrentUser } from 'helpers/Utils';
 
 const validateEmail = (value) => {
   let error;
@@ -17,20 +19,35 @@ const validateEmail = (value) => {
   }
   return error;
 };
-
 const ForgotPassword = ({
-  history,
+  // history,
   forgotUserMail,
   loading,
   error,
-  forgotPasswordAction,
+  // forgotPasswordAction,
 }) => {
-  const [email] = useState('demo@coloredstrategies.com');
+  const [email] = useState(getCurrentUser() ? getCurrentUser().email : '');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onForgotPassword = (values) => {
+  const onForgotPassword = async (values) => {
     if (!loading) {
       if (values.email !== '') {
-        forgotPasswordAction(values, history);
+        // forgotPasswordAction(values, history);
+        setIsLoading(!isLoading);
+        try {
+          const forgotPass = await axios.post('http://localhost:5013/api/Email/forgotpassword', { 'toMail': values.email });
+          if (forgotPass) {
+            setIsLoading(false);
+            alert("Your Pass was reset, please check an email")
+          }
+        } catch (errorMsg) {
+          if (errorMsg.response) {
+            if (errorMsg.response.data.status === 404) {
+              setIsLoading(false);
+              alert(errorMsg.response.data.message)
+            }
+          }
+        }
       }
     }
   };
@@ -68,7 +85,7 @@ const ForgotPassword = ({
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
               <NavLink to="/user/register" className="white">
-                register
+                <ins>register</ins>
               </NavLink>
               .
             </p>
@@ -106,9 +123,8 @@ const ForgotPassword = ({
                     </NavLink>
                     <Button
                       color="primary"
-                      className={`btn-shadow btn-multiple-state ${
-                        loading ? 'show-spinner' : ''
-                      }`}
+                      className={`btn-shadow btn-multiple-state ${isLoading ? 'show-spinner' : ''
+                        }`}
                       size="lg"
                     >
                       <span className="spinner d-inline-block">
