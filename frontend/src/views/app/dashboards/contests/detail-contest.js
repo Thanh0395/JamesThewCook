@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Row,
   Card,
@@ -29,10 +29,16 @@ import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import SingleLightbox from 'components/pages/SingleLightbox';
 import Entry from 'components/ContestComponent/Entry';
 import Participate from 'components/ContestComponent/Participate';
+import { GetSc } from 'services/Sy_Api/SCApi';
 
 const DetailsPages = ({ match, location }) => {
   const { contest } = location.state;
   const [activeTab, setActiveTab] = useState('Entrys');
+  const [sc, setSc] = useState([]);
+  const [reRender, setReRender] = useState(false);
+  useEffect(() => {
+    GetSc(contest.contestId).then((rs) => setSc(rs));
+  }, [reRender])
   return (
     <>
       <Row>
@@ -114,10 +120,10 @@ const DetailsPages = ({ match, location }) => {
                 </CardHeader>
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId="Entrys">
-                    <Entry contestId = {contest.contestId}/>
+                    <Entry sc = {sc} />
                   </TabPane>
                   <TabPane tabId="participate">
-                    <Participate/>
+                    <Participate contestId = {contest.contestId} setReRender = {setReRender} setActiveTab={setActiveTab} />
                   </TabPane>
                 </TabContent>
               </Card>

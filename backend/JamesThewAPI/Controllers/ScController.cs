@@ -73,16 +73,16 @@ namespace JamesThewAPI.Controllers
             try
             {
                 var resources = await scRepo.AddSC(sc, file);
-                if (resources != null)
+                if (resources == null)
+                {
+                    var response = new CustomRespone<SubmissionContest>(400, "Create Submissive form failed!!!", null, null);
+                    return NotFound(response);
+                }
+                else
                 {
                     var response = new CustomRespone<SubmissionContest>
                             (StatusCodes.Status201Created, "Submissive form created", resources, null);
                     return Ok(response);
-                }
-                else
-                {
-                    var response = new CustomRespone<SubmissionContest>(StatusCodes.Status404NotFound, "Create Submissive form failed!!!", null, null);
-                    return NotFound(response);
                 }
             }
             catch (Exception ex)
