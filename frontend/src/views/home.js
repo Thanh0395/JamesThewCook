@@ -163,14 +163,18 @@ const contest = [
 
 const members = [
   {
-    title: 'Free Member',
+    title: 'One-Month',
     path: `${adminRoot}/applications/survey`,
     img: '/assets/img/landing-page/members/member-1.jpg',
+    month: 1,
+    fee: 10,
   },
   {
     title: 'One-Year',
     path: `${adminRoot}/applications/chat`,
     img: '/assets/img/landing-page/members/member-2.jpg',
+    month: 12,
+    fee: 100,
   },
   // {
   //   title: 'Todo',

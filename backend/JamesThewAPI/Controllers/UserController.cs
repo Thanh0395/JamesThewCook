@@ -46,7 +46,7 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpGet("{UId}")]
-        public async Task<ActionResult<CustomRespone<Recipe>>> GetUserById(int UId)
+        public async Task<ActionResult<CustomRespone<User>>> GetUserById(int UId)
         {
             try
             {

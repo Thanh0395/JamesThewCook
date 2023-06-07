@@ -81,6 +81,25 @@ const data = [
           }
         ]
       },
+      {
+        icon: 'simple-icon-book-open',
+        label: 'menu.user',
+        to: `${adminRoot}/dashboards/user`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.user.listuser',
+            to: `${adminRoot}/dashboards/user/listuser`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.user.profile',
+            to: `${adminRoot}/dashboards/user/profile`,
+          }
+        ]
+      },
     ],
   },
   {
