@@ -399,7 +399,7 @@ const ModalUi = ({ match }) => {
                       onClosed={
                         closeAll
                           ? () => setModalNestedContainer(false)
-                          : () => {}
+                          : () => { }
                       }
                     >
                       <ModalHeader>Nested Modal title</ModalHeader>

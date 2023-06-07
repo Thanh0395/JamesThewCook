@@ -12,7 +12,6 @@ namespace JamesThewAPI.Repository
 		Task<Recipe> UpdateRecipeAsync(Recipe recipe, IFormFile file);
 		Task<bool> DeleteRecipeAsync(int rId);
 		Task<IEnumerable<Recipe>> GetRecentRecipe();
-
 		Task<IEnumerable<RecipeCategoryModel>> GetCategoryByRecipeCount();
 	}
 }

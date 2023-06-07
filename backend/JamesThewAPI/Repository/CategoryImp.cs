@@ -58,7 +58,7 @@ namespace JamesThewAPI.Repository
             var cateDb = await _dbContext.Categories.FindAsync(category.CId);
             if (cateDb != null)
             {
-                _dbContext.Entry(cateDb).State = EntityState.Modified;
+                _dbContext.Entry(category).State = EntityState.Modified;
                 await _dbContext.SaveChangesAsync();
                 return category;
             }

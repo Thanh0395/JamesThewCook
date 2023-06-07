@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Card, CardBody } from 'reactstrap';
 // import { NavLink } from 'react-router-dom';
 // import LinesEllipsis from 'react-lines-ellipsis';
@@ -10,14 +10,28 @@ import SingleLightbox from 'components/pages/SingleLightbox';
 import VideoPlayer from 'components/common/VideoPlayer';
 // import { blogCategories } from 'data/blog';
 // import IntlMessages from 'helpers/IntlMessages';
-import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
+// import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
+import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecipe/ImagesCardRecipe';
+import ComponentShowComment from 'components/Recipe/ComponentShowComment';
+import { GetRecipeFeedbackByRecipeId } from 'services/Hung_Api/RecipeFeedbackApi';
+
 
 // const recentPosts = blogData.slice(0, 4);
 // const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
 const DetailRecipePage = ({ match, location }) => {
-  const { recipe } = location.state;
-  console.log("recipe form detail modal :", recipe);
+  // const { recipe } = location.state?.recipe;
+  const recipe = location.state && location.state.recipe;
+  const [feedbackRecipe, setFeedbackRecipe] = useState([]);
+  useEffect(() => {
+    GetRecipeFeedbackByRecipeId(recipe.rId).then(rs => setFeedbackRecipe(rs))
+  }, [])
+  console.log(" :", feedbackRecipe);
+  const renderComments = (data) => {
+    return data.map((item, index) => {
+      return <ComponentShowComment data={item} key={index} />;
+    });
+  };
   return (
     <>
       <Row>
@@ -68,7 +82,7 @@ const DetailRecipePage = ({ match, location }) => {
                 poster={`http://localhost:5013${recipe.featureImage}`}
                 sources={[
                   {
-                    src: '/assets/videos/Seafood-pasta.mp4',
+                    src: `/assets/videos/${recipe.cId}.mp4`,
                     type: 'video/mp4',
                   },
                 ]}
@@ -80,13 +94,18 @@ const DetailRecipePage = ({ match, location }) => {
               </p>
               <footer>
                 <p className="text-muted text-small mb-0 font-weight-light">
-                {recipe.createdAt}
+                  {recipe.createdAt}
                 </p>
               </footer>
             </CardBody>
           </Card>
           <Card className="mb-4">
-            <RecentRecipe />
+            {/* <RecentRecipe /> */}
+            <ImagesCardRecipe recipe={recipe} />
+            <div className="mt-5 remove-last-border">
+              <h5><strong>Comments</strong></h5>
+              {renderComments(feedbackRecipe)}
+            </div>
           </Card>
         </Colxx>
       </Row>

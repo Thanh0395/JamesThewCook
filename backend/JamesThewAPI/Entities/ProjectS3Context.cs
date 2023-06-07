@@ -35,7 +35,7 @@ namespace JamesThewAPI.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=THANH-MSILAPTOP;Database=ProjectS3;User Id=sa;password=123;");
+                optionsBuilder.UseSqlServer("Server=.;Database=ProjectS3;User Id=sa;password=123;");
             }
         }
 
@@ -48,9 +48,7 @@ namespace JamesThewAPI.Entities
 
                 entity.ToTable("Category");
 
-                entity.Property(e => e.CId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("C_id");
+                entity.Property(e => e.CId).HasColumnName("C_id");
 
                 entity.Property(e => e.CategoryName).HasMaxLength(50);
             });
@@ -171,7 +169,7 @@ namespace JamesThewAPI.Entities
 
                 entity.Property(e => e.CId)
                     .HasColumnName("C_id")
-                    .HasDefaultValueSql("((0))");
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
 
@@ -232,7 +230,7 @@ namespace JamesThewAPI.Entities
 
                 entity.Property(e => e.CId)
                     .HasColumnName("C_id")
-                    .HasDefaultValueSql("((0))");
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.CountryId).HasColumnName("Country_id");
 
@@ -331,7 +329,7 @@ namespace JamesThewAPI.Entities
 
                 entity.ToTable("User");
 
-                entity.HasIndex(e => e.Email, "UQ__User__A9D105346E3352B4")
+                entity.HasIndex(e => e.Email, "UQ__User__A9D1053492C2CC61")
                     .IsUnique();
 
                 entity.Property(e => e.UId).HasColumnName("U_id");

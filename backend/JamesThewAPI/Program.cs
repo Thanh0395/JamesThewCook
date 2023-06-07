@@ -45,6 +45,8 @@ builder.Services.AddScoped<IRecipe, RecipeImp>();
 builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
 builder.Services.AddScoped<IMembership, MembershipImp>();
+builder.Services.AddScoped<IMultiFIle, MultiFIleImp>();
+builder.Services.AddScoped<IRecipeFeedback, RecipeFeedbackImp>();
 
 //config localhost to use UI
 builder.Services.AddCors(options =>

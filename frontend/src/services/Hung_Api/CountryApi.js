@@ -10,12 +10,12 @@ export const GetCountry= async (id) => {
     return data.data.data
 }
 
-export const PostCountry= async (dataPost) => {
-    const data = await axios.post("http://localhost:5013/api/Country",dataPost)
+export const PostCountry= async (countryName) => {
+    const data = await axios.post("http://localhost:5013/api/Country",{countryName})
     return data.data.data
 }
 
-export const PutCountry= async (dataPut) => {
-    const data = await axios.put("http://localhost:5013/api/Country",dataPut)
+export const PutCountry= async (countryId,countryName) => {
+    const data = await axios.put("http://localhost:5013/api/Country",{countryId,countryName})
     return data.data.data
 }

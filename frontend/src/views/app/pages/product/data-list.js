@@ -88,7 +88,7 @@ const DataListPages = ({ match }) => {
     }
     if (lastChecked === null) {
       setLastChecked(id);
-    }
+    } 
 
     let selectedList = [...selectedItems];
     if (selectedList.includes(id)) {

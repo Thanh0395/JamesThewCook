@@ -28,7 +28,6 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
     const handleFileChange = (e) => {
         setInputFile(e.target.files[0]);
     };
-    console.log("recipeupdate :", recipe);
     const onSubmit = (values) => {
         console.log("Values", values);
         console.log("get time cuurent: ", getDateWithFormat());

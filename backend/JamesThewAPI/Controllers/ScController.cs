@@ -44,14 +44,14 @@ namespace JamesThewAPI.Controllers
         }
 
         [HttpGet("{ContestId}")]
-        public async Task<ActionResult<CustomRespone<SubmissionContest>>> GetSCById(int ContestId)
+        public async Task<ActionResult<CustomRespone<IEnumerable<SubmissionContest>>>> GetSCById(int ContestId)
         {
             try
             {
                 var resources = await scRepo.GetSCById(ContestId);
                 if (resources != null)
                 {
-                    var response = new CustomRespone<SubmissionContest>
+                    var response = new CustomRespone<IEnumerable<SubmissionContest>>
                             (StatusCodes.Status200OK, "Get Submissive Contest successfully", resources, null);
                     return Ok(response);
                 }

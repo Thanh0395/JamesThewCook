@@ -39,9 +39,9 @@ function* loginWithEmailPassword({ payload }) {
   const { history } = payload;
   try {
     const loginUser = yield call(axios.post,"http://localhost:5013/api/Auth", {email,password});
-    if (!loginUser.email) {
+    if (loginUser.status===200) {
       
-      const item = { uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
+      const item = { token: loginUser.data.token, uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
         img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };
         
       setCurrentUser(item);
@@ -51,7 +51,7 @@ function* loginWithEmailPassword({ payload }) {
       yield put(loginUserError(loginUser.data.message));
     }
   } catch (error) {
-    yield put(loginUserError(error));
+    yield put(loginUserError("You are not register yet or wrong password"));
   }
 }
 
@@ -60,13 +60,22 @@ export function* watchRegisterUser() {
   yield takeEvery(REGISTER_USER, registerWithEmailPassword);
 }
 
-const registerWithEmailPasswordAsync = async (email, password) =>
+const registerWithEmailPasswordAsync = async (email, password) =>{
   // eslint-disable-next-line no-return-await
-  await auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((user) => user)
-    .catch((error) => error);
-
+  // await auth
+  //   .createUserWithEmailAndPassword(email, password)
+  //   .then((user) => user)
+  //   .catch((error) => error);
+  const loginUser = await axios.post("http://localhost:5013/api/Auth", {email,password});
+  if (loginUser.status===200) {
+      
+    const item = { uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
+      img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };
+      
+    setCurrentUser(item);
+    loginUserSuccess(item);
+  }
+}
 function* registerWithEmailPassword({ payload }) {
   const { email, password } = payload.user;
   const { history } = payload;

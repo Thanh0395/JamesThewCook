@@ -89,21 +89,21 @@ namespace JamesThewAPI.Repository
             //lay list sc -> foreach item item.scid == 
             foreach(var item in data)
             {
-                foreach(var item2 in scdb)
+                var scdb2 = await context.SubmissionContests.FindAsync(item.scId);
+                if(scdb2 != null)
                 {
-                    if(item.scId == item2.ScId)
-                    {
-                        item2.AverageScore = item.avgScore;
-                        await context.SaveChangesAsync();
-                    }
+
+                    scdb2.AverageScore = item.avgScore;
+                    context.Entry(scdb2).State = EntityState.Modified;
+                    await context.SaveChangesAsync();
                 }
             }
             return data;
         }
 
-        public async Task<SubmissionContest> GetSCById(int id)
+        public async Task<IEnumerable<SubmissionContest>> GetSCById(int id)
         {
-            var sc = await context.SubmissionContests.FindAsync(id);
+            var sc = await context.SubmissionContests.Where(e => e.ContestId.Equals(id)).ToListAsync();
             return (sc != null) ? sc : null;
         }
 

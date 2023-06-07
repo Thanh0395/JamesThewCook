@@ -61,6 +61,8 @@ namespace JamesThewAPI.Repository
 					}
 					else
 					{
+						_dbContext.Recipes.Remove(recipeDb);
+						await _dbContext.SaveChangesAsync();
 						return false;
 					}
 				}

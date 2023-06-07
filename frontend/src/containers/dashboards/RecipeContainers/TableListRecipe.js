@@ -14,6 +14,7 @@ import DatatablePagination from 'components/DatatablePagination';
 import { DeleteRecipe, GetListRecipe } from 'services/Hung_Api/RecipeApi';
 import UpdateRecipe from 'views/app/dashboards/recipes/update-recipe';
 // import DetailRecipePage from 'views/app/dashboards/recipes/detail-recipe';
+import { DeleteImagesByRecipeId, GetListImages } from 'services/Hung_Api/MultiFileApi';
 import UseModal from './UseModal';
 import DetailRecipeModal from './detailRecipe/DetailModal';
 // import DetailRecipeModal from './DetailModal';
@@ -112,42 +113,42 @@ function Table({ columns, data, divided = false, defaultPageSize = 6 }) {
 const TableListRecipe = ({ match }) => {
   console.log("match:", match);
   const [selectedRecipeUpdate, setSelectedRecipeUpdate] = useState(null);
-  const [initialRecipies, setInitialRecipies] = useState([]);
   const [recipies, setRecipies] = useState([]);
   const { isShow, toggle } = UseModal();
   const [recipeDetail, setRecipeDetail] = useState([])
+  const [images, setImages] = useState([])
   useEffect(() => {
-    console.log("effect getlist");
-    GetListRecipe().then(rs => {
-      setInitialRecipies(rs);
-      setRecipies(rs);
-    });
+    GetListImages()
+      .then(rs => {
+        console.log("images api :", images)
+        setImages(rs)
+      })
+  }, [])
+  useEffect(() => {
+    GetListRecipe()
+      .then(rs => setRecipies(rs))
   }, [selectedRecipeUpdate])
 
   const handleDelete = (Id) => {
-    DeleteRecipe(Id).then(data => {
-      if (data.status === 200) {
-        setInitialRecipies(initialRecipies.filter(item => item.rId !== Id));
-        setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
-      } else {
-        console.log(data);
+    DeleteImagesByRecipeId(Id).then(rs => {
+      if (rs.status === 201) {
+        DeleteRecipe(Id).then(data => {
+          if (data.status === 200) {
+            setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
+          } else {
+            console.log(data);
+          }
+        })
       }
     })
   }
 
-  // const handleDetail = (recipe)=>{
-  //   toggle()
-  //   console.log("detail :", recipe);
-  //   setRecipeDetail(recipe)
-  // }
-
   const handleDetail = useCallback((recipe) => {
     toggle()
-    console.log("detail :", recipe);
     setRecipeDetail(recipe)
   }, [])
 
-  const onUpdate = (recipe)=>{
+  const onUpdate = (recipe) => {
     setSelectedRecipeUpdate(recipe)
   }
 
@@ -164,23 +165,30 @@ const TableListRecipe = ({ match }) => {
         accessor: 'featureImage',
         cellClass: 'text-muted w-40',
         Cell: (props) =>
-          <img src={`http://localhost:5013${props.value}`} style={{ width: '130px' }} alt="" aria-hidden="true" />,
+          <img
+            src={`http://localhost:5013${props.value}`}
+            style={{ width: '130px' }} alt="" aria-hidden="true"
+          />,
+        // <img 
+        // src={`http://localhost:5013${images.find((item) => item.rId === props.row.original.rId)?.featureImage}`} 
+        //   style={{ width: '130px' }} alt="" aria-hidden="true" 
+        // />,
       },
       {
         Header: 'Ingredient',
         accessor: 'ingredient',
         cellClass: 'text-muted w-10',
         Cell: (props) => (<div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }}>
-        {props.value}
-      </div>),
+          {props.value}
+        </div>),
       },
       {
-        Header: 'Content',
+        Header: 'Directions',
         accessor: 'content',
         cellClass: 'text-muted w-10',
         Cell: (props) => (<div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }}>
-        {props.value}
-      </div>),
+          {props.value}
+        </div>),
       },
       {
         Header: 'CreatedAt',
