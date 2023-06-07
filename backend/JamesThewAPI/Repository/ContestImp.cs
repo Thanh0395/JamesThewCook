@@ -72,7 +72,7 @@ namespace JamesThewAPI.Repository
             return (contest != null) ? contest : null;
         }
 
-        public async Task<Contest> UpdateContest(Contest contest, IFormFile file)
+        public async Task<Contest> UpdateContest(Contest contest, IFormFile ? file)
         {
             var contestdb = await context.Contests.FindAsync(contest.ContestId);
             if (contestdb != null)
@@ -115,6 +115,7 @@ namespace JamesThewAPI.Repository
                 }
                 else
                 {
+                    contest.FeatureImage = contestdb.FeatureImage;
                     context.Entry(contest).State = EntityState.Modified;
                     await context.SaveChangesAsync();
                     return contest;
