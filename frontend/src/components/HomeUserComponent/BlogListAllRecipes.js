@@ -49,15 +49,6 @@ const BlogListRecipes = ({ recipes }) => {
                                         src={`http://localhost:5013${recipe.featureImage}`}
                                         alt=""
                                     />
-                                    {/* {blogItem.badge && (
-                                            <Badge
-                                                color="primary"
-                                                pill
-                                                className="position-absolute badge-top-left"
-                                            >
-                                                {blogItem.badge}
-                                            </Badge>
-                                        )} */}
                                     {(countries && categories) && (
                                         <div>
                                             {countries.map(item => item.countryId === recipe.countryId && (

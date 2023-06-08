@@ -9,8 +9,8 @@ import { adminRoot } from 'constants/defaultValues';
 const IconCardsCarouselRecipe = ({ className = 'icon-cards-row' }) => {
   const navlinkTo = [
     `${adminRoot}/dashboards/recipes/list-recipe`,
-    `${adminRoot}/dashboards/recipes/analytics-recipe`,
-    `${adminRoot}/dashboards/recipes/category-country`,
+    `${adminRoot}/dashboards/analytics`,
+    `${adminRoot}/dashboards/contests`,
     `${adminRoot}/dashboards/recipes/list-recipe`
   ]
   return (

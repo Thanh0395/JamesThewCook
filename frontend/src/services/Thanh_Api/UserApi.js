@@ -10,3 +10,8 @@ export const GetListUser = async () => {
     return data.data.data
 }
 
+export const PutUser = async (dataPut) => {
+  const data = await axios.put("http://localhost:5013/api/User", dataPut)
+  return data.data.data;
+}
+

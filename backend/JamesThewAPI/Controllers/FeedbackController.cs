@@ -3,6 +3,7 @@ using JamesThewAPI.ModelUtility.CustomResult;
 using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 
 namespace JamesThewAPI.Controllers
 {
@@ -212,5 +213,32 @@ namespace JamesThewAPI.Controllers
                 return BadRequest(response);
             }
         }
-    }
+
+		//Hung them vao API GetFeedbackByPostId
+
+		[HttpGet("GetFeedbackByPostId/{pId}")]
+		public async Task<ActionResult<CustomRespone<IEnumerable<Feedback>>>> GetFeedbackByPostId(int pId)
+		{
+			try
+			{
+				var resources = await _feedbackRepo.GetFeedbackByPostId(pId);
+				if (resources != null)
+				{
+					var response = new CustomRespone<IEnumerable<Feedback>>
+							(StatusCodes.Status200OK, "GetRecipeFeedbackByRecipeId success!", resources, null);
+					return Ok(response);
+				}
+				else
+				{
+					var response = new CustomRespone<IEnumerable<Feedback>>(StatusCodes.Status404NotFound, "Update Recipe Feedback failed!!!!!!", null, null);
+					return NotFound(response);
+				}
+			}
+			catch (Exception ex)
+			{
+				var response = new CustomRespone<IEnumerable<Feedback>>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
+				return BadRequest(response);
+			}
+		}
+	}
 }

@@ -27,6 +27,7 @@ import whotoFollowData from 'data/follow';
 import UserCardBasic from 'components/cards/UserCardBasic';
 import HomeRecipes from 'containers/HomeUserContainer/HomeRecipes';
 import PostAndContest from 'containers/HomeUserContainer/PostContest';
+import HomeAuthor from 'containers/HomeUserContainer/HomeAuthor';
 // import recentPostsData from 'data/recentposts';
 // import RecentPost from 'components/common/RecentPost';
 // import posts from 'data/posts';
@@ -36,9 +37,7 @@ const friendsData = whotoFollowData.slice();
 // const followData = whotoFollowData.slice(0, 5);
 
 const HomePage = ({ match }) => {
-
   const [activeTab, setActiveTab] = useState('recipes');
-
   return (
     <>
       <Row>
@@ -46,6 +45,19 @@ const HomePage = ({ match }) => {
           <h1>Home Page </h1>
           <Breadcrumb match={match} />
           <Nav tabs className="separator-tabs ml-0 mb-5">
+            <NavItem>
+              <NavLink
+                className={classnames({
+                  active: activeTab === 'authors',
+                  'nav-link': true,
+                })}
+                onClick={() => setActiveTab('authors')}
+                to="#"
+                location={{}}
+              >
+                Author
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink
                 className={classnames({
@@ -88,8 +100,11 @@ const HomePage = ({ match }) => {
           </Nav>
 
           <TabContent activeTab={activeTab}>
+            <TabPane tabId="authors">
+              <HomeAuthor />
+            </TabPane>
             <TabPane tabId="recipes">
-              <HomeRecipes />
+              <HomeRecipes activeTab={activeTab} />
             </TabPane>
             <TabPane tabId="News">
               <PostAndContest />

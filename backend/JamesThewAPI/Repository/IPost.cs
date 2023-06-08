@@ -9,5 +9,7 @@ namespace JamesThewAPI.Repository
         Task<Post> AddPostAsync(Post post, IFormFile file);
         Task<Post> UpdatePostAsync(Post post, IFormFile file);
         Task<bool> DeletePostAsync(int pId);
+
+        Task<IEnumerable<Post>> GetPostByUserId(int uId);
     }
 }

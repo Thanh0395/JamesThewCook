@@ -207,6 +207,15 @@ const TopNav = ({
     setAvatar(getCurrentUser().img);
     setUserName(getCurrentUser().userName);
   }, [userName]);
+
+  // handle change page to profile user
+  const {uid} = getCurrentUser();
+  const handleChangePageProfile = () => {
+    history.push({
+      pathname: `${adminRoot}/home-user/profile-user`,
+      state: { uid }
+    });
+  }
   return (
     <nav className="navbar fixed-top">
       <div className="d-flex align-items-center navbar-left">
@@ -312,10 +321,15 @@ const TopNav = ({
               </span>
             </DropdownToggle>
             <DropdownMenu className="mt-3" right>
-              <DropdownItem>Account</DropdownItem>
-              <DropdownItem>Features</DropdownItem>
-              <DropdownItem>History</DropdownItem>
-              <DropdownItem>Support</DropdownItem>
+              <DropdownItem onClick={() => handleChangePageProfile()} >
+                Profile
+              </DropdownItem>
+              <DropdownItem>
+                Features
+              </DropdownItem>
+              <DropdownItem>
+                History
+              </DropdownItem>
               <DropdownItem divider />
               <DropdownItem onClick={() => handleLogout()}>
                 Sign out
