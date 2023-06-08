@@ -19,7 +19,7 @@ namespace JamesThewAPI.Repository
             _formFile = formFile;
         }
 
-        public async Task<User> AddUserAsync(User user, IFormFile file)
+        public async Task<User> AddUserAsync(User user, IFormFile? file)
         {
             var userDB = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(user.Email));
             user.Email = user.Email.ToLower();
