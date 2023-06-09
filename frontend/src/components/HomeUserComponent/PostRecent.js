@@ -58,7 +58,7 @@ const PostRecent = ({ data, className="mb-4", intl }) => {
   const [user, setUser] = useState()
   const [feedbacks, setFeedbacks] = useState()
   const [comment, setComment] = useState()
-  const [reRender, setRerender] = useState(false)
+  const [reRender, setRerender] = useState()
   useEffect(() => {
     GetUserByUid(data.uId)
       .then(rs => setUser(rs))
