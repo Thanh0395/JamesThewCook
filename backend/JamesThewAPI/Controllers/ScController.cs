@@ -1,5 +1,6 @@
 ﻿using JamesThewAPI.Entities;
 using JamesThewAPI.ModelUtility.CustomResult;
+using JamesThewAPI.ModelUtility.Rating;
 using JamesThewAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,15 +43,15 @@ namespace JamesThewAPI.Controllers
             }
         }
 
-        [HttpGet("{ScId}")]
-        public async Task<ActionResult<CustomRespone<SubmissionContest>>> GetSCById(int ScId)
+        [HttpGet("{ContestId}")]
+        public async Task<ActionResult<CustomRespone<IEnumerable<SubmissionContest>>>> GetSCById(int ContestId)
         {
             try
             {
-                var resources = await scRepo.GetSCById(ScId);
+                var resources = await scRepo.GetSCById(ContestId);
                 if (resources != null)
                 {
-                    var response = new CustomRespone<SubmissionContest>
+                    var response = new CustomRespone<IEnumerable<SubmissionContest>>
                             (StatusCodes.Status200OK, "Get Submissive Contest successfully", resources, null);
                     return Ok(response);
                 }
@@ -72,16 +73,16 @@ namespace JamesThewAPI.Controllers
             try
             {
                 var resources = await scRepo.AddSC(sc, file);
-                if (resources != null)
+                if (resources == null)
+                {
+                    var response = new CustomRespone<SubmissionContest>(400, "Create Submissive form failed!!!", null, null);
+                    return NotFound(response);
+                }
+                else
                 {
                     var response = new CustomRespone<SubmissionContest>
                             (StatusCodes.Status201Created, "Submissive form created", resources, null);
                     return Ok(response);
-                }
-                else
-                {
-                    var response = new CustomRespone<SubmissionContest>(StatusCodes.Status404NotFound, "Create Submissive form failed!!!", null, null);
-                    return NotFound(response);
                 }
             }
             catch (Exception ex)
@@ -138,6 +139,12 @@ namespace JamesThewAPI.Controllers
                 var response = new CustomRespone<SubmissionContest>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
                 return BadRequest(response);
             }
+        }
+        [HttpGet("GetAvgScore")]
+        public async Task<IEnumerable<TotalRatingModel>> GetAvgScore()
+        {
+            var resources = await scRepo.GetAverageScore();
+            return resources;
         }
     }
 }

@@ -1,5 +1,7 @@
 
-import { UserRole, adminRoot } from './defaultValues';
+import {  adminRoot } from './defaultValues';
+
+// UserRole
 
 const data = [
   {
@@ -19,7 +21,7 @@ const data = [
         icon: 'simple-icon-pie-chart',
         label: 'menu.analytics',
         to: `${adminRoot}/dashboards/analytics`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin,UserRole.User],
       },
       {
         icon: 'simple-icon-basket-loaded',
@@ -60,13 +62,44 @@ const data = [
             label: 'menu.recipes.analytics-recipe',
             to: `${adminRoot}/dashboards/recipes/analytics-recipe`,
           },
+          {
+            icon: 'simple-icon-notebook',
+            label: 'menu.recipes.Category-Country',
+            to: `${adminRoot}/dashboards/recipes/category-country`,
+          },
+        ]
+      },
+      {
+        icon: 'simple-icon-book-open',
+        label: 'menu.contests',
+        to: `${adminRoot}/dashboards/contests`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-book-open',
+            label: 'menu.create-contest',
+            to: `${adminRoot}/dashboards/contests/create-contest`,
+          }
+        ]
+      },
+      {
+        icon: 'simple-icon-book-open',
+        label: 'menu.user',
+        to: `${adminRoot}/dashboards/user`,
+        // roles: [UserRole.Editor],
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.user.listuser',
+            to: `${adminRoot}/dashboards/user/listuser`,
+            // roles: [UserRole.Admin],
+          }
         ]
       },
       {
         icon: 'simple-icon-doc',
         label: 'menu.post',
         to: `${adminRoot}/dashboards/post`,
-        // roles: [UserRole.Editor],
         subs:[
           {
             icon: 'simple-icon-list',
@@ -74,19 +107,34 @@ const data = [
             to: `${adminRoot}/dashboards/post/default`,
             // roles: [UserRole.Admin],
           },
-          {
-            icon: 'simple-icon-book-open',
-            label: 'menu.post.list-post',
-            to: `${adminRoot}/dashboards/post/list-post`,
-          },
-          {
-            icon: 'simple-icon-book-open',
-            label: 'menu.create-post',
-            to: `${adminRoot}/dashboards/post/create-post`,
-          },
         ]
-      },
+      }
     ],
+  },
+  {
+    id:'home-user',
+    icon:'simple-icon-home',
+    label:'menu.home-page-user',
+    to:`${adminRoot}/home-user`,
+    subs: [
+      {
+        id: 'pages-authorization',
+        label: 'menu.home-page',
+        to: `${adminRoot}/home-user/home-page`,
+      }
+    ]
+  },
+  {
+    id:'feedback-page',
+    icon:'iconsminds-inbox',
+    label:'menu.feedback-to-page',
+    to:`${adminRoot}/feedback`
+  },
+  {
+    id:'faq-page',
+    icon:'simple-icon-question',
+    label:'menu.faq-page',
+    to:`${adminRoot}/faq`
   },
   {
     id: 'pages',

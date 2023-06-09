@@ -3,103 +3,146 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/display-name */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Button,
   Card,
   CardBody,
-  CardImg,
-  CardSubtitle,
-  CardText,
-  CardTitle,
+  // CardImg,
+  // CardSubtitle,
+  // CardText,
+  // CardTitle,
+  NavLink,
   Row,
 } from 'reactstrap';
 
+// import LinesEllipsis from 'react-lines-ellipsis';
+// import responsiveHOC from 'react-lines-ellipsis/lib/responsivehoc';
 import { Colxx } from 'components/common/CustomBootstrap';
 // import IntlMessages from 'helpers/IntlMessages';
 // import axios from 'axios';
 import { DeleteContest, GetListContest } from 'services/Sy_Api/ContestApi';
-import DetailContestModal from './DetailContest';
+import UpdateContest from 'views/app/dashboards/contests/update-contest';
+import UseModal from '../RecipeContainers/UseModal';
+import DetailContest from './DetailContest';
 // import DetailRecipeModal from './DetailModal';
 // import { NavLink } from 'react-router-dom';
 
+// const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 const TableListContest = () => {
+  const [selectedContestUpdate, setSelectedContestUpdate] = useState(null);
   const [initialContests, setInitialContests] = useState([]);
   const [contests, setContests] = useState([]);
-  const effectList = useEffect(() => {
+  const { isShow, toggle } = UseModal();
+  const [contestDetail, setContestDetail] = useState([]);
+  useEffect(() => {
     console.log('effect getlist');
     GetListContest().then((rs) => {
       setInitialContests(rs);
       setContests(rs);
     });
-  }, []);
+  }, [selectedContestUpdate]);
 
+  const handleDetail = useCallback((contest) => {
+    toggle();
+    console.log('detail :', contest);
+    setContestDetail(contest);
+  }, []);
   const handleDelete = async (Id) => {
-      DeleteContest(Id).then(data => {
-        if (data.status === 200) {
-          setInitialContests(initialContests.filter(item => item.contestId !== Id));
-          setContests(prevContests => prevContests.filter(item => item.contestId !== Id));
-        } else {
-          console.log(data);
-        }
-      }).then(effectList)
+    DeleteContest(Id).then((data) => {
+      if (data.status === 200) {
+        setInitialContests(
+          initialContests.filter((item) => item.contestId !== Id)
+        );
+        setContests((prevContests) =>
+          prevContests.filter((item) => item.contestId !== Id)
+        );
+      } else {
+        console.log(data);
+      }
+    });
   };
 
   return (
-    <Row>
-      {contests.map((item, index) => {
-        return (
-          <div key={index}>
-            <Colxx xxs="12">
-              <CardTitle className="mb-4">{item.title}</CardTitle>
-              <Row>
-                <Colxx xxs="12" xs="6" lg="4">
-                  <Card className="mb-4">
-                    <div className="position-relative">
-                      <CardImg
-                        top
-                        src={item.FeatureImage}
-                        alt="Card image cap"
-                        style={{ width: '130px' }}
-                      />
+    <>
+      {selectedContestUpdate && ( // Render the update component if a recipe is selected
+        <UpdateContest
+          contest={selectedContestUpdate}
+          setSelectedContestUpdate={setSelectedContestUpdate}
+        />
+      )}
+      <Row>
+        {/* <Colxx xxs="12">
+          <Row> */}
+        {contests.map((item, index) => {
+          return (
+            <Colxx xxs="12" lg="6" className="mb-5" key={`blogItem_${index}`}>
+              <Card className="flex-row listing-card-container">
+                <div className="w-50 position-relative">
+                  <NavLink to="blog-detail">
+                    <img
+                      className="card-img-left"
+                      src={`http://localhost:5013${item.featureImage}`}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </NavLink>
+                </div>
+                <div className="w-60 d-flex align-items-center">
+                  <CardBody>
+                    <div style={{fontWeight: 'bold'}}>
+                      {item.title}
                     </div>
-                    <CardBody>
-                      <CardSubtitle className="mb-4">
-                        {item.description}
-                      </CardSubtitle>
-                      <CardText className="text-muted text-medium mb-0 font-weight-light">
-                        Prize: {item.prize}
-                      </CardText>
-                      <CardText className="text-muted text-medium mb-0 font-weight-light">
-                        StartDate: {item.startDate}
-                      </CardText>
-                      <CardText className="text-muted text-medium mb-0 font-weight-light">
-                        EndDate: {item.endDate}
-                      </CardText>
-                      <CardText className="text-muted text-small mb-0 font-weight-light">
-                        {item.winner}
-                      </CardText>
-                      <Button outline size="sm" color="primary">
-                        Edit
-                      </Button>
-                      <Button
-                        outline
-                        size="sm"
-                        color="primary"
-                        onClick={() => handleDelete(item.contestId)}
-                      >
-                        Delete
-                      </Button>
-                    </CardBody>
-                  </Card>
-                </Colxx>
-              </Row>
-              <DetailContestModal />
+                    <div
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '100px',
+                      }}
+                    >
+                      {item.description}
+                    </div>
+                    <Button
+                      outline
+                      size="sm"
+                      color="primary"
+                      onClick={() => handleDetail(item)}
+                    >
+                      View All
+                    </Button>
+                    <Button
+                      outline
+                      size="sm"
+                      color="primary"
+                      onClick={() => setSelectedContestUpdate(item)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      outline
+                      size="sm"
+                      color="primary"
+                      onClick={() => handleDelete(item.contestId)}
+                    >
+                      Delete
+                    </Button>
+                    <DetailContest
+                      isShow={isShow}
+                      hide={toggle}
+                      contest={contestDetail}
+                    />
+                  </CardBody>
+                </div>
+              </Card>
             </Colxx>
-          </div>
-        );
-      })}
-    </Row>
+          );
+        })}
+        {/* </Row>
+        </Colxx> */}
+      </Row>
+    </>
   );
 };
+
 export default TableListContest;

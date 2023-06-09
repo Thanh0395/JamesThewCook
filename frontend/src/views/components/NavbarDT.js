@@ -17,50 +17,50 @@ function NavbarDT(props) {
         </a>
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a
-              className="c-pointer"
-              href="#scroll"
-              onClick={(event) => scrollTo(event, 'features')}
-            >
-              FEATURES
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="c-pointer"
-              href="#scroll"
-              onClick={(event) => scrollTo(event, 'layouts')}
-            >
-              LAYOUTS
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="c-pointer"
-              href="#scroll"
-              onClick={(event) => scrollTo(event, 'components')}
-            >
-              COMPONENTS
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="c-pointer"
-              href="#scroll"
-              onClick={(event) => scrollTo(event, 'apps')}
-            >
-              APPS
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="c-pointer"
-              href="#scroll"
-              onClick={(event) => scrollTo(event, 'themes')}
-            >
-              THEMES
-            </a>
-          </li>
+                <a
+                  className="c-pointer"
+                  href="#scroll"
+                  onClick={(event) => scrollTo(event, 'home')}
+                >
+                  AUTHOR
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="c-pointer"
+                  href="#scroll"
+                  onClick={(event) => scrollTo(event, 'recipies')}
+                >
+                  RECIPE
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="c-pointer"
+                  href="#scroll"
+                  onClick={(event) => scrollTo(event, 'contest')}
+                >
+                  CONTEST
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="c-pointer"
+                  href="#scroll"
+                  onClick={(event) => scrollTo(event, 'post')}
+                >
+                  POST
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="c-pointer"
+                  href="#scroll"
+                  onClick={(event) => scrollTo(event, 'member')}
+                >
+                  MEMBER
+                </a>
+              </li>
           <li className="nav-item">
             <div className="separator" />
           </li>

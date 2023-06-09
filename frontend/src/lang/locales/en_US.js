@@ -163,16 +163,37 @@ module.exports = {
   'menu.create-post': 'Create Post',
   'menu.detail-post':'Detail Post',
 
+  /* Recipe */
+
+  'menu.recipes.update-recipe':'Update Recipe',
+  'menu.recipes.analytics-recipe':'Analytics Recipe',
+  'menu.recipes.Category-Country':'Category & Country',
+  'menu.category-country': "Category & Contry",
+  'menu.home-page-user' :" Home",
+  'menu.home-page' :" Home Page",
+  "menu.home-user": "Home Page",
+  "menu.profile-user": "Profile",
+  "menu.feedback-to-page":"Feedback Page",
+  "menu.faq-page":"FAQ",
+  "menu.feedback": "feedback",
+
   /* Sy COntest */
-  'menu.contest': 'Contest',
+  'menu.contests': 'Contest',
   'menu.contest.default': 'Contest Default',
   'menu.contest.list-contest': 'List Contest',
   'menu.list-contest': 'List Contest',
   'menu.create-contest': 'Create Contest',
   'menu.detail-contest':'Detail Contest',
-  'menu.test-recipe':'Test Recipe',
-  'menu.recipes.update-recipe':'Update Recipe',
-  'menu.recipes.analytics-recipe':'Analytics Recipe',
+  'pages.contest-description': 'Description',
+  'pages.contest-sc': 'Entry',
+  'pages.contest-participate': 'Participate',
+
+  
+  /* Thanh */
+  'menu.user': 'User',
+  'menu.user.listuser': 'All User',
+  'menu.user.profile': 'Profile', // Xem profile của mình và sửa dc
+  'menu.user.detail': 'Detail', // Admin dc truy cập xem thông tin user
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -230,9 +251,15 @@ module.exports = {
   'dashboards.recipe': 'Recipe',
   'dashboards.recipes': 'Recipes',
   'dashboards.recent-recipe': 'Recent Recipe',
+  'dashboards.hot-recipe': 'Hot Recipe',
+  'dashboards.form-category': 'Category Form',
+  'dashboards.form-country': 'Country Form',
+
   // Cac trang con cua Recipe
   'dashboards.recipes.default': 'Recipe Default',
   'dashboards.recipes.list-recipe': 'List Recipe',
+  'dashboards.recipes.analytics': 'Analytics',
+  'dashboards.recipes.category-country': 'Category && Country',
 
   /* 05.Pages */
   'pages.add-new': 'ADD NEW',
@@ -628,6 +655,7 @@ module.exports = {
   'modal.launch-large-modal': 'Launch Large Modal',
   'modal.launch-small-modal': 'Launch Small Modal',
   'modal.detail-recipe': 'Detail Recipe',
+  'modal.detail-contest': 'Detail Contest',
 
   /* 07.16.Navigation */
   'nav.basic': 'Nav Basic',
@@ -686,6 +714,8 @@ module.exports = {
   'table.form-create-post':'Create new post right here!',
   'table.list-recipe': 'Table Recipies',
   'table.list-contest': 'List Contest',
+  'table.list-category': 'List Category',
+  'table.list-country': 'List Country',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',

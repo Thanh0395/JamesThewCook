@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import Headroom from 'react-headroom';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
-import { getCurrentUser } from 'helpers/Utils';
+import { getCurrentUser, setCurrentUser } from 'helpers/Utils';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Navbar(props) {
   const { scrollTo, setShowMobileMenu, showMobileMenu } = props;
 
   // set button login/logout
-  const [userName, setUserName] = useState(null);
+  const [userName, setUserName] = useState();
   useEffect(() => {
     if (getCurrentUser() != null) {
       setUserName(getCurrentUser().userName);
-    }
+    } else { setUserName() }
   }, [userName]);
+  const history = useHistory();
+  const handleLogout = () => {
+    setCurrentUser();
+    setUserName();
+    history.push("/");
+  }
   return (
     <div>
       <Headroom className="landing-page-nav">
@@ -72,25 +79,28 @@ function Navbar(props) {
                   MEMBER
                 </a>
               </li>
-              { userName? (
+              {userName ? (
                 <>
-                  <Link to="/login" className="nav-item pl-4">
-                    <a
-                      className="btn btn-outline-semi-light btn-sm pr-4 pl-4"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="#foo"
-                    >
+                  <button type="button"
+                    style={{ border: "none", backgroundColor: "transparent" }}
+                    onClick={handleLogout}
+                  ><a className="btn btn-outline-semi-light pr-2 pl-4 ml-4"
+                    style={{ fontSize: "12pt" }}
+                    rel="noopener noreferrer"
+                    href="#foo"
+                  >
                       Logout
                     </a>
-                  </Link>
-                  <p className="nav-item pr-4 pl-4 pt-3">Hi, {userName}</p>
+                  </button>
+                  <p style={{ border: "none" }} className="nav-item btn btn-outline-semi-light mt-3">Hi, {userName}
+                  {(getCurrentUser().isMembership==='Membership')?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
+                  </p>
                 </>
-              ):(
+              ) : (
                 <Link to="/login" className="nav-item pl-4">
                   <a
                     className="btn btn-outline-semi-light btn-sm pr-4 pl-4"
-                    target="_blank"
+                    // target="_blank"
                     rel="noopener noreferrer"
                     href="#foo"
                   >

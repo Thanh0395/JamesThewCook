@@ -19,7 +19,7 @@ namespace JamesThewAPI.Repository
             _formFile = formFile;
         }
 
-        public async Task<User> AddUserAsync(User user, IFormFile file)
+        public async Task<User> AddUserAsync(User user, IFormFile? file)
         {
             var userDB = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(user.Email));
             user.Email = user.Email.ToLower();
@@ -130,7 +130,7 @@ namespace JamesThewAPI.Repository
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task<User> UpdateUserAsync(User user, IFormFile file)
+        public async Task<User> UpdateUserAsync(User user, IFormFile? file)
         {
             var userDB = await _dbContext.Users.FindAsync(user.UId);
             if (userDB != null)

@@ -7,7 +7,6 @@ import {
   CardBody,
   CardTitle,
   CardImg,
-  Badge,
 } from 'reactstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { Colxx } from 'components/common/CustomBootstrap';
@@ -28,24 +27,10 @@ const ImageCards = () => {
                   src="/assets/img/cards/thumb-1.jpg"
                   alt="Card image cap"
                 />
-                <Badge
-                  color="primary"
-                  pill
-                  className="position-absolute badge-top-left"
-                >
-                  NEW
-                </Badge>
-                <Badge
-                  color="secondary"
-                  pill
-                  className="position-absolute badge-top-left-2"
-                >
-                  TRENDING
-                </Badge>
               </div>
               <CardBody>
                 <CardSubtitle className="mb-4">
-                  Homemade Cheesecake with Fresh Berries and Mint
+                  Homemade Cheesecake with Fresh Berries and Mintasd
                 </CardSubtitle>
                 <CardText className="text-muted text-small mb-0 font-weight-light">
                   09.04.2018
@@ -57,7 +42,7 @@ const ImageCards = () => {
             <Card className="mb-4">
               <CardBody>
                 <CardSubtitle className="mb-4">
-                  Homemade Cheesecake with Fresh Berries and Mint
+                  Homemade Cheesecake with Fresh Berries and Mintasdaa
                 </CardSubtitle>
                 <CardText className="text-muted text-small mb-0 font-weight-light">
                   09.04.2018
@@ -69,20 +54,6 @@ const ImageCards = () => {
                   src="/assets/img/cards/thumb-1.jpg"
                   alt="Card image cap"
                 />
-                <Badge
-                  color="primary"
-                  pill
-                  className="position-absolute badge-top-left"
-                >
-                  NEW
-                </Badge>
-                <Badge
-                  color="secondary"
-                  pill
-                  className="position-absolute badge-top-left-2"
-                >
-                  TRENDING
-                </Badge>
               </div>
             </Card>
           </Colxx>

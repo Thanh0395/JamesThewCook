@@ -10,12 +10,12 @@ export const GetCategory= async (id) => {
     return data.data.data
 }
 
-export const PostCategory= async (dataPost) => {
-    const data = await axios.post("http://localhost:5013/api/Category",dataPost)
+export const PostCategory= async (categoryName) => {
+    const data = await axios.post("http://localhost:5013/api/Category",{categoryName})
     return data.data.data
 }
 
-export const PutCategory= async (dataPut) => {
-    const data = await axios.put("http://localhost:5013/api/Category",dataPut)
+export const PutCategory= async (cId, categoryName) => {
+    const data = await axios.put("http://localhost:5013/api/Category",{cId, categoryName})
     return data.data.data
 }

@@ -7,6 +7,10 @@ import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { forgotPassword } from 'redux/actions';
 import { NotificationManager } from 'components/common/react-notifications';
+import axios from 'axios';
+import { getCurrentUser } from 'helpers/Utils';
+import PopupMessage from 'views/components/CustomHomePages/PopupMessage';
+import '../components/CustomHomePages/Popup.css'
 
 const validateEmail = (value) => {
   let error;
@@ -17,20 +21,47 @@ const validateEmail = (value) => {
   }
   return error;
 };
-
 const ForgotPassword = ({
-  history,
+  // history,
   forgotUserMail,
   loading,
   error,
-  forgotPasswordAction,
+  // forgotPasswordAction,
 }) => {
-  const [email] = useState('demo@coloredstrategies.com');
+  const [email] = useState(getCurrentUser() ? getCurrentUser().email : '');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onForgotPassword = (values) => {
+  // Popup message
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [propMessage, setPropMessage] = useState();
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+  // End popupmessage
+  const onForgotPassword = async (values) => {
     if (!loading) {
       if (values.email !== '') {
-        forgotPasswordAction(values, history);
+        // forgotPasswordAction(values, history);
+        setIsLoading(!isLoading);
+        try {
+          const forgotPass = await axios.post('http://localhost:5013/api/Email/forgotpassword', { 'toMail': values.email });
+          if (forgotPass) {
+            console.log(forgotPass);
+            setIsLoading(false);
+            setPopupOpen(true);
+            setPropMessage(forgotPass.data.message)
+            // alert("Your Pass was reset, please check an email")
+          }
+        } catch (errorMsg) {
+          if (errorMsg.response) {
+            if (errorMsg.response.data.status === 404) {
+              setIsLoading(false);
+              setPopupOpen(true);
+              setPropMessage(errorMsg.response.data.message)
+              // alert(errorMsg.response.data.message)
+            }
+          }
+        }
       }
     }
   };
@@ -60,6 +91,11 @@ const ForgotPassword = ({
 
   return (
     <Row className="h-100">
+      {/* Popup message */}
+      <div>
+        <PopupMessage isOpen={isPopupOpen} onClose={closePopup} message={propMessage} />
+      </div>
+      {/* End popup message */}
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
@@ -68,7 +104,7 @@ const ForgotPassword = ({
               Please use your e-mail to reset your password. <br />
               If you are not a member, please{' '}
               <NavLink to="/user/register" className="white">
-                register
+                <ins>register</ins>
               </NavLink>
               .
             </p>
@@ -80,7 +116,7 @@ const ForgotPassword = ({
             <CardTitle className="mb-4">
               <IntlMessages id="user.forgot-password" />
             </CardTitle>
-
+            
             <Formik initialValues={initialValues} onSubmit={onForgotPassword}>
               {({ errors, touched }) => (
                 <Form className="av-tooltip tooltip-label-bottom">
@@ -106,9 +142,8 @@ const ForgotPassword = ({
                     </NavLink>
                     <Button
                       color="primary"
-                      className={`btn-shadow btn-multiple-state ${
-                        loading ? 'show-spinner' : ''
-                      }`}
+                      className={`btn-shadow btn-multiple-state ${isLoading ? 'show-spinner' : ''
+                        }`}
                       size="lg"
                     >
                       <span className="spinner d-inline-block">

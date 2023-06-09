@@ -26,6 +26,10 @@ const PostDefault = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-ecommerce" */ './posts')
 );
 
+const UserDefault = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-ecommerce" */ './users')
+);
+
 const Dashboards = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -57,6 +61,10 @@ const Dashboards = ({ match }) => (
       <Route
         path={`${match.url}/contests`}
         render={(props) => <ContestDefault {...props} />}
+      />
+      <Route
+        path={`${match.url}/user`}
+        render={(props) => <UserDefault {...props} />}
       />
       {/* <Route
         path={`${match.url}/contests/:id`}

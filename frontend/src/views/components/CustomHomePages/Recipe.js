@@ -16,7 +16,7 @@ function HomeRecipe(props) {
       </div>
       {recipies.map((feature, i) => (
         // eslint-disable-next-line react/no-array-index-key
-        <div key={`feature_${i}`}>
+         <div key={`feature_${i}`}>
           {i % 2 === 0 && (
             <div className="row feature-row">
               <div className="col-12 col-md-6 col-lg-5 d-flex align-items-center">

@@ -66,7 +66,7 @@ namespace JamesThewAPI.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult<CustomRespone<Contest>>> AddContest([FromForm] Contest contest, IFormFile file)
+        public async Task<ActionResult<CustomRespone<Contest>>> AddContest([FromForm] Contest contest, IFormFile? file)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace JamesThewAPI.Controllers
             }
         }
         [HttpPut]
-        public async Task<ActionResult<CustomRespone<Contest>>> UpdateContest([FromForm] Contest contest, IFormFile file)
+        public async Task<ActionResult<CustomRespone<Contest>>> UpdateContest([FromForm] Contest contest, IFormFile? file)
         {
             try
             {
