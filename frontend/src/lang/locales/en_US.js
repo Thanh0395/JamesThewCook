@@ -154,6 +154,17 @@ module.exports = {
   'menu.list-recipe': 'List Recipe',
   'menu.create-recipe': 'Create Recipe',
   'menu.detail-recipe':'Detail Recipe',
+
+  /* Post */
+  'menu.post':'Posts',
+  'menu.post.default': 'Post Default',
+  'menu.post.list-post': 'List Post',
+  'menu.list-post': 'List Posts',
+  'menu.create-post': 'Create Post',
+  'menu.detail-post':'Detail Post',
+
+  /* Recipe */
+
   'menu.recipes.update-recipe':'Update Recipe',
   'menu.recipes.analytics-recipe':'Analytics Recipe',
   'menu.recipes.Category-Country':'Category & Country',
@@ -590,6 +601,9 @@ module.exports = {
   'form-recipe-create.categoty': 'Category',
   'form-recipe-create.isfree': 'IsFree',
   'form-recipe-create.portion': 'Portion',
+  /* For Post */
+  'form-post-create.title': 'Title',
+  'form-post-create.content': 'Content',
   'form-contest-create.title': 'Title',
   'form-contest-create.description': 'Description',
   'form-contest-create.prize': 'Prize',
@@ -696,6 +710,8 @@ module.exports = {
   'table.react-advanced': 'Filter, Length and Jump',
   'table.divided': 'Divided Table',
   /* them o day */
+  'table.list-post':'All posts will be there',
+  'table.form-create-post':'Create new post right here!',
   'table.list-recipe': 'Table Recipies',
   'table.list-contest': 'List Contest',
   'table.list-category': 'List Category',

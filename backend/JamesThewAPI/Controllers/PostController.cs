@@ -215,6 +215,7 @@ namespace JamesThewAPI.Controllers
             }
         }
 
+
         // Hung them vao API GetPostByUserId
         [HttpGet("GetPostByUserId/{uId}")]
         public async Task<ActionResult<CustomRespone<IEnumerable<Post>>>> GetPostByUserId(int uId)
