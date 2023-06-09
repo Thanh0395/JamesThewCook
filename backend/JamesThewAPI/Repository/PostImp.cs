@@ -80,7 +80,7 @@ namespace JamesThewAPI.Repository
             return (postDB != null) ? postDB : null;
         }
 
-        public async Task<Post> UpdatePostAsync(Post post, IFormFile file)
+        public async Task<Post> UpdatePostAsync(Post post, IFormFile? file)
         {
             var postDB = await _context.Posts.FindAsync(post.PId);
             if (postDB != null) { 
@@ -98,7 +98,7 @@ namespace JamesThewAPI.Repository
                 }
                 else
                 {
-                    post.FeatureImage = "/Public" + componentPath + "/" + "defaultavt.png";
+                    post.FeatureImage = postDB.FeatureImage;
                 }
             _context.Entry(post).State = EntityState.Modified;
             await _context.SaveChangesAsync();
