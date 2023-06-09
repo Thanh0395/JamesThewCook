@@ -80,7 +80,7 @@ const Register = (
           setPopupOpen(true);
           setPropMessage("Please, login for new user")
           // alert("Please, login for new user")
-          window.location.href = "/"
+          window.location.href = "/login"
 
           // history.push('/');
         }
