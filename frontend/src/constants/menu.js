@@ -107,6 +107,18 @@ const data = [
             to: `${adminRoot}/dashboards/post/default`,
             // roles: [UserRole.Admin],
           },
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.post.list-post',
+            to: `${adminRoot}/dashboards/post/list-post`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.create-post',
+            to: `${adminRoot}/dashboards/post/create-post`,
+            // roles: [UserRole.Admin],
+          },
         ]
       }
     ],

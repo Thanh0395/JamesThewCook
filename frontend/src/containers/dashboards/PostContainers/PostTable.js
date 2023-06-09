@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/display-name */
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
@@ -109,70 +109,48 @@ function Table({ columns, data, divided = true, defaultPageSize = 6 }) {
 const TablePost = () => {
   const [initialPosts, setInitialPosts] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([])
- // const [postDetail, setPostDetail] = useState([])
- // const { isShow, toggle } = UseModal();
- const fetchAuthorName = async () => {
-  // try {
-  //   const response = await fetch(`http://localhost:5013/api/User/1`);
-  //   console.log(response.data);
-  //   if (response.ok) {
-  //     const author = await response.json();
-  //     console.log(author.userName);
-  //     return author.userName;
-  //   } 
-  //     throw new Error('Failed to fetch author');
-  // } catch (error) {
-  //   console.log('Error fetching author:', error);
-  //   throw error;
-  // }
-  const response = await axios.get('http://localhost:5013/api/User');
-  return response.data.data;
-};
-useEffect(() => {
-  fetchAuthorName().then(rs => {
-    console.log("result api get user by Id:", rs)
-    setUsers(rs);
-  })
-}, [])
-// const AuthorNameCell = ({ value }) => {
-//   const [authorName, setAuthorName] = useState('');
-
-//   useEffect(() => {
-//     fetchAuthorName(value)
-//       .then((name) => setAuthorName(name))
-//       .catch((error) => console.log('Error fetching author:', error));
-//   }, [value]);
-//   console.log(authorName);
-
-//   return <>{authorName}</>;
-// };
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  // const [postDetail, setPostDetail] = useState([])
+  // const { isShow, toggle } = UseModal();
+  const fetchAuthorName = async () => {
+    const response = await axios.get('http://localhost:5013/api/User');
+    return response.data.data;
+  };
 
   const effectList = useEffect(() => {
-   // console.log("effect getlist");
-    GetListPost().then(rs => {
-      setInitialPosts(rs);
-      setPosts(rs);
-    });
-  }, [])  
+    Promise.all([GetListPost(), fetchAuthorName()])
+      .then(([postData, userData])=> {
+        setPosts(postData);
+        setUsers(userData);
+        setIsLoading(false);
+      })
+    GetListPost()
+      .then((rs) => {
+        setInitialPosts(rs);
+        setPosts(rs);
+      })
+      .then(fetchAuthorName().then((rs) => setUsers(rs)));
+  }, []);
 
   const handleDelete = (Id) => {
-    DeletePost(Id).then(data => {
-      if (data.status === 200) {
-        setInitialPosts(initialPosts.filter(item => item.pId !== Id));
-        setPosts(prevPosts => prevPosts.filter(item => item.pId !== Id));
-      } else {
-        console.log(data);
-      }
-    }).then(effectList)
-  }
+    DeletePost(Id)
+      .then((data) => {
+        if (data.status === 200) {
+          setInitialPosts(initialPosts.filter((item) => item.pId !== Id));
+          setPosts((prevPosts) => prevPosts.filter((item) => item.pId !== Id));
+        } else {
+          console.log(data);
+        }
+      })
+      .then(effectList);
+  };
 
-
-//  const handleDetail = useCallback((recipe) => {
-//     toggle()
-//     console.log("Detail:", recipe);
-//     setPostDetail(recipe)
-//   }, [])
+  //  const handleDetail = useCallback((recipe) => {
+  //     toggle()
+  //     console.log("Detail:", recipe);
+  //     setPostDetail(recipe)
+  //   }, [])
 
   const cols = React.useMemo(
     () => [
@@ -187,7 +165,7 @@ useEffect(() => {
         accessor: 'uId',
         cellClass: 'list-item-content w-20',
         Cell: (props) => {
-          const author = users.find(item => item.uId === props.value);
+          const author = users.find((item) => item.uId === props.value);
           return author ? <span>{author.userName}</span> : null;
         },
       },
@@ -195,35 +173,44 @@ useEffect(() => {
         Header: 'Feature Image',
         accessor: 'featureImage',
         cellClass: 'text-muted w-20',
-        Cell: (props) =>
-          <img src={`http://localhost:5013${props.value}`} style={{ width: '150px', height:'100px' }} alt="" aria-hidden="true" />,
+        Cell: (props) => (
+          <img
+            src={`http://localhost:5013${props.value}`}
+            style={{ width: '150px', height: '100px' }}
+            alt=""
+            aria-hidden="true"
+          />
+        ),
       },
       {
         Header: 'Description',
-        accessor: (row) =>{
-            const maxLength = 100; 
-            const contents = row.content;
-            if (contents.length > maxLength) {
-              return `${contents.substring(0, maxLength)}...`; 
-            }
-            return contents;
+        accessor: (row) => {
+          const maxLength = 100;
+          const contents = row.content;
+          if (contents.length > maxLength) {
+            return `${contents.substring(0, maxLength)}...`;
+          }
+          return contents;
         },
         cellClass: 'text-muted w-30',
         Cell: (props) => <>{props.value}</>,
       },
       {
         Header: 'Published On',
-        accessor:  (row) => {
-            const createdAtDate = new Date(row.createdAt);
-            const day = createdAtDate.getDate(); // Get the day from the createdAt date
-            const month = createdAtDate.getMonth() + 1; // Get the month from the createdAt date (months are zero-based)
-            const year = createdAtDate.getFullYear(); // Get the year from the createdAt date
-            const time = createdAtDate.toLocaleTimeString([],{hour: '2-digit', minute:'2-digit'})
-            // Format the date as "dd/mm/yyyy"
-            const formattedDate = `${day}/${month}/${year} at ${time}`;
-    
-            return formattedDate;
-          },
+        accessor: (row) => {
+          const createdAtDate = new Date(row.createdAt);
+          const day = createdAtDate.getDate(); // Get the day from the createdAt date
+          const month = createdAtDate.getMonth() + 1; // Get the month from the createdAt date (months are zero-based)
+          const year = createdAtDate.getFullYear(); // Get the year from the createdAt date
+          const time = createdAtDate.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          // Format the date as "dd/mm/yyyy"
+          const formattedDate = `${day}/${month}/${year} at ${time}`;
+
+          return formattedDate;
+        },
         cellClass: 'text-muted w-40',
         Cell: (props) => <>{props.value}</>,
       },
@@ -235,7 +222,7 @@ useEffect(() => {
           <div style={{ display: 'inline-flex' }}>
             <button
               type="button"
-              onClick={() => alert("ádsad")}
+              onClick={() => alert('ádsad')}
               className="btn btn-success mr-2"
             >
               Edit
@@ -251,7 +238,7 @@ useEffect(() => {
         ),
       },
     ],
-    []
+    [users]
   );
 
   return (
@@ -260,12 +247,10 @@ useEffect(() => {
         {/* <CardTitle>
           <IntlMessages id="table.list-recipe" />
         </CardTitle> */}
-        <Table columns={cols} data={posts} />
-      {/* <DetailRecipeModal isShow={isShow} hide={toggle} recipe={recipeDetail} /> */}
-
+        {!isLoading && (<Table columns={cols} data={posts}/>)}
+        {/* <DetailRecipeModal isShow={isShow} hide={toggle} recipe={recipeDetail} /> */}
       </CardBody>
     </Card>
-
   );
 };
 export default TablePost;

@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
 import { getCurrentUser } from 'helpers/Utils';
-// import { CreatePost } from 'services/Nhan_API/PostAPI';
+import { CreatePost } from 'services/Nhan_API/PostAPI';
 import { Formik, Form, Field } from 'formik';
-// import { useHistory } from 'react-router-dom';
-// import { adminRoot } from 'constants/defaultValues';
+import { useHistory } from 'react-router-dom';
+import { adminRoot } from 'constants/defaultValues';
 import * as Yup from 'yup';
 import {
   Row,
@@ -26,7 +26,7 @@ const SignupSchema = Yup.object().shape({
 
 const FormCreatePost = () => {
   const [inputFile, setInputFile] = useState(null);
-//   const history = useHistory();
+  const history = useHistory();
   const handleFileChange = (e) => {
     setInputFile(e.target.files[0]);
   };
@@ -46,14 +46,14 @@ const FormCreatePost = () => {
     formData.append('content', values.content);
     formData.append('isFree', values.isFree);
     formData.append('cId', values.cId);
-    formData.append('uId', values.uId);
+    formData.append('uId', getCurrentUser().uid);
     formData.append('file', inputFile);
     console.log('payload:', payload);
-    // setTimeout(() => {
-    // //   CreatePost(formData).then(() =>
-    // //     history.push(`${adminRoot}/dashboards/posts/list-post`)
-    // //   );
-    // }, 1000);
+    setTimeout(() => {
+      CreatePost(formData).then(() =>
+        history.push(`${adminRoot}/dashboards/post/list-post`)
+      );
+    }, 1000);
   };
   const [categories, setCategories] = useState([]);
   useEffect(() => {
