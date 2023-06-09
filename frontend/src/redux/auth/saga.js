@@ -49,7 +49,9 @@ function* loginWithEmailPassword({ payload }) {
         
       setCurrentUser(item);
       yield put(loginUserSuccess(item));
-      history.push(adminRoot);
+      // Hung sua cho nay
+      if(loginUser.data.role === "admin") history.push(adminRoot);
+      else history.push(`${adminRoot}/home-user`)
     } else {
       yield put(loginUserError(loginUser.data.message));
     }

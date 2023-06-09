@@ -4,15 +4,12 @@ import { PutCountry } from 'services/Hung_Api/CountryApi';
 import FormUpdateCountry from './FormUpdateCountry';
 
 const UpdateModalCountry = ({ modalBasic, setModalBasic, countryUpdate, setReRender}) =>{
-  console.log("countryUpdate", countryUpdate);
   const [countryName, setCountryName ] = useState()
   const handleUpdate = () => {
     const {countryId} = countryUpdate;
-    console.log("Country Name Update :", countryName);
-    console.log("countryId",countryId);
     PutCountry(countryId, countryName).then(response => {
       console.log("Put country API result :", response);
-      setReRender(true);
+      setReRender(prev => !prev);
       setModalBasic(false);
     })
   }
@@ -38,7 +35,7 @@ const UpdateModalCountry = ({ modalBasic, setModalBasic, countryUpdate, setReRen
                       color="primary"
                       onClick={handleUpdate}
                     >
-                      Do Something
+                      Save
                     </Button>{' '}
                     <Button
                       color="secondary"

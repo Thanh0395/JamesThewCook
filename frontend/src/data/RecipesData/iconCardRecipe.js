@@ -19,7 +19,7 @@ const data = [
     value: "See More",
   },
   {
-    title: 'dashboards.new-comments',
+    title: 'dashboards.post.list-post',
     icon: 'iconsminds-mail-read',
     value: 25
   },

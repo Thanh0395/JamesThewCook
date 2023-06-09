@@ -34,7 +34,7 @@ const BlogListRecipes = ({ recipes }) => {
     }, [])
     const navigateToDetailPage = (recipe) => {
         history.push({
-            pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+            pathname: `${adminRoot}/home-user/detail-recipe`,
             state: { recipe }
         });
     };

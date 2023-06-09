@@ -9,9 +9,15 @@ const HomePage = React.lazy(() =>
 const ProfileUser = React.lazy(() =>
 import(/* webpackChunkName: "dashboard-default" */ './profie-user')
 );
+
 const CreateRecipeUser = React.lazy(() =>
 import(/* webpackChunkName: "dashboard-default" */ './FormCreateRecipeUer')
 );
+
+const DetailRecipeUser = React.lazy(() =>
+import(/* webpackChunkName: "dashboard-default" */ './DetailRecipeUser')
+);
+
 const HomePageUser = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -27,6 +33,10 @@ const HomePageUser = ({ match }) => (
       <Route
         path={`${match.url}/create-recipe`}
         render={(props) => <CreateRecipeUser {...props} />}
+      />
+      <Route
+        path={`${match.url}/detail-recipe`}
+        render={(props) => <DetailRecipeUser {...props} />}
       />
       <Redirect to="/error" />
     </Switch>

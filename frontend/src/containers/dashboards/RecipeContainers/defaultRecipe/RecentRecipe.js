@@ -9,6 +9,7 @@ import IntlMessages from 'helpers/IntlMessages';
 import { adminRoot } from 'constants/defaultValues';
 import { GetListCountry } from 'services/Hung_Api/CountryApi';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
+import { getCurrentUser } from 'helpers/Utils';
 
 const RecentRecipe = () => {
   const history = useHistory()
@@ -22,11 +23,16 @@ const RecentRecipe = () => {
       .then(GetListCountry().then(rs => setCountries(rs))
         .then(GetListCategory().then(rs => setCategories(rs))))
   }, [])
+  const {isMembership} = getCurrentUser();
   const handleSeeDetail = (recipe) => {
-    history.push({
-      pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
-      state: { recipe }
-    });
+    if(recipe.isFree === isMembership){
+      alert("You are not a member yet.")
+    }else{
+      history.push({
+        pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+        state: { recipe }
+      });
+    }
   }
 
   return (
