@@ -2,11 +2,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
-import { getCurrentUser } from 'helpers/Utils';
-import { CreatePost } from 'services/Nhan_API/PostAPI';
+import { getCurrentUser, getDateWithFormat } from 'helpers/Utils';
+import { PutPost } from 'services/Nhan_API/PostAPI';
 import { Formik, Form, Field } from 'formik';
-import { useHistory } from 'react-router-dom';
-import { adminRoot } from 'constants/defaultValues';
 import * as Yup from 'yup';
 import {
   Row,
@@ -15,44 +13,42 @@ import {
   FormGroup,
   Label,
   Button,
+  InputGroup,
+  InputGroupAddon,
+  Input,
 } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
-import { FormikSwitch } from './FormikField';
+import { FormikCustomRadioGroup, FormikSwitch } from './FormikField';
 
 const SignupSchema = Yup.object().shape({
-  
+  select: Yup.string().required('Category is required!'),
 });
 
-const FormCreatePost = () => {
+const FormUpdatePost = ({ post, setSelectedPostUpdate }) => {
   const [inputFile, setInputFile] = useState(null);
-  const history = useHistory();
   const handleFileChange = (e) => {
     setInputFile(e.target.files[0]);
   };
-  console.log('fileee :', inputFile);
-
   const onSubmit = (values) => {
-    const payload = {
-      title: values.title,
-      content: values.content,
-      isFree: values.isFree,
-      cId: values.cId,
-      type: values.type,
-    //   file: inputFile,
-    };
+    console.log("values", values)
+    console.log('get time cuurent: ', getDateWithFormat());
     const formData = new FormData();
+    formData.append('pId', values.pId);
     formData.append('title', values.title);
     formData.append('content', values.content);
     formData.append('isFree', values.isFree);
-    formData.append('cId', values.cId);
-    formData.append('uId', getCurrentUser().uid);
+    formData.append('type', values.type)
+    formData.append('cId', values.select);
+    formData.append('uId', values.uId);
     formData.append('file', inputFile);
-    console.log('payload:', payload);
     setTimeout(() => {
-      CreatePost(formData).then(() =>
-        history.push(`${adminRoot}/dashboards/post/list-post`)
-      );
+      PutPost(formData).then((res) => {
+        console.log('Put API :', res);
+        if (res.pId != null) {
+          setSelectedPostUpdate(null);
+        }
+      });
     }, 1000);
   };
   const [categories, setCategories] = useState([]);
@@ -61,18 +57,22 @@ const FormCreatePost = () => {
       .then((cates) => setCategories(cates))
       .catch((err) => console.log('Loi request api cate:', err));
   }, []);
+  console.log('List cate :', categories);
   return (
     <Row className="mb-4">
       <Colxx xxs="12">
         <Card>
           <CardBody>
+            <h6 className="mb-4">Update Post Form</h6>
             <Formik
               initialValues={{
-                title: '',
-                content: '',
-                isFree: false,
-                cId: '',
-                type: '',
+                pId: post.pId,
+                uId: post.uId,
+                title: post.title,
+                content: post.content,
+                isFree: post.isFree,
+                type: post.type,
+                select: post.cId,
               }}
               validationSchema={SignupSchema}
               onSubmit={onSubmit}
@@ -89,43 +89,38 @@ const FormCreatePost = () => {
                 isSubmitting,
               }) => (
                 <Form className="av-tooltip tooltip-label-right">
+                  <Field className="form-control" name="pId" hidden />
+                  <Field className="form-control" name="uId" hidden />
                   <FormGroup className="error-l-100">
                     <Label>
-                      <IntlMessages id="form-recipe-create.title" />
+                      <IntlMessages id="form-post-create.title" />
                     </Label>
                     <Field className="form-control" name="title" />
                   </FormGroup>
                   <FormGroup className="error-l-100">
-                    <Label>
-                      <IntlMessages id="form-post-create.content" />
-                    </Label>
-                    <Field
-                      className="form-control"
-                      name="content"
-                      component="textarea"
-                    />
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        Content
+                      </InputGroupAddon>
+                      <Field
+                        className="form-control"
+                        name="content"
+                        component="textarea"
+                      />
+                    </InputGroup>
                   </FormGroup>
+
                   <FormGroup className="error-l-100">
-                    <Label>Category </Label>
-                    <select
-                      name="cId"
-                      className="form-control"
-                      value={values.cId}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="">Select an option..</option>
-                      {categories.map((category) => (
-                        <option key={category.cId} value={category.cId}>
-                          {category.categoryName}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.select && touched.select ? (
-                      <div className="invalid-feedback d-block">
-                        {errors.select}
-                      </div>
-                    ) : null}
+                    <Label className="d-block">
+                      Is Free
+                    </Label>
+                    <FormikSwitch
+                      name="isFree"
+                      className="custom-switch custom-switch-primary"
+                      value={values.isFree}
+                      onChange={setFieldValue}
+                      onBlur={setFieldTouched}
+                    />
                   </FormGroup>
                   <FormGroup className="error-l-100">
                     <Label>Type </Label>
@@ -148,17 +143,40 @@ const FormCreatePost = () => {
                   </FormGroup>
 
                   <FormGroup className="error-l-100">
-                    <Label className="d-block">
-                      Is Free
-                    </Label>
-                    <FormikSwitch
-                      name="isFree"
-                      className="custom-switch custom-switch-primary"
-                      value={values.isFree}
-                      onChange={setFieldValue}
-                      onBlur={setFieldTouched}
-                    />
+                    <Label>Category </Label>
+                    <select
+                      name="select"
+                      className="form-control"
+                      value={values.select}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    >
+                      <option value="">Select an option..</option>
+                      {categories.map((category) => (
+                        <option key={category.cId} value={category.cId}>
+                          {category.categoryName}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.select && touched.select ? (
+                      <div className="invalid-feedback d-block">
+                        {errors.select}
+                      </div>
+                    ) : null}
                   </FormGroup>
+
+                  <FormGroup className="error-l-100">
+                    <Label>Image Current</Label>
+                    <div>
+                      <img
+                        src={`http://localhost:5013${post.featureImage}`}
+                        style={{ width: '130px' }}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </FormGroup>
+
                   <FormGroup className="error-l-100">
                     <Label>Image</Label>
                     <input
@@ -180,4 +198,4 @@ const FormCreatePost = () => {
     </Row>
   );
 };
-export default FormCreatePost;
+export default FormUpdatePost;

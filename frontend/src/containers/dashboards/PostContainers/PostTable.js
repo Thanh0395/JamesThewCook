@@ -13,6 +13,7 @@ import DatatablePagination from 'components/DatatablePagination';
 // import axios from 'axios';
 import { DeletePost, GetListPost } from 'services/Nhan_API/PostAPI';
 import axios from 'axios';
+import UpdatePost from 'views/app/dashboards/posts/update-post';
 // import DetailRecipeModal from './DetailModal';
 // import { NavLink } from 'react-router-dom';
 
@@ -108,6 +109,7 @@ function Table({ columns, data, divided = true, defaultPageSize = 6 }) {
 
 const TablePost = () => {
   const [initialPosts, setInitialPosts] = useState([]);
+  const [selectedPostUpdate, setSelectedPostUpdate] = useState(null);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -131,7 +133,7 @@ const TablePost = () => {
         setPosts(rs);
       })
       .then(fetchAuthorName().then((rs) => setUsers(rs)));
-  }, []);
+  }, [selectedPostUpdate]);
 
   const handleDelete = (Id) => {
     DeletePost(Id)
@@ -146,11 +148,9 @@ const TablePost = () => {
       .then(effectList);
   };
 
-  //  const handleDetail = useCallback((recipe) => {
-  //     toggle()
-  //     console.log("Detail:", recipe);
-  //     setPostDetail(recipe)
-  //   }, [])
+  const onUpdate = (post) => {
+    setSelectedPostUpdate(post)
+  }
 
   const cols = React.useMemo(
     () => [
@@ -222,14 +222,14 @@ const TablePost = () => {
           <div style={{ display: 'inline-flex' }}>
             <button
               type="button"
-              onClick={() => alert('ádsad')}
+              onClick={() => onUpdate(props.row.original)}
               className="btn btn-success mr-2"
             >
               Edit
             </button>
             <button
               type="button"
-              onClick={() => handleDelete(props.row.original.rId)}
+              onClick={() => handleDelete(props.row.original.pId)}
               className="btn btn-danger"
             >
               Delete
@@ -247,8 +247,10 @@ const TablePost = () => {
         {/* <CardTitle>
           <IntlMessages id="table.list-recipe" />
         </CardTitle> */}
+          {selectedPostUpdate && ( // Render the update component if a recipe is selected
+          <UpdatePost post={selectedPostUpdate} setSelectedPostUpdate={setSelectedPostUpdate} />
+        )}
         {!isLoading && (<Table columns={cols} data={posts}/>)}
-        {/* <DetailRecipeModal isShow={isShow} hide={toggle} recipe={recipeDetail} /> */}
       </CardBody>
     </Card>
   );
