@@ -109,10 +109,5 @@ namespace JamesThewAPI.Repository
             }
         }
 
-        public async Task<string> GetUserNameAsync(int uId)
-        {
-            var user = await _context.Users.FindAsync(uId);
-            return user?.UserName;
-        }
     }
 }

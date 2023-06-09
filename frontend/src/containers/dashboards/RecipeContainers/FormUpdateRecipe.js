@@ -3,11 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
 import { GetListCountry } from 'services/Hung_Api/CountryApi';
-import { getCurrentUser } from 'helpers/Utils';
-import { PostRecipe } from 'services/Hung_Api/RecipeApi';
+import { getCurrentUser, getDateWithFormat } from 'helpers/Utils';
+import { PutRecipe } from 'services/Hung_Api/RecipeApi';
 import { Formik, Form, Field } from 'formik';
-import { useHistory } from 'react-router-dom';
-import { adminRoot } from 'constants/defaultValues';
 import * as Yup from 'yup';
 import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
@@ -15,7 +13,7 @@ import IntlMessages from 'helpers/IntlMessages';
 import {
     FormikCustomRadioGroup,
     FormikSwitch,
-} from './FormikFields';
+} from './formsRecipe/FormikFields';
 
 const SignupSchema = Yup.object().shape({
     email: Yup.string()
@@ -25,40 +23,35 @@ const SignupSchema = Yup.object().shape({
     customRadioGroup: Yup.string().required('Country is required'),
 });
 
-const FormCreateRecipe = () => {
-    const [ingredients, setIngredients] = useState()
-    const [contents, setContents] = useState()
+const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
     const [inputFile, setInputFile] = useState(null)
-    const history = useHistory(); 
-    const handleFileChange = (e) =>{
+    const handleFileChange = (e) => {
         setInputFile(e.target.files[0]);
     };
-    console.log("fileee :", inputFile)
+    console.log("recipeupdate :", recipe);
     const onSubmit = (values) => {
-        const payload = {
-            title: values.title,
-            ingredient: ingredients,
-            content: contents,
-            isFree: values.isFree,
-            cId: values.select,
-            countryId: values.customRadioGroup,
-            uId: getCurrentUser().uid,
-            file:inputFile,
-            portion:values.portion
-        }
+        console.log("Values", values);
+        console.log("get time cuurent: ", getDateWithFormat());
+        console.log("Ingredient", values.ingredient)
+        console.log("Content", values.content)
         const formData = new FormData()
+        formData.append('rId', values.rId);
         formData.append('title', values.title);
-        formData.append('ingredient', ingredients);
-        formData.append('content', contents);
+        formData.append('ingredient', values.ingredient);
+        formData.append('content', values.content);
         formData.append('isFree', values.isFree);
         formData.append('cId', values.select);
         formData.append('countryId', values.customRadioGroup);
         formData.append('uId', getCurrentUser().uid);
-        formData.append('portion', values.portion)
+        formData.append('portion', values.portion);
         formData.append('file', inputFile);
         setTimeout(() => {
-            console.log("payload:",payload);
-            PostRecipe(formData).then(()=> history.push(`${adminRoot}/dashboards/recipes/list-recipe`))
+            PutRecipe(formData).then(res => {
+                console.log("Put API :", res);
+                if (res.rId != null) {
+                    setSelectedRecipeUpdate(null)
+                }
+            })
         }, 1000);
 
     };
@@ -81,17 +74,18 @@ const FormCreateRecipe = () => {
             <Colxx xxs="12">
                 <Card>
                     <CardBody>
-                        <h6 className="mb-4">Create Recipe Form</h6>
+                        <h6 className="mb-4">Update Recipe Form</h6>
                         <Formik
                             initialValues={{
+                                rId: recipe.rId,
                                 email: getCurrentUser().email,
-                                title: '',
-                                ingredient: '',
-                                content: '',
-                                isFree: false,
-                                select: '',
-                                customRadioGroup: '',
-                                portion: 1
+                                title: recipe.title,
+                                ingredient: recipe.ingredient,
+                                content: recipe.content,
+                                isFree: recipe.isFree,
+                                select: recipe.cId,
+                                customRadioGroup: recipe.countryId,
+                                portion: recipe.portion,
                             }}
                             validationSchema={SignupSchema}
                             onSubmit={onSubmit}
@@ -108,6 +102,7 @@ const FormCreateRecipe = () => {
                                 isSubmitting,
                             }) => (
                                 <Form className="av-tooltip tooltip-label-right">
+                                    <Field className="form-control" name="rId" hidden />
                                     <FormGroup className="error-l-100">
                                         <Label>
                                             <IntlMessages id="forms.email" />
@@ -126,17 +121,27 @@ const FormCreateRecipe = () => {
                                         <Field className="form-control" name="title" />
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
-                                        <Label>
-                                            <IntlMessages id="form-recipe-create.ingredient" />
-                                        </Label>
-                                        <textarea className="form-control" onChange={e => setContents(e.target.value)} name="ingredient" />
+                                        <InputGroup>
+                                            <InputGroupAddon addonType="prepend">
+                                                Ingredient
+                                            </InputGroupAddon>
+                                            <Field
+                                                className="form-control"
+                                                name="ingredient"
+                                                component="textarea"
+                                            />
+                                        </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup>
                                             <InputGroupAddon addonType="prepend">
                                                 Direction
                                             </InputGroupAddon>
-                                            <Input type="textarea" onChange={e => setIngredients(e.target.value)} name="content" />
+                                            <Field
+                                                className="form-control"
+                                                name="content"
+                                                component="textarea"
+                                            />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
@@ -198,6 +203,12 @@ const FormCreateRecipe = () => {
                                         />
                                     </FormGroup>
                                     <FormGroup className="error-l-100">
+                                        <Label>Image Current</Label>
+                                        <div>
+                                            <img src={`http://localhost:5013${recipe.featureImage}`} style={{ width: '130px' }} alt="" aria-hidden="true" />
+                                        </div>
+                                    </FormGroup>
+                                    <FormGroup className="error-l-100">
                                         <Label>Image</Label>
                                         <input
                                             type="file"
@@ -218,4 +229,4 @@ const FormCreateRecipe = () => {
         </Row>
     );
 };
-export default FormCreateRecipe;
+export default FormUpdateRecipe;

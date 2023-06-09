@@ -30,3 +30,13 @@ export const DeleteRecipe= async (rId) => {
     const data = await axios.delete(`http://localhost:5013/api/Recipe/${rId}`)
     return data.data;
 }
+
+export const GetListRecentReCipe = async () => {
+    const data = await axios.get("http://localhost:5013/api/Recipe/recent-recipe")
+    return data.data.data
+}
+
+export const GetListCategoryByRecipeCount = async () => {
+    const data = await axios.get("http://localhost:5013/api/Recipe/categories-by-recipe-count")
+    return data.data.data
+}

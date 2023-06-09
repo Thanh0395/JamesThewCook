@@ -139,7 +139,7 @@ const Tacgia = () => {
             <div className="col-12 col-xl-4 col-lg-5 col-md-6">
               <div className="home-text">
                 <div className="display-1">
-                  MAGIC IS IN <br />
+                  JAMES THEW <br />
                   THE DETAILS
                 </div>
                 <p className="white mb-5">

@@ -12,6 +12,7 @@ import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
 // import axios from 'axios';
 import { DeletePost, GetListPost } from 'services/Nhan_API/PostAPI';
+import axios from 'axios';
 // import DetailRecipeModal from './DetailModal';
 // import { NavLink } from 'react-router-dom';
 
@@ -108,23 +109,32 @@ function Table({ columns, data, divided = true, defaultPageSize = 6 }) {
 const TablePost = () => {
   const [initialPosts, setInitialPosts] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([])
  // const [postDetail, setPostDetail] = useState([])
  // const { isShow, toggle } = UseModal();
  const fetchAuthorName = async () => {
-  try {
-    const response = await fetch(`http://localhost:5013/api/User/1`);
-    if (response.ok) {
-      const author = await response.json();
-      console.log(author.userName);
-      return author.userName;
-    } 
-      throw new Error('Failed to fetch author');
-  } catch (error) {
-    console.log('Error fetching author:', error);
-    throw error;
-  }
+  // try {
+  //   const response = await fetch(`http://localhost:5013/api/User/1`);
+  //   console.log(response.data);
+  //   if (response.ok) {
+  //     const author = await response.json();
+  //     console.log(author.userName);
+  //     return author.userName;
+  //   } 
+  //     throw new Error('Failed to fetch author');
+  // } catch (error) {
+  //   console.log('Error fetching author:', error);
+  //   throw error;
+  // }
+  const response = await axios.get('http://localhost:5013/api/User');
+  return response.data.data;
 };
-fetchAuthorName();
+useEffect(() => {
+  fetchAuthorName().then(rs => {
+    console.log("result api get user by Id:", rs)
+    setUsers(rs);
+  })
+}, [])
 // const AuthorNameCell = ({ value }) => {
 //   const [authorName, setAuthorName] = useState('');
 
@@ -175,8 +185,11 @@ fetchAuthorName();
       {
         Header: 'Author',
         accessor: 'uId',
-        cellClass: 'list-item-heading w-20',
-        Cell: (props) => <>{props.value}</>,
+        cellClass: 'list-item-content w-20',
+        Cell: (props) => {
+          const author = users.find(item => item.uId === props.value);
+          return author ? <span>{author.userName}</span> : null;
+        },
       },
       {
         Header: 'Feature Image',

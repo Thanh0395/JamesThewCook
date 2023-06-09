@@ -148,7 +148,7 @@ module.exports = {
   'menu.validations': 'Validations',
   'menu.wizard': 'Wizard',
   /* Them o day */
-  'menu.recipes': 'Recipies',
+  'menu.recipes': 'Recipes',
   'menu.recipes.default': 'Recipe Default',
   'menu.recipes.list-recipe': 'List Recipe',
   'menu.list-recipe': 'List Recipe',
@@ -163,7 +163,16 @@ module.exports = {
   'menu.create-post': 'Create Post',
   'menu.detail-post':'Detail Post',
 
+  /* Sy COntest */
+  'menu.contest': 'Contest',
+  'menu.contest.default': 'Contest Default',
+  'menu.contest.list-contest': 'List Contest',
+  'menu.list-contest': 'List Contest',
+  'menu.create-contest': 'Create Contest',
+  'menu.detail-contest':'Detail Contest',
   'menu.test-recipe':'Test Recipe',
+  'menu.recipes.update-recipe':'Update Recipe',
+  'menu.recipes.analytics-recipe':'Analytics Recipe',
 
   /* 04.Dashboards */
   'dashboards.pending-orders': 'Pending Orders',
@@ -434,6 +443,7 @@ module.exports = {
   'cards.image-card-list': 'Image Card List',
   'cards.tab-card': 'Tab Card',
   'cards.user-card': 'User Card',
+  'cards.contest-card': 'List Contest',
 
   /* 07.05.Carousel */
   'carousel.basic': 'Carousel Basic',
@@ -567,6 +577,9 @@ module.exports = {
   /* For Post */
   'form-post-create.title': 'Title',
   'form-post-create.content': 'Content',
+  'form-contest-create.title': 'Title',
+  'form-contest-create.description': 'Description',
+  'form-contest-create.prize': 'Prize',
   /* 07.12.Icons */
   'icons.simplelineicons': 'Simple Line Icons',
   'icons.iconsmind': 'Iconsmind Icons',
@@ -671,6 +684,8 @@ module.exports = {
   /* them o day */
   'table.list-post':'All posts will be there',
   'table.form-create-post':'Create new post right here!',
+  'table.list-recipe': 'Table Recipies',
+  'table.list-contest': 'List Contest',
 
   /* 07.21.Wizards */
   'wizard.step-name-1': 'Step 1',

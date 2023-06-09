@@ -18,6 +18,9 @@ const EcommerceDefault = React.lazy(() =>
 const RecipesDefault = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-ecommerce" */ './recipes')
 );
+const ContestDefault = React.lazy(() =>
+  import(/* webpackChunkName: "dashboard-ecommerce" */ './contests')
+);
 
 const PostDefault = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-ecommerce" */ './posts')
@@ -51,6 +54,14 @@ const Dashboards = ({ match }) => (
         path={`${match.url}/post`}
         render={(props) => <PostDefault {...props} />}
       />
+      <Route
+        path={`${match.url}/contests`}
+        render={(props) => <ContestDefault {...props} />}
+      />
+      {/* <Route
+        path={`${match.url}/contests/:id`}
+        render={(props) => <ContestDefault {...props} />}
+      /> */}
       {/* 
       <ProtectedRoute
         path={`${match.url}/default`}

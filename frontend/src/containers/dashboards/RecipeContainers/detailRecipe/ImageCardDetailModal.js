@@ -18,7 +18,7 @@ const ImageCardDetailModal = ({recipe}) => {
     useEffect(()=>{
         GetCountry(recipe.countryId).then(rs => setCountry(rs))
             .then(GetCategory(recipe.cId).then(rs=>setCate(rs)))
-    }, [])
+    },[])
     return (
         <Row>
             <Colxx xxs="12">

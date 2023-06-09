@@ -51,14 +51,14 @@ const data = [
             to: `${adminRoot}/dashboards/recipes/list-recipe`,
           },
           {
-            icon: 'simple-icon-book-open',
+            icon: 'simple-icon-plus',
             label: 'menu.create-recipe',
             to: `${adminRoot}/dashboards/recipes/create-recipe`,
           },
           {
-            icon: 'simple-icon-book-open',
-            label: 'menu.test-recipe',
-            to: `${adminRoot}/dashboards/recipes/test-recipe`,
+            icon: 'simple-icon-graph',
+            label: 'menu.recipes.analytics-recipe',
+            to: `${adminRoot}/dashboards/recipes/analytics-recipe`,
           },
         ]
       },
