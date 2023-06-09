@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { injectIntl } from 'react-intl';
 import ComponentShowComment from 'components/Recipe/ComponentShowComment';
 import { GetFeedbackByPostId, GetUserByUid, PostFeedbackPost } from 'services/Hung_Api/RecipeApi';
+import { getCurrentUser } from 'helpers/Utils';
 import {
   Card,
   CardBody,
@@ -13,28 +14,6 @@ import {
   Button,
 } from 'reactstrap';
 import SingleLightbox from '../pages/SingleLightbox';
-// import VideoPlayer from '../common/VideoPlayer';
-// import CommentWithLikes from '../pages/CommentWithLikes';
-
-// const renderLikeAndCommentCount = (messages) => {
-//   return (
-//     <div className="mb-3">
-//       <div className="post-icon mr-3 d-inline-block">
-//         <NavLink to="#" location={{}}>
-//           <i className="simple-icon-heart mr-1" />
-//         </NavLink>
-//         <span>125 {messages['pages.likes']}</span>
-//       </div>
-
-//       <div className="post-icon mr-3 d-inline-block">
-//         <NavLink to="#" location={{}}>
-//           <i className="simple-icon-bubble mr-1" />
-//         </NavLink>
-//         <span>6 {messages['pages.comments-title']}</span>
-//       </div>
-//     </div>
-//   );
-// };
 
 const renderContent = (data) => {
   return (
@@ -53,51 +32,61 @@ const renderComments = (feedbacks) => {
   });
 };
 
-const PostRecent = ({ data, className="mb-4", intl }) => {
+const PostRecent = ({ data, className = "mb-4", intl }) => {
   const { messages } = intl;
   const [user, setUser] = useState()
   const [feedbacks, setFeedbacks] = useState()
-  const [comment, setComment] = useState()
-  const [reRender, setRerender] = useState()
+  const [comment, setComment] = useState('')
+  const [reRender, setRerender] = useState(false)
   useEffect(() => {
     GetUserByUid(data.uId)
       .then(rs => setUser(rs))
       .then(GetFeedbackByPostId(data.pId).then(rs => setFeedbacks(rs)))
-      setRerender(false)
+      .then(() => {
+        setRerender(false)
+      })
   }, [reRender])
   const handleSubmitFeedback = () => {
-    PostFeedbackPost(data.uId, data.pId, comment)
+    PostFeedbackPost(getCurrentUser().uid, data.pId, comment)
       .then(rs => console.log("API feedback post :", rs))
-      .then(setRerender(true))
+      .then(() => {
+        setRerender(true)
+      })
   }
   return (
-    <Card className={className}>
+    <Card className={className} >
       <CardBody>
         {user && (
           <div className="d-flex flex-row mb-3">
-          <NavLink to="#" location={{}}>
-            <img
-              src={`http://localhost:5013${user.avatar}`}
-              alt="thumbnail"
-              className="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall"
-            />
-          </NavLink>
-          <div className="pl-3">
             <NavLink to="#" location={{}}>
-              <p className="font-weight-medium mb-0 ">{user.userName}</p>
-              <p className="text-muted mb-0 text-small">{user.email}</p>
+              <img
+                src={`http://localhost:5013${user.avatar}`}
+                alt="thumbnail"
+                className="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall"
+              />
             </NavLink>
+            <div className="pl-3">
+              <NavLink to="#" location={{}}>
+                <div>
+                  <p className="font-weight-medium mb-0 ">{user.userName}</p>
+                </div>
+                <div>
+                  <p className="text-muted mb-0 text-small">{user.email}</p>
+                </div>
+              </NavLink>
+            </div>
           </div>
-        </div>
         )}
-        <p>{data.title}</p>
+        <div>
+          <p>{data.title}</p>
+        </div>
         {renderContent(data)}
         {/* {renderLikeAndCommentCount(messages)} */}
         <div className="mt-5 remove-last-border">{feedbacks && renderComments(feedbacks)}</div>
         <InputGroup className="comment-container">
           <Input placeholder={messages['pages.addComment']} onChange={e => setComment(e.target.value)} />
           <InputGroupAddon addonType="append">
-            <Button 
+            <Button
               color="primary"
               onClick={() => handleSubmitFeedback()}
             >

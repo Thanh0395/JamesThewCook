@@ -1,21 +1,22 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card, CardBody } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 // import { items } from 'data/carouselItems';
 import { Colxx } from 'components/common/CustomBootstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
+import { getCurrentUser } from 'helpers/Utils';
 import { GetRecipe } from 'services/Hung_Api/RecipeApi';
 import { adminRoot } from 'constants/defaultValues';
 
 
 const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) => {
   const history = useHistory();
-  const [isFree, ] = useState(false)
+  const {isMembership} = getCurrentUser();
   const navigateToDetailPage = async (rId) => {
     const recipe = await GetRecipe(rId);
-    if(recipe.isFree === isFree){
-      alert("You are not a member yet.");
+    if(recipe.isFree === isMembership){
+      alert("You are not a member yet.")
     }else{
       history.push({
         pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,

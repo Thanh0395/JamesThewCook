@@ -38,14 +38,14 @@ const ProfileUser = ({ match, location }) => {
         GetPostByUserId(uId)
             .then(rs => setPostsList(rs))
             .then(GetListContest().then(rs => setContest(rs)))
-    }, [])
+    }, [reRender,uId])
     console.log("Contest :", contest);
     useEffect(() => {
         getUserByIdAPI(uId).then(rs => {
             setUser(rs)
             setRender(false)
         })
-    }, [reRender])
+    }, [reRender, uId])
     return (
         <>
             {user && (

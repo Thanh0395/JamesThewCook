@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
-import { Row, Card, CardBody, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
+import { Row, Card, CardBody, InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 // import { NavLink } from 'react-router-dom';
 // import LinesEllipsis from 'react-lines-ellipsis';
 // import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
@@ -8,29 +8,20 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import SingleLightbox from 'components/pages/SingleLightbox';
 import VideoPlayer from 'components/common/VideoPlayer';
-// import { blogCategories } from 'data/blog';
-// import IntlMessages from 'helpers/IntlMessages';
-// import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecipe/ImagesCardRecipe';
 import ComponentShowComment from 'components/Recipe/ComponentShowComment';
 import { GetRecipeFeedbackByRecipeId, PostRecipeFeedback } from 'services/Hung_Api/RecipeFeedbackApi';
 import { getCurrentUser } from 'helpers/Utils';
 
-
-// const recentPosts = blogData.slice(0, 4);
-// const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
-
 const DetailRecipePage = ({ match, location }) => {
-  // const { recipe } = location.state?.recipe;
   const recipe = location.state && location.state.recipe;
   const [feedbackRecipe, setFeedbackRecipe] = useState([]);
-  const [comment, setComment] = useState()
+  const [comment, setComment] = useState("")
   const [reRender, setRender] = useState()
   useEffect(() => {
     GetRecipeFeedbackByRecipeId(recipe.rId)
       .then(rs => setFeedbackRecipe(rs))
       .then(setRender(false))
-      .then(setComment(''))
   }, [reRender])
   const renderComments = (data) => {
     return data.map((item, index) => {
@@ -39,9 +30,6 @@ const DetailRecipePage = ({ match, location }) => {
   };
   const handleSubmitFeedback = () => {
     const {uid}= getCurrentUser();
-    console.log("uId detail recipe :", uid)
-    console.log("Commnet :", comment)
-    console.log("rId detail Recipe :", recipe.rId);
     PostRecipeFeedback(uid, recipe.rId, comment)
     setRender(true)
   }

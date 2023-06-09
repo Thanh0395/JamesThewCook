@@ -61,15 +61,11 @@ function HomeAuthor() {
                                     <br />
                                     Hope you enjoy it!
                                 </p>
-                                <div>
-                                    <p className="text-muted text-small mb-2">
-                                        {/* <IntlMessages id="pages.location" /> */}
-                                        <strong>location</strong>
-                                    </p>
-                                    <div>
-                                        <p className="mb-3">Stratford-upon-Avon, Warwickshire, London</p>
-                                    </div>
-                                </div>
+                                <p className="text-muted text-small mb-2">
+                                    {/* <IntlMessages id="pages.location" /> */}
+                                    <strong>location</strong>
+                                </p>
+                                <p className="mb-3">Stratford-upon-Avon, Warwickshire, London</p>
                                 <div>
                                     <p className="text-muted text-small mb-2">
                                         <strong>Responsibilities</strong>
