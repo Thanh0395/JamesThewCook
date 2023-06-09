@@ -5,8 +5,13 @@ export const GetListSc= async () => {
     return data.data.data
 }
 
-export const GetSc= async (id) => {
-    const data = await axios.get(`http://localhost:5013/api/Sc/${id}`)
+export const GetListSCByContestId= async (id) => {
+    const data = await axios.get(`http://localhost:5013/api/Sc/${id}/GetListSCByContestId`)
+    return data.data.data
+}
+
+export const GetListSCByUId= async (id) => {
+    const data = await axios.get(`http://localhost:5013/api/Sc/${id}/GetListSCByUId`)
     return data.data.data
 }
 

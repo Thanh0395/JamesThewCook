@@ -43,7 +43,7 @@ namespace JamesThewAPI.Controllers
             }
         }
 
-        [HttpGet("{ContestId}")]
+        [HttpGet("{ContestId}/GetListSCByContestId")]
         public async Task<ActionResult<CustomRespone<IEnumerable<SubmissionContest>>>> GetSCById(int ContestId)
         {
             try
@@ -67,6 +67,32 @@ namespace JamesThewAPI.Controllers
                 return BadRequest(response);
             }
         }
+
+        [HttpGet("{UId}/GetListSCByUId")]
+        public async Task<ActionResult<CustomRespone<IEnumerable<SubmissionContest>>>> GetSCByUId(int UId)
+        {
+            try
+            {
+                var resources = await scRepo.GetSCByUId(UId);
+                if (resources != null)
+                {
+                    var response = new CustomRespone<IEnumerable<SubmissionContest>>
+                            (StatusCodes.Status200OK, "Get List Submissive Contest successfully", resources, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<IEnumerable<SubmissionContest>>(StatusCodes.Status404NotFound, "not found result or result empty", null, "Can't find Id to get!!!");
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<IEnumerable<SubmissionContest>>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
+                return BadRequest(response);
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<CustomRespone<SubmissionContest>>> AddSC([FromForm] SubmissionContest sc, IFormFile file)
         {
@@ -115,6 +141,12 @@ namespace JamesThewAPI.Controllers
                 return BadRequest(response);
             }
         }
+        [HttpGet("{contestId}/GetWinner")]
+        public async Task<User> GetWinner(int contestId)
+        {
+            var resources = await scRepo.GetWinner(contestId);
+            return resources;
+        } 
 
         [HttpDelete("{ScId}")]
         public async Task<ActionResult<CustomRespone<SubmissionContest>>> DeleteSC(int ScId)

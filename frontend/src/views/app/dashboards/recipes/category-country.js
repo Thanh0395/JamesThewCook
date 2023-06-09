@@ -27,10 +27,10 @@ const CategoryAndCountry = ({ match }) => {
         </Colxx> */}
 
         <Colxx xxs="12" md="12" xl="6" className="col-left">
-          <TableListCategory match={ match }/>
+          <TableListCategory/>
         </Colxx>
         <Colxx xxs="12" md="12" xl="6" className="col-left">
-          <TableListCountry match={ match }/>
+          <TableListCountry/>
         </Colxx>
 
         {/* <Colxx xxs="12">
