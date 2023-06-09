@@ -1,43 +1,34 @@
-import axios from 'axios';
+// import axios from 'axios';
 import classNames from 'classnames';
-import { getCurrentUser} from 'helpers/Utils';
-import React from 'react';
+// import { getCurrentUser } from 'helpers/Utils';
+import React, { useState } from 'react';
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { Nav, NavItem, TabContent, TabPane } from 'reactstrap';
+import PopupMember from './PopupMember';
+import './Popup.css'
 
 function HomeMember(props) {
   const { toggle, members, activeTab } = props;
+  // pop up dang ki member
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [propMonth, setPropMonth] = useState();
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+
+  // end popup
   const handlechargeMembership = async (month) => {
-    if (getCurrentUser() != null) {
-      const userToken = getCurrentUser().token;
-      const Uid = getCurrentUser().uid;
-      try {
-        const response = await axios.get(`http://localhost:5013/api/Membership?UserID=${Uid}&month=${month}`, {
-          headers: {
-            'Authorization': `Bearer ${userToken}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        if (response.data.data !== null) {
-          const text = `You paid for ${month} month. ${response.data.message}!. Please relogin`
-          window.confirm(text)
-          // setCurrentUser()
-          window.location.href = "/login";
-        } else {
-          alert(response.data.message)
-        }
-      } catch (error) {
-        alert("Login to payment")
-      }
-    } else {
-      const text = `Please register to pay for membership`
-      if (window.confirm(text) === true) {
-        window.location.href = "/user/register";
-      } 
-    }
+    setPopupOpen(true);
+    setPropMonth(month)
   }
   return (
     <div className="container" id="member">
+      {/* Popup */}
+      <div>
+        <PopupMember isOpen={isPopupOpen} onClose={closePopup} month={propMonth}/>
+      </div>
+      {/* End popup */}
       <div className="row">
         <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
           <h1>Membership</h1>
