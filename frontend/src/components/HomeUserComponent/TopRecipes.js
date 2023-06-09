@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardBody } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 // import { items } from 'data/carouselItems';
@@ -11,12 +11,17 @@ import { adminRoot } from 'constants/defaultValues';
 
 const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) => {
   const history = useHistory();
+  const [isFree, ] = useState(false)
   const navigateToDetailPage = async (rId) => {
     const recipe = await GetRecipe(rId);
-    history.push({
-      pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
-      state: { recipe }
-    });
+    if(recipe.isFree === isFree){
+      alert("You are not a member yet.");
+    }else{
+      history.push({
+        pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+        state: { recipe }
+      });
+    }
   };
   return (
     <div className="glide-item">

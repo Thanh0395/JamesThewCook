@@ -1,5 +1,7 @@
 
-import { UserRole, adminRoot } from './defaultValues';
+import {  adminRoot } from './defaultValues';
+
+// UserRole
 
 const data = [
   {
@@ -19,7 +21,7 @@ const data = [
         icon: 'simple-icon-pie-chart',
         label: 'menu.analytics',
         to: `${adminRoot}/dashboards/analytics`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin,UserRole.User],
       },
       {
         icon: 'simple-icon-basket-loaded',
@@ -97,11 +99,6 @@ const data = [
             label: 'menu.user.listuser',
             to: `${adminRoot}/dashboards/user/listuser`,
             // roles: [UserRole.Admin],
-          },
-          {
-            icon: 'simple-icon-book-open',
-            label: 'menu.user.profile',
-            to: `${adminRoot}/dashboards/user/profile`,
           }
         ]
       },
@@ -119,6 +116,18 @@ const data = [
         to: `${adminRoot}/home-user/home-page`,
       }
     ]
+  },
+  {
+    id:'feedback-page',
+    icon:'iconsminds-inbox',
+    label:'menu.feedback-to-page',
+    to:`${adminRoot}/feedback`
+  },
+  {
+    id:'faq-page',
+    icon:'simple-icon-question',
+    label:'menu.faq-page',
+    to:`${adminRoot}/faq`
   },
   {
     id: 'pages',

@@ -17,11 +17,14 @@ const Applications = React.lazy(() =>
   import(/* webpackChunkName: "applications" */ './applications')
 );
 const Ui = React.lazy(() => import(/* webpackChunkName: "ui" */ './ui'));
+const Pages = React.lazy(() => import(/* webpackChunkName: "ui" */ './pages'));
 const Menu = React.lazy(() => import(/* webpackChunkName: "menu" */ './menu'));
 const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './blank-page')
 );
 const HomeUser = React.lazy(() => import(/* webpackChunkName: "ui" */ './home-user'));
+const FeedbackPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FeedbackPage'));
+const FaqPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FaqPage'));
 
 const App = ({ match }) => {
   return (
@@ -42,6 +45,14 @@ const App = ({ match }) => {
               path={`${match.url}/home-user`}
               render={(props) => <HomeUser {...props} />}
             />
+            <Route
+              path={`${match.url}/feedback`}
+              render={(props) => <FeedbackPage {...props} />}
+            />
+            <Route
+              path={`${match.url}/faq`}
+              render={(props) => <FaqPage {...props} />}
+            />
             {/* <Route
               path={`${match.url}/applications`}
               render={(props) => <Applications {...props} />}
@@ -51,10 +62,10 @@ const App = ({ match }) => {
               component={(props) => <Applications {...props} />}
               roles={[UserRole.Admin]}
             />
-            {/* <Route
+            <Route
               path={`${match.url}/pages`}
               render={(props) => <Pages {...props} />}
-            /> */}
+            />
             <Route
               path={`${match.url}/ui`}
               render={(props) => <Ui {...props} />}

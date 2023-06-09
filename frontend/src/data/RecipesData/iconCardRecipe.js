@@ -5,12 +5,12 @@ const data = [
     value: "See More"
   },
   {
-    title: 'Analytics',
+    title: 'dashboards.recipes.analytics',
     icon: 'simple-icon-graph',
     value: 4,
   },
   {
-    title: 'Country && Category',
+    title: 'menu.contests',
     icon: 'simple-icon-notebook',
     value: "See More",
   },

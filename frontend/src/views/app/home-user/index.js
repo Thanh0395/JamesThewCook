@@ -6,6 +6,10 @@ const HomePage = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-default" */ './home-page')
 );
 
+const ProfileUser = React.lazy(() =>
+import(/* webpackChunkName: "dashboard-default" */ './profie-user')
+);
+
 const HomePageUser = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -13,6 +17,10 @@ const HomePageUser = ({ match }) => (
       <Route
         path={`${match.url}/home-page`}
         render={(props) => <HomePage {...props} />}
+      />
+      <Route
+        path={`${match.url}/profile-user`}
+        render={(props) => <ProfileUser {...props} />}
       />
       <Redirect to="/error" />
     </Switch>

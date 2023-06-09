@@ -161,6 +161,10 @@ module.exports = {
   'menu.home-page-user' :" Home",
   'menu.home-page' :" Home Page",
   "menu.home-user": "Home Page",
+  "menu.profile-user": "Profile",
+  "menu.feedback-to-page":"Feedback Page",
+  "menu.faq-page":"FAQ",
+  "menu.feedback": "feedback",
 
   /* Sy COntest */
   'menu.contests': 'Contest',
@@ -243,6 +247,8 @@ module.exports = {
   // Cac trang con cua Recipe
   'dashboards.recipes.default': 'Recipe Default',
   'dashboards.recipes.list-recipe': 'List Recipe',
+  'dashboards.recipes.analytics': 'Analytics',
+  'dashboards.recipes.category-country': 'Category && Country',
 
   /* 05.Pages */
   'pages.add-new': 'ADD NEW',

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
-import { Row, Card, CardBody } from 'reactstrap';
+import { Row, Card, CardBody, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
 // import { NavLink } from 'react-router-dom';
 // import LinesEllipsis from 'react-lines-ellipsis';
 // import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
@@ -23,15 +23,24 @@ const DetailRecipePage = ({ match, location }) => {
   // const { recipe } = location.state?.recipe;
   const recipe = location.state && location.state.recipe;
   const [feedbackRecipe, setFeedbackRecipe] = useState([]);
+  const [comment, setComment] = useState()
+  const [reRender, setRender] = useState()
   useEffect(() => {
-    GetRecipeFeedbackByRecipeId(recipe.rId).then(rs => setFeedbackRecipe(rs))
-  }, [])
-  console.log(" :", feedbackRecipe);
+    GetRecipeFeedbackByRecipeId(recipe.rId)
+      .then(rs => setFeedbackRecipe(rs))
+      .then(setRender(false))
+      .then(setComment(''))
+  }, [reRender])
   const renderComments = (data) => {
     return data.map((item, index) => {
       return <ComponentShowComment data={item} key={index} />;
     });
   };
+  const handleSubmitFeedback = () => {
+    console.log("Comment recipe :", comment);
+    setRender(true)
+  }
+
   return (
     <>
       <Row>
@@ -105,6 +114,18 @@ const DetailRecipePage = ({ match, location }) => {
             <div className="mt-5 remove-last-border">
               <h5><strong>Comments</strong></h5>
               {renderComments(feedbackRecipe)}
+              <InputGroup className="comment-container">
+                <Input placeholder="add comments..." onChange={e => setComment(e.target.value)} />
+                <InputGroupAddon addonType="append">
+                  <Button
+                    color="primary"
+                    onClick={() => handleSubmitFeedback()}
+                  >
+                    <span className="d-inline-block">sent</span>{' '}
+                    <i className="simple-icon-arrow-right ml-2" />
+                  </Button>
+                </InputGroupAddon>
+              </InputGroup>
             </div>
           </Card>
         </Colxx>

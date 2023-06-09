@@ -20,7 +20,7 @@ namespace JamesThewAPI.Controllers
             _userRepo = userRepo;  
         }
         [HttpGet]
-        [Authorize(Roles = $"{UserRole.Admin}")]
+        //[Authorize(Roles = $"{UserRole.Admin}")]
         public async Task<ActionResult<CustomRespone<IEnumerable<User>>>> GetAllUsers()
         {
             try

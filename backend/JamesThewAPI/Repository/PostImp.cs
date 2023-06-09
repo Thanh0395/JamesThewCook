@@ -1,6 +1,7 @@
 ﻿using JamesThewAPI.Entities;
 using JamesThewAPI.ModelUtility.FIleService;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace JamesThewAPI.Repository
 {
@@ -108,5 +109,13 @@ namespace JamesThewAPI.Repository
                 return null;
             }
         }
-    }
+
+		// Hung Them vao API GetPostByUserId
+        public async Task<IEnumerable<Post>> GetPostByUserId(int uId)
+        {
+			return await _context.Posts
+			.Where(p => p.UId == uId)
+			.ToListAsync();
+		}
+	}
 }

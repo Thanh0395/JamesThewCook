@@ -40,11 +40,12 @@ const HomeRecipes = () => {
             <Row>
                 <Colxx xxs="12">
                     <h5 className="mb-4">All recipes</h5>
+                    <BlogListRecipes recipes={recipes} />
                 </Colxx>
             </Row>
-            <Row className="gallery gallery-page mb-5">
+            {/* <Row className="gallery gallery-page mb-5">
                 <BlogListRecipes recipes={recipes} />
-            </Row>
+            </Row> */}
             <Row>
                 <Colxx xxs="12">
                     <h5 className="mb-4">Top Recipes</h5>
