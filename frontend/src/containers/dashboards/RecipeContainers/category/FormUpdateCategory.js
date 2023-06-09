@@ -27,7 +27,7 @@ const FormUpdateCategory = ({ categoryUpdate, setCategoryName }) => {
                 <Form className="dashboard-quick-post">
                     <FormGroup row>
                         <Label sm="3">
-                            Country Name
+                            Category Name
                         </Label>
                         <Colxx sm="9">
                             <Input

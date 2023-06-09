@@ -26,7 +26,6 @@ const FormCreateContest = () => {
       title: values.title,
       description: values.description,
       startDate: values.startDate,
-      endDate: values.endDate,
       file: values.file,
       prize: values.prize,
     };
@@ -34,7 +33,6 @@ const FormCreateContest = () => {
     formData.append('title', values.title);
     formData.append('description', values.description);
     formData.append('startDate', values.startDate);
-    formData.append('endDate', values.endDate);
     formData.append('prize', values.prize);
     formData.append('file', values.file);
     setTimeout(() => {
@@ -55,7 +53,6 @@ const FormCreateContest = () => {
                 title: '',
                 description: '',
                 startDate: '',
-                endDate: '',
                 prize: 100,
               }}
               onSubmit={onSubmit}
@@ -96,15 +93,6 @@ const FormCreateContest = () => {
                       type="date"
                       className="form-control-file"
                       name="startDate"
-                      onChange={handleChange}
-                    />
-                  </FormGroup>
-                  <FormGroup className="error-l-100">
-                    <Label>EndDate</Label>
-                    <input
-                      type="date"
-                      className="form-control-file"
-                      name="endDate"
                       onChange={handleChange}
                     />
                   </FormGroup>

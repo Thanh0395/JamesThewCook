@@ -12,11 +12,19 @@ namespace JamesThewAPI.Repository
         }
         public async Task<Rating> AddRating(Rating rating)
         {
-            if (rating != null)
+            var ratingdb = await _dbContext.Ratings.FirstOrDefaultAsync(p => p.ScId.Equals(rating.ScId) && p.UId.Equals(rating.UId));
+            if (ratingdb == null)
             {
-                await _dbContext.Ratings.AddAsync(rating);
-                await _dbContext.SaveChangesAsync();
-                return rating;
+                if (rating != null)
+                {
+                    await _dbContext.Ratings.AddAsync(rating);
+                    await _dbContext.SaveChangesAsync();
+                    return rating;
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

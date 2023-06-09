@@ -76,12 +76,6 @@ const data = [
         // roles: [UserRole.Editor],
         subs:[
           {
-            icon: 'simple-icon-list',
-            label: 'menu.contest.default',
-            to: `${adminRoot}/dashboards/contests/default`,
-            // roles: [UserRole.Admin],
-          },
-          {
             icon: 'simple-icon-book-open',
             label: 'menu.create-contest',
             to: `${adminRoot}/dashboards/contests/create-contest`,
@@ -102,6 +96,31 @@ const data = [
           }
         ]
       },
+      {
+        icon: 'simple-icon-doc',
+        label: 'menu.post',
+        to: `${adminRoot}/dashboards/post`,
+        subs:[
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.post.default',
+            to: `${adminRoot}/dashboards/post/default`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.post.list-post',
+            to: `${adminRoot}/dashboards/post/list-post`,
+            // roles: [UserRole.Admin],
+          },
+          {
+            icon: 'simple-icon-list',
+            label: 'menu.create-post',
+            to: `${adminRoot}/dashboards/post/create-post`,
+            // roles: [UserRole.Admin],
+          },
+        ]
+      }
     ],
   },
   {

@@ -29,16 +29,22 @@ import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import SingleLightbox from 'components/pages/SingleLightbox';
 import Entry from 'components/ContestComponent/Entry';
 import Participate from 'components/ContestComponent/Participate';
-import { GetSc } from 'services/Sy_Api/SCApi';
+import { GetListSCByContestId } from 'services/Sy_Api/SCApi';
+import { GetWinner } from 'services/Sy_Api/Rating';
 
 const DetailsPages = ({ match, location }) => {
   const { contest } = location.state;
   const [activeTab, setActiveTab] = useState('Entrys');
   const [sc, setSc] = useState([]);
-  const [reRender, setReRender] = useState(false);
+  const [reRender, setreRender] = useState(false);
+  const getWinner = (contestId) => {
+    GetWinner(contestId).then(() => setreRender(!reRender));
+  };
+  console.log('SC truoc effect', sc);
   useEffect(() => {
-    GetSc(contest.contestId).then((rs) => setSc(rs));
-  }, [reRender])
+    GetListSCByContestId(contest.contestId).then((rs) => setSc(rs));
+    console.log('SC sau effect', sc);
+  }, [reRender]);
   return (
     <>
       <Row>
@@ -48,7 +54,7 @@ const DetailsPages = ({ match, location }) => {
 
           <Row>
             <Colxx xxs="12" xl="12" className="col-left">
-                <Card className="mb-4">
+              <Card className="mb-4">
                 <SingleLightbox
                   thumb={`http://localhost:5013${contest.featureImage}`}
                   large={`http://localhost:5013${contest.featureImage}`}
@@ -81,13 +87,27 @@ const DetailsPages = ({ match, location }) => {
                       <h5>
                         <strong>EndDate</strong>
                       </h5>
-                      <p>{contest.endDate}</p>
+                      <p>
+                        {contest.endDate ? contest.endDate : 'Still Available'}
+                      </p>
                     </div>
+                    {contest.endDate ? (
+                      ''
+                    ) : (
+                      <Button
+                        color="primary"
+                        onClick={() => {
+                          getWinner(contest.contestId);
+                        }}
+                      >
+                        End Contest
+                      </Button>
+                    )}
                   </div>
                 </CardBody>
               </Card>
-              
-                <Card className="mb-4">
+
+              <Card className="mb-4">
                 <CardHeader>
                   <Nav tabs className="card-header-tabs ">
                     <NavItem>
@@ -120,10 +140,19 @@ const DetailsPages = ({ match, location }) => {
                 </CardHeader>
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId="Entrys">
-                    <Entry sc = {sc} />
+                    <Entry sc={sc} />
                   </TabPane>
                   <TabPane tabId="participate">
-                    <Participate contestId = {contest.contestId} setReRender = {setReRender} setActiveTab={setActiveTab} />
+                    {!contest.endDate ? (
+                      <Participate
+                        contestId={contest.contestId}
+                        setreRender={setreRender}
+                        reRender={reRender}
+                        setActiveTab={setActiveTab}
+                      />
+                    ) : (
+                      <strong>No time left to participate</strong>
+                    )}
                   </TabPane>
                 </TabContent>
               </Card>
