@@ -8,6 +8,7 @@ import {
     DropdownItem,
     DropdownMenu,
     CardTitle,
+    Button,
 } from 'reactstrap';
 import GalleryDetail from 'containers/pages/GalleryDetail';
 import Breadcrumb from 'containers/navs/Breadcrumb';
@@ -23,6 +24,7 @@ import FormUpdateProfile from 'components/HomeUserComponent/FormUpdateProfile';
 import PostRecent from 'components/HomeUserComponent/PostRecent';
 import { GetPostByUserId } from 'services/Hung_Api/RecipeApi';
 import { GetListContest } from 'services/Sy_Api/ContestApi';
+import { getCurrentUser } from 'helpers/Utils';
 
 const followData = whotoFollowData.slice(0, 5);
 
@@ -115,8 +117,12 @@ const ProfileUser = ({ match, location }) => {
                                                 <IntlMessages id="pages.location" />
                                             </p>
                                             <p className="mb-3">Nairobi, Kenya</p>
-                                            <h3><strong>Update Your Profile</strong></h3>
-                                            <FormUpdateProfile user={user} setRender={setRender} />
+                                            {(uId === getCurrentUser().uid) && (
+                                                <>
+                                                    <h3><strong>Update Your Profile</strong></h3>
+                                                    <FormUpdateProfile user={user} setRender={setRender} />
+                                                </>
+                                            )}
 
                                         </div>
                                     </CardBody>
@@ -168,6 +174,12 @@ const ProfileUser = ({ match, location }) => {
                                 </Card>
                             </Colxx>
                             <Colxx xxs="12" lg="6" xl="6" className="col-right">
+                                <Button>
+                                    Add Recipe
+                                </Button>
+                                <Button>
+                                    Add Post
+                                </Button>
                                 {postList.map((itemData) => {
                                     return (
                                         <PostRecent

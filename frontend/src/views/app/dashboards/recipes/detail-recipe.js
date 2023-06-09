@@ -13,7 +13,8 @@ import VideoPlayer from 'components/common/VideoPlayer';
 // import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecipe/ImagesCardRecipe';
 import ComponentShowComment from 'components/Recipe/ComponentShowComment';
-import { GetRecipeFeedbackByRecipeId } from 'services/Hung_Api/RecipeFeedbackApi';
+import { GetRecipeFeedbackByRecipeId, PostRecipeFeedback } from 'services/Hung_Api/RecipeFeedbackApi';
+import { getCurrentUser } from 'helpers/Utils';
 
 
 // const recentPosts = blogData.slice(0, 4);
@@ -37,7 +38,11 @@ const DetailRecipePage = ({ match, location }) => {
     });
   };
   const handleSubmitFeedback = () => {
-    console.log("Comment recipe :", comment);
+    const {uid}= getCurrentUser();
+    console.log("uId detail recipe :", uid)
+    console.log("Commnet :", comment)
+    console.log("rId detail Recipe :", recipe.rId);
+    PostRecipeFeedback(uid, recipe.rId, comment)
     setRender(true)
   }
 
@@ -115,7 +120,7 @@ const DetailRecipePage = ({ match, location }) => {
               <h5><strong>Comments</strong></h5>
               {renderComments(feedbackRecipe)}
               <InputGroup className="comment-container">
-                <Input placeholder="add comments..." onChange={e => setComment(e.target.value)} />
+                <Input placeholder="add comments..." defaultValue={comment} onChange={e => setComment(e.target.value)} />
                 <InputGroupAddon addonType="append">
                   <Button
                     color="primary"
