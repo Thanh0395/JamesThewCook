@@ -18,9 +18,9 @@ import IntlMessages from 'helpers/IntlMessages';
 import { getCurrentUser } from 'helpers/Utils';
 import { PostSc } from 'services/Sy_Api/SCApi';
 
-const Participate = ({ contestId, setReRender, setActiveTab }) => {
+const Participate = ({ contestId, setreRender, setActiveTab, reRender }) => {
   const [errorMsg, setErrorMsg] = useState('');
-  const [success, setSuccess] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const onSubmit = (values) => {
     const payload = {
       title: values.title,
@@ -42,13 +42,15 @@ const Participate = ({ contestId, setReRender, setActiveTab }) => {
       PostSc(formData)
         .then((rs) => {
           console.log('rs:', rs.data);
-          setReRender(true);
+          setreRender(!reRender);
           setActiveTab('Entrys');
-          setSuccess('Participate successfully');
+          setSuccessMsg('Participate successfully');
+          setErrorMsg('');
         })
         .catch((error) => {
           console.log('error', error.response.data.status);
           if (error.response.data.status === 400) {
+            setSuccessMsg('');
             setErrorMsg('You already participate');
           }
         });
@@ -60,9 +62,9 @@ const Participate = ({ contestId, setReRender, setActiveTab }) => {
         <Card>
           <CardBody>
             <h6 className="mb-4">Participate Form</h6>
-            {success && (
+            {successMsg && (
               <Alert color="success" className="rounded">
-                {success}
+                {successMsg}
               </Alert>
             )}
             {errorMsg && (

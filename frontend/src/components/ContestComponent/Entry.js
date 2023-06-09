@@ -1,8 +1,16 @@
 import { Colxx } from 'components/common/CustomBootstrap';
-import React from 'react';
-import { Card, CardBody, Row } from 'reactstrap';
+import UpdateModalSC from 'containers/dashboards/ContestContainers/UpdateModalSC';
+import React, { useState } from 'react';
+import { Button, Card, CardBody, Row } from 'reactstrap';
 
 function Entry({ sc }) {
+  const [modalBasic, setModalBasic] = useState(false);
+  const [scUpdate, setScUpdate] = useState(null);
+  const onUpdate = (sContest) => {
+    console.log('sContest :', sContest);
+    setScUpdate(sContest);
+    setModalBasic(true);
+  };
   return (
     <Row>
       <Colxx sm="12">
@@ -16,12 +24,12 @@ function Entry({ sc }) {
                 <Colxx xxs="12" lg="6" className="mb-5" key={index}>
                   <Card className="flex-row listing-card-container">
                     <div className="w-50 position-relative">
-                        <img
-                          className="card-img-left"
-                          src={`http://localhost:5013${item.image}`}
-                          alt=""
-                          aria-hidden="true"
-                        />
+                      <img
+                        className="card-img-left"
+                        src={`http://localhost:5013${item.image}`}
+                        alt=""
+                        aria-hidden="true"
+                      />
                     </div>
                     <div className="w-60 d-flex align-items-center">
                       <CardBody>
@@ -36,8 +44,32 @@ function Entry({ sc }) {
                         >
                           {item.ingredients}
                         </div>
+                        <div
+                          style={{
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            maxWidth: '200px',
+                          }}
+                        >
+                          {item.content}
+                        </div>
                       </CardBody>
                     </div>
+                    <div className="w-30 d-flex align-items-center">
+                      <Button
+                        color="primary"
+                        outline
+                        onClick={() => onUpdate(item)}
+                      >
+                        View
+                      </Button>
+                    </div>
+                    <UpdateModalSC
+                      modalBasic={modalBasic}
+                      setModalBasic={setModalBasic}
+                      scUpdate={scUpdate}
+                    />
                   </Card>
                 </Colxx>
               );

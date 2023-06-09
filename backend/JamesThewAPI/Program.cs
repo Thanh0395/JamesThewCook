@@ -41,6 +41,7 @@ builder.Services.AddScoped<ICategory, CategoryImp>();
 builder.Services.AddScoped<IUser, UserImp>();
 builder.Services.AddScoped<ICountry, CountryImp>();
 builder.Services.AddScoped<IContest, ContestImp>();
+builder.Services.AddScoped<IRating, RatingImp>();
 builder.Services.AddScoped<IRecipe, RecipeImp>();
 builder.Services.AddScoped<IPost, PostImp>();
 builder.Services.AddScoped<IFeedback, FeedbackImp>();
