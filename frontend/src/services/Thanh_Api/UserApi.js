@@ -15,3 +15,7 @@ export const PutUser = async (dataPut) => {
   return data.data.data;
 }
 
+export const sendFeedback = async (dataPost) => {
+  const data = await axios.post("http://localhost:5013/api/Email/sendfeedback", dataPost)
+  return data.data;
+}

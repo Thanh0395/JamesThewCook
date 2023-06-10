@@ -56,6 +56,7 @@ const Register = (
   // const [userName, setUserName] = useState('')
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
 
   // Popup message
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -72,21 +73,22 @@ const Register = (
     formdata.append('email', values.email)
     formdata.append('password', values.password)
     if (values.userName !== '' && values.email !== '' && values.password !== '') {
+      setIsLoading(!isLoading);
       try {
         const newUser = await axios.post('http://localhost:5013/api/User', formdata);
         if (newUser) {
           setCurrentUser()
           // registerUserAction(values,history)
+          setIsLoading(false);
           setPopupOpen(true);
           setPropMessage("Please, login for new user")
-          // alert("Please, login for new user")
-          window.location.href = "/login"
-
+          // window.location.href = "/login"
           // history.push('/');
         }
       } catch (error) {
         if (error.response) {
           if (error.response.data.status === 404) {
+            setIsLoading(false);
             setPopupOpen(true);
             setPropMessage(error.response.data.message)
             // alert(error.response.data.message)

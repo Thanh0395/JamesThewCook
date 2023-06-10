@@ -2,7 +2,7 @@
 {
     public class FromMail
     {
-        public const string MailSend = "tranphamduythanh@gmail.com";
-        public const string PasswordMail = "dxilhlziutgqilzc";
+        public const string MailSend = "thanhmegaman23031995@gmail.com";
+        public const string PasswordMail = "ysflsseypbjkflxy";
     }
 }
