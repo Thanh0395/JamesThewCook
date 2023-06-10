@@ -9,12 +9,10 @@ import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
 import IntlMessages from 'helpers/IntlMessages';
-// import UpdateRecipe from 'views/app/dashboards/recipes/update-recipe';
 import { GetListCategory } from 'services/Hung_Api/CategoryApi';
 import FormCategory from './FormCategory';
 import UpdateModalCategory from './UpdateModalCategory';
-// import UseModal from './UseModal';
-// import DetailRecipeModal from './detailRecipe/DetailModal';
+
 
 
 function Table({ columns, data, divided = false, defaultPageSize = 6 }) {

@@ -11,7 +11,7 @@ const IconCardsCarouselRecipe = ({ className = 'icon-cards-row' }) => {
     `${adminRoot}/dashboards/recipes/list-recipe`,
     `${adminRoot}/dashboards/analytics`,
     `${adminRoot}/dashboards/contests`,
-    `${adminRoot}/dashboards/recipes/list-recipe`
+    `${adminRoot}/dashboards/post/list-post`
   ]
   return (
     <div className={className}>

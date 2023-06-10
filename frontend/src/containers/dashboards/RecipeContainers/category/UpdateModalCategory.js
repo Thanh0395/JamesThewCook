@@ -12,7 +12,7 @@ const UpdateModalCategory = ({ modalBasic, setModalBasic, categoryUpdate, setReR
     console.log("category Id",cId);
     PutCategory(cId, categoryName).then(response => {
       console.log("Put category API result :", response);
-      setReRender(true);
+      setReRender(prev => !prev);
       setModalBasic(false);
     })
   }

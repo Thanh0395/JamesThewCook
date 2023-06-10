@@ -3,11 +3,12 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/display-name */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
+import { useHistory } from 'react-router-dom';
 import { GetListUser } from 'services/Thanh_Api/UserApi';
 
 
@@ -108,10 +109,13 @@ const ListUser = ({ match }) => {
     GetListUser()
       .then(rs => setUsers(rs))
   }, [])
-
-  const handleDetail = useCallback(() => {
-    
-  }, [])
+  const history = useHistory();
+  const handleDetail = (user) => {
+    history.push({
+      pathname: `/app/home-user/profile-user`,
+      state: { uid:user.uId }
+    });
+  }
   const cols = React.useMemo(
     () => [
       {

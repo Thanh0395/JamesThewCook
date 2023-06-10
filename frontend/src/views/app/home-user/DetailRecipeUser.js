@@ -13,7 +13,7 @@ import ComponentShowComment from 'components/Recipe/ComponentShowComment';
 import { GetRecipeFeedbackByRecipeId, PostRecipeFeedback } from 'services/Hung_Api/RecipeFeedbackApi';
 import { getCurrentUser } from 'helpers/Utils';
 
-const DetailRecipePage = ({ match, location }) => {
+const DetailRecipeUser = ({ match, location }) => {
   const recipe = location.state && location.state.recipe;
   const [feedbackRecipe, setFeedbackRecipe] = useState([]);
   const [comment, setComment] = useState("")
@@ -127,4 +127,4 @@ const DetailRecipePage = ({ match, location }) => {
   );
 };
 
-export default DetailRecipePage;
+export default DetailRecipeUser;

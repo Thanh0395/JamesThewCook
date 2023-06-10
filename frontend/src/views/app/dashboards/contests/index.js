@@ -25,10 +25,6 @@ const Contest = ({ match }) => (
         render={(props) => <ContestCreate {...props} />}
       />
       <Route
-        path={`${match.url}/create-contest`}
-        render={(props) => <ContestCreate {...props} />}
-      />
-      <Route
         path={`${match.url}/detail-contest`}
         render={(props) => <DetailContest {...props} />}  
       />

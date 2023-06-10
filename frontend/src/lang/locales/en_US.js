@@ -261,6 +261,9 @@ module.exports = {
   'dashboards.recipes.analytics': 'Analytics',
   'dashboards.recipes.category-country': 'Category && Country',
 
+  /* Them vao phan a Nhan */
+  'dashboards.post.list-post': 'Posts',
+
   /* 05.Pages */
   'pages.add-new': 'ADD NEW',
   'pages.add-new-modal-title': 'Add New Item',
