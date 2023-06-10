@@ -105,17 +105,19 @@ namespace JamesThewAPI.Repository
             if (scdb == null)
             {
                 contestdb.EndDate = DateTime.Now;
+                context.Entry(contestdb).State = EntityState.Modified;
+                await context.SaveChangesAsync();
                 return null;
             }
             else
             {
-            var userId = scdb.UId;
-            contestdb.Winner = userId;
-            contestdb.EndDate = DateTime.Now;
-            context.Entry(contestdb).State = EntityState.Modified;
-            await context.SaveChangesAsync();
-            var winner = await context.Users.FirstOrDefaultAsync(p => p.UId.Equals(userId));
-            return winner;
+                var userId = scdb.UId;
+                contestdb.Winner = userId;
+                contestdb.EndDate = DateTime.Now;
+                context.Entry(contestdb).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+                var winner = await context.Users.FirstOrDefaultAsync(p => p.UId.Equals(userId));
+                return winner;
             }
         }
 
