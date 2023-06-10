@@ -84,7 +84,7 @@ namespace JamesThewAPI.Controllers
                 }
                 else
                 {
-                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email already used!!!!!!", null, null);
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email already used! Try to login", null, null);
                     return NotFound(response);
                 }
             }
@@ -109,7 +109,7 @@ namespace JamesThewAPI.Controllers
                 }
                 else
                 {
-                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email already used!!!!!!", null, null);
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email already used! Try an other email", null, null);
                     return NotFound(response);
                 }
             }

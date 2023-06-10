@@ -21,11 +21,11 @@ function Footer(props) {
                     href="#scroll"
                     onClick={(event) => scrollTo(event, 'home')}
                   >
-                    <img
+                    {/* <img 
                       className="footer-logo"
                       alt="footer logo"
                       src="/assets/logos/white-full.svg"
-                    />
+                    /> */}
                   </a>
                 </div>
               </div>
@@ -34,7 +34,7 @@ function Footer(props) {
               <div className="row">
                 <div className="col-12" />
                 <div className="col-12 text-center">
-                  <p className="mb-0">2021 © ColoredStrategies</p>
+                  <p className="mb-0">FPT Aptech. Group01-Sem03</p>
                 </div>
               </div>
             </div>

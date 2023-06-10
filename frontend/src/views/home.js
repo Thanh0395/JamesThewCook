@@ -297,11 +297,11 @@ const Home = () => {
             />
           </div>
 
-          <div className="section mb-0">
+          <div hidden = "hidden" className="section mb-0">
             <Themes themes = {themes}/>
           </div>
 
-          <div className="section background background-no-bottom mb-0 pb-0">
+          <div hidden = "hidden" className="section background background-no-bottom mb-0 pb-0">
             <BuyNow buyUrl = {buyUrl}/>
           </div>
 

@@ -280,7 +280,14 @@ const TopNav = ({
           </UncontrolledDropdown>
         </div>
         <div className="position-relative d-none d-none d-lg-inline-block">
-          <a
+        <a 
+            className="btn btn-outline-primary btn-sm ml-2 p-1 pt-2 pb-2"
+            target="_top"
+            href="/"
+          >
+            <IntlMessages id="Landing Page" />
+          </a>
+          <a hidden
             className="btn btn-outline-primary btn-sm ml-2"
             target="_top"
             href={buyUrl}

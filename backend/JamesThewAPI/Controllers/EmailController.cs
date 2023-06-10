@@ -49,6 +49,37 @@ namespace JamesThewAPI.Controllers
             }
         }
 
+        [HttpPost("sendfeedback")]
+        public async Task<ActionResult<CustomRespone<User>>> SendFeedback(MailConfig mailConfig)
+        {
+            mailConfig.Subject = "Thanks for your contribution to James Thew website";
+            mailConfig.Body = "Your contribution is our driving force to develop and make you more satisfied. Your feedback is:\n" +
+                mailConfig.Body +
+                "\nHave a nice day";
+            try
+            {
+                var userDB = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(mailConfig.ToMail));
+                if (userDB == null)
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Email have not registed yet", null, null);
+                    return NotFound(response);
+                }
+                else
+                {
+                    //send email
+                    SendEmail(mailConfig);
+
+                    var response = new CustomRespone<User>
+                                (StatusCodes.Status200OK, "Thank for your feedback", userDB, null);
+                    return Ok(response);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost("resetpassword")]
         public async Task<ActionResult<CustomRespone<User>>> ResetPassword(string email, string newPass)
         {
