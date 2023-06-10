@@ -30,6 +30,11 @@ export const GetListRecentReCipe = async () => {
     return data.data.data
 }
 
+export const GetListRecipeByUserId = async(uId) => {
+    const data = await axios.get(`http://localhost:5013/api/Recipe/Recipes-by-uId/${uId}`)
+    return data.data.data;
+}
+
 export const GetListCategoryByRecipeCount = async () => {
     const data = await axios.get("http://localhost:5013/api/Recipe/categories-by-recipe-count")
     return data.data.data

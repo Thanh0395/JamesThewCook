@@ -8,9 +8,7 @@ import {
     DropdownItem,
     DropdownMenu,
     CardTitle,
-    Button,
 } from 'reactstrap';
-import GalleryDetail from 'containers/pages/GalleryDetail';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
@@ -22,9 +20,11 @@ import RecentPost from 'components/common/RecentPost';
 import { getUserByIdAPI } from 'services/Thanh_Api/UserApi';
 import FormUpdateProfile from 'components/HomeUserComponent/FormUpdateProfile';
 import PostRecent from 'components/HomeUserComponent/PostRecent';
-import { GetPostByUserId } from 'services/Hung_Api/RecipeApi';
-import { GetListContest } from 'services/Sy_Api/ContestApi';
+import { GetListRecipeByUserId, GetPostByUserId } from 'services/Hung_Api/RecipeApi';
 import { getCurrentUser } from 'helpers/Utils';
+import { NavLink } from 'react-router-dom';
+import { adminRoot } from 'constants/defaultValues';
+import BlogListRecipes from 'components/HomeUserComponent/BlogListAllRecipes';
 
 const followData = whotoFollowData.slice(0, 5);
 
@@ -33,13 +33,17 @@ const ProfileUser = ({ match, location }) => {
     const [user, setUser] = useState()
     const [reRender, setRender] = useState(false)
     const [postList, setPostsList] = useState([])
-    const [contest, setContest] = useState([])
+    const [recipes, setRecipes] = useState([])
     useEffect(() => {
         GetPostByUserId(uId)
             .then(rs => setPostsList(rs))
-            .then(GetListContest().then(rs => setContest(rs)))
-    }, [reRender,uId])
-    console.log("Contest :", contest);
+            .then(GetListRecipeByUserId(uId).then(rs => setRecipes(rs))
+            .catch(err => {
+                if(err.response.status === 404){
+                    setRecipes(null)
+                }
+            }))
+    }, [reRender, uId])
     useEffect(() => {
         getUserByIdAPI(uId).then(rs => {
             setUser(rs)
@@ -53,32 +57,38 @@ const ProfileUser = ({ match, location }) => {
                     <Colxx xxs="12">
                         <h1>{user.userName}</h1>
                         <div className="text-zero top-right-button-container">
-                            <UncontrolledDropdown>
-                                <DropdownToggle
-                                    caret
-                                    color="primary"
-                                    size="lg"
-                                    outline
-                                    className="top-right-button top-right-button-single"
-                                >
-                                    <IntlMessages id="pages.actions" />
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem header>
-                                        <IntlMessages id="pages.header" />
-                                    </DropdownItem>
-                                    <DropdownItem disabled>
-                                        <IntlMessages id="pages.delete" />
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <IntlMessages id="pages.another-action" />
-                                    </DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem>
-                                        <IntlMessages id="pages.another-action" />
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
+                            {uId === getCurrentUser().uid && (
+                                <UncontrolledDropdown>
+                                    <DropdownToggle
+                                        caret
+                                        color="primary"
+                                        size="lg"
+                                        outline
+                                        className="top-right-button top-right-button-single"
+                                    >
+                                        <IntlMessages id="pages.actions" />
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem>
+                                            <NavLink to={`${adminRoot}/home-user/create-recipe`}>
+                                                <IntlMessages id="menu.create-recipe" />
+                                            </NavLink>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <NavLink to={`${adminRoot}/home-user/create-post`}>
+                                                <IntlMessages id="menu.create-post" />
+                                            </NavLink>
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            <IntlMessages id="pages.another-action" />
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+                                        <DropdownItem>
+                                            <IntlMessages id="pages.another-action" />
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            )}
                         </div>
 
                         <Breadcrumb match={match} />
@@ -105,14 +115,16 @@ const ProfileUser = ({ match, location }) => {
                                             <div className="text-center pt-4">
                                                 <p className="list-item-heading pt-2">{user.userName}</p>
                                             </div>
-                                            <p className="mb-3">
-                                                I’m a web developer. I spend my whole day, practically
-                                                every day, experimenting with HTML, CSS, and JavaScript;
-                                                dabbling with Python and Ruby; and inhaling a wide
-                                                variety of potentially useless information through a few
-                                                hundred RSS feeds. I build websites that delight and
-                                                inform. I do it well.
-                                            </p>
+                                            <div>
+                                                <p className="mb-3">
+                                                    I’m a web developer. I spend my whole day, practically
+                                                    every day, experimenting with HTML, CSS, and JavaScript;
+                                                    dabbling with Python and Ruby; and inhaling a wide
+                                                    variety of potentially useless information through a few
+                                                    hundred RSS feeds. I build websites that delight and
+                                                    inform. I do it well.
+                                                </p>
+                                            </div>
                                             <p className="text-muted text-small mb-2">
                                                 <IntlMessages id="pages.location" />
                                             </p>
@@ -123,7 +135,6 @@ const ProfileUser = ({ match, location }) => {
                                                     <FormUpdateProfile user={user} setRender={setRender} />
                                                 </>
                                             )}
-
                                         </div>
                                     </CardBody>
                                 </Card>
@@ -131,9 +142,9 @@ const ProfileUser = ({ match, location }) => {
                                 <Card className="mb-4">
                                     <CardBody>
                                         <CardTitle>
-                                            <IntlMessages id="pages.similar-projects" />
+                                            <p>{user.userName}&apos;s Recipe</p>
                                         </CardTitle>
-                                        <GalleryDetail />
+                                        {recipes && <BlogListRecipes recipes={recipes} />}
                                     </CardBody>
                                 </Card>
 
@@ -174,12 +185,6 @@ const ProfileUser = ({ match, location }) => {
                                 </Card>
                             </Colxx>
                             <Colxx xxs="12" lg="6" xl="6" className="col-right">
-                                <Button>
-                                    Add Recipe
-                                </Button>
-                                <Button>
-                                    Add Post
-                                </Button>
                                 {postList.map((itemData) => {
                                     return (
                                         <PostRecent

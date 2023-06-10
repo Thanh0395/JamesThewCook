@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import AppLayout from 'layout/AppLayout';
 import { ProtectedRoute } from 'helpers/authHelper';
 import { UserRole } from 'constants/defaultValues';
+import { getCurrentUser } from 'helpers/Utils';
 // import { ProtectedRoute, UserRole } from 'helpers/authHelper';
 
 const Dashboards = React.lazy(() =>
@@ -27,19 +28,29 @@ const FeedbackPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './Fee
 const FaqPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FaqPage'));
 
 const App = ({ match }) => {
+  const {role} = getCurrentUser();
   return (
     <AppLayout>
       <div className="dashboard-wrapper">
         <Suspense fallback={<div className="loading" />}>
           <Switch>
-            <Redirect
+            {role === "admin" ? (
+              <Redirect
               exact
               from={`${match.url}/`}
               to={`${match.url}/dashboards`}
             />
-            <Route
+            ) : (
+              <Redirect
+              exact
+              from={`${match.url}/`}
+              to={`${match.url}/home-user`}
+            />
+            )}
+            <ProtectedRoute
               path={`${match.url}/dashboards`}
-              render={(props) => <Dashboards {...props} />}
+              component={(props) => <Dashboards {...props} />}
+              roles={[UserRole.Admin]}
             />
             <Route
               path={`${match.url}/home-user`}

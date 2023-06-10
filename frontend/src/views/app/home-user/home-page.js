@@ -20,7 +20,7 @@ import classnames from 'classnames';
 // import GalleryProfile from 'containers/pages/GalleryProfile';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Colxx } from 'components/common/CustomBootstrap';
-import IntlMessages from 'helpers/IntlMessages';
+// import IntlMessages from 'helpers/IntlMessages';
 // import SingleLightbox from 'components/pages/SingleLightbox';
 import whotoFollowData from 'data/follow';
 // import UserFollow from 'components/common/UserFollow';
@@ -94,7 +94,7 @@ const HomePage = ({ match }) => {
                 to="#"
                 location={{}}
               >
-                <IntlMessages id="pages.friends" />
+                Winer
               </NavLink>
             </NavItem>
           </Nav>
