@@ -23,6 +23,7 @@ const DetailContest = ({ isShow, hide, contest }) => {
   const toggle = useCallback(() => {
     hide();
   }, [hide]);
+
   const handleSeeDetail = () => {
     toggle();
     history.push({
