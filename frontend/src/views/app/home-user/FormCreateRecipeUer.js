@@ -14,6 +14,7 @@ import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAd
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { FormikCustomRadioGroup } from 'containers/dashboards/RecipeContainers/formsRecipe/FormikFields';
+import SingleLightbox from 'components/pages/SingleLightbox';
 
 
 const SignupSchema = Yup.object().shape({
@@ -75,10 +76,18 @@ const FormCreateRecipeUser = () => {
     }, [])
     return (
         <Row className="mb-4">
+            <Colxx xxs="12" className="mb-5">
+                <Card>
+                    <SingleLightbox
+                        thumb="/assets/background-home/background-4.jpg"
+                        large="/assets/img/social/header.jpg"
+                        className="social-header card-img"
+                    />
+                </Card>
+            </Colxx>
             <Colxx xxs="12">
                 <Card>
                     <CardBody>
-                        <h6 className="mb-4">Create Recipe Form</h6>
                         <Formik
                             initialValues={{
                                 email: getCurrentUser().email,

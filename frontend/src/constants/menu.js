@@ -144,6 +144,11 @@ const data = [
         label: 'menu.create-recipe',
         to: `${adminRoot}/home-user/create-recipe`,
       },
+      {
+        id: 'pages-authorization',
+        label: 'menu.create-post',
+        to: `${adminRoot}/home-user/create-post`,
+      },
     ]
   },
   {

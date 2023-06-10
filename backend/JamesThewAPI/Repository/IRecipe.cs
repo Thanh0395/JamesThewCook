@@ -13,5 +13,6 @@ namespace JamesThewAPI.Repository
 		Task<bool> DeleteRecipeAsync(int rId);
 		Task<IEnumerable<Recipe>> GetRecentRecipe();
 		Task<IEnumerable<RecipeCategoryModel>> GetCategoryByRecipeCount();
+		Task<IEnumerable<Recipe>> GetListRecipeByUserId(int uId);
 	}
 }

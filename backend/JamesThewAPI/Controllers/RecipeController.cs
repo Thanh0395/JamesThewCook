@@ -192,5 +192,31 @@ namespace JamesThewAPI.Controllers
 
 			}
 		}
+
+		[HttpGet("Recipes-by-uId/{uId}")]
+		public async Task<ActionResult<CustomRespone<IEnumerable<Recipe>>>> GetListRecipeByUserId(int uId)
+		{
+			try
+			{
+				var resources = await _recipeRepo.GetListRecipeByUserId(uId);
+				if (resources != null && resources.Any())
+				{
+					var response = new CustomRespone<IEnumerable<Recipe>>
+							(StatusCodes.Status200OK, "Get list Recipe by user id successfully", resources, null);
+					return Ok(response);
+				}
+				else
+				{
+					var response = new CustomRespone<IEnumerable<Recipe>>(StatusCodes.Status200OK, "Success", Enumerable.Empty<Recipe>(), null);
+					return NotFound(response);
+				}
+			}
+			catch (Exception ex)
+			{
+				var response = new CustomRespone<IEnumerable<Recipe>>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
+				return BadRequest(response);
+
+			}
+		}
 	}
 }
