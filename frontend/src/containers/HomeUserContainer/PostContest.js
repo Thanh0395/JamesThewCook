@@ -14,11 +14,13 @@ import { GetListPosts } from 'services/Hung_Api/RecipeApi';
 import ContestRecentComponent from 'components/HomeUserComponent/ContestRecentComponent';
 import { GetListContest } from 'services/Sy_Api/ContestApi';
 import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
+import { getCurrentUser } from 'helpers/Utils';
 
 const followData = whotoFollowData.slice(0, 5);
 const PostAndContest = () => {
     const [postList, setPostsList] = useState([])
     const [contest, setContest] = useState([])
+    const {isMembership} = getCurrentUser();
     useEffect(() => {
         GetListPosts()
             .then(rs => setPostsList(rs))
@@ -74,13 +76,16 @@ const PostAndContest = () => {
             </Colxx>
             <Colxx xxs="12" lg="6" xl="6" className="col-right">
                 {postList.map((itemData) => {
-                    return (
-                        <PostRecent
-                            data={itemData}
-                            key={`post_${itemData.pId}`}
-                            className="mb-4"
-                        />
-                    );
+                    if(itemData.isFree !== isMembership || isMembership){
+                        return (
+                            <PostRecent
+                                data={itemData}
+                                key={`post_${itemData.pId}`}
+                                className="mb-4"
+                            />
+                        );
+                    }
+                    return null;
                 })}
             </Colxx>
         </Row>

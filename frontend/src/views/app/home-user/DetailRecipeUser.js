@@ -43,7 +43,8 @@ const DetailRecipeUser = ({ match, location }) => {
         </Colxx>
       </Row>
 
-      <Row>
+      {recipe && (
+        <Row>
         <Colxx xxs="12" md="12" xl="8" className="col-left">
           <Card className="mb-4">
             <SingleLightbox
@@ -123,6 +124,7 @@ const DetailRecipeUser = ({ match, location }) => {
           </Card>
         </Colxx>
       </Row>
+      )}
     </>
   );
 };
