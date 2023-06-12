@@ -58,7 +58,10 @@ const PostRecent = ({ data, className = "mb-4", intl }) => {
       <CardBody>
         {user && (
           <div className="d-flex flex-row mb-3">
-            <NavLink to="#" location={{}}>
+            <NavLink to={{
+                    pathname: '/app/home-user/profile-user',
+                    state: { uid: user.uId }
+                }}>
               <img
                 src={`http://localhost:5013${user.avatar}`}
                 alt="thumbnail"
@@ -66,7 +69,10 @@ const PostRecent = ({ data, className = "mb-4", intl }) => {
               />
             </NavLink>
             <div className="pl-3">
-              <NavLink to="#" location={{}}>
+              <NavLink to={{
+                    pathname: '/app/home-user/profile-user',
+                    state: { uid: user.uId }
+                }}>
                 <div>
                   <p className="font-weight-medium mb-0 ">{user.userName}</p>
                 </div>

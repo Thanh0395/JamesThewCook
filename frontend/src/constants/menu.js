@@ -135,19 +135,24 @@ const data = [
     to:`${adminRoot}/home-user`,
     subs: [
       {
-        id: 'pages-authorization',
+        id: 'home-user-home-page',
         label: 'menu.home-page',
         to: `${adminRoot}/home-user/home-page`,
       },
       {
-        id: 'pages-authorization',
+        id: 'home-user-create-recipe',
         label: 'menu.create-recipe',
         to: `${adminRoot}/home-user/create-recipe`,
       },
       {
-        id: 'pages-authorization',
+        id: 'home-user-create-post',
         label: 'menu.create-post',
         to: `${adminRoot}/home-user/create-post`,
+      },
+      {
+        id: 'home-user-search-recipe',
+        label: 'menu.search',
+        to: `${adminRoot}/home-user/search`,
       },
     ]
   },

@@ -26,6 +26,7 @@ const Search = ({ match }) => {
           `${apiUrl}?pageSize=${pageSize}&currentPage=${currentPage}&search=${keyword}`
         )
         .then((res) => {
+          console.log("res search :", res)
           return res.data;
         })
         .then((data) => {

@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import IntlMessages from 'helpers/IntlMessages';
 import {
   menuHiddenBreakpoint,
-  searchPath,
+  // searchPath,
   localeOptions,
   isDarkSwitchActive,
   buyUrl,
@@ -51,9 +51,10 @@ const TopNav = ({
 }) => {
   const [isInFullScreen, setIsInFullScreen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
-
+  // const [dataSearch, setDataSearch] = useState([])
   const search = () => {
-    history.push(`${searchPath}?key=${searchKeyword}`);
+    history.push(`${adminRoot}/home-user/search?key=${searchKeyword}`)
+    // history.push(`${searchPath}?key=${searchKeyword}`);
     setSearchKeyword('');
   };
 

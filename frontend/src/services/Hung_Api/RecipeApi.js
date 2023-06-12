@@ -74,3 +74,8 @@ export const GetPostByUserId = async (uId) => {
     const data = await axios.get(`http://localhost:5013/api/Post/GetPostByUserId/${uId}`)
     return data.data.data;
 }
+
+export const SearchRecipeAndPost = async (keyword) => {
+    const data = await axios.get(`http://localhost:5013/api/Search?keyword=${keyword}`)
+    return data.data.data;
+}
