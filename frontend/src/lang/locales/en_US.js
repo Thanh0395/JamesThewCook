@@ -179,7 +179,6 @@ module.exports = {
 
   /* Sy COntest */
   'menu.contests': 'Contest',
-  'menu.contest.default': 'Contest Default',
   'menu.contest.list-contest': 'List Contest',
   'menu.list-contest': 'List Contest',
   'menu.create-contest': 'Create Contest',

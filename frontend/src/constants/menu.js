@@ -80,8 +80,8 @@ const data = [
         roles: [UserRole.Admin],
         subs:[
           {
-            icon: 'simple-icon-book-open',
-            label: 'menu.contest.default',
+            icon: 'simple-icon-list',
+            label: 'menu.contest.list-contest',
             to: `${adminRoot}/dashboards/contests/default`,
             roles: [UserRole.Admin],
           },

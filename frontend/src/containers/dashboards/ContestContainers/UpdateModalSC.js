@@ -14,7 +14,7 @@ import { AddRating, GetAvg } from 'services/Sy_Api/Rating';
 import { getCurrentUser } from 'helpers/Utils';
 import FormUpdateSC from './FormUpdateSC';
 
-const UpdateModalSC = ({ modalBasic, setModalBasic, scUpdate }) => {
+const UpdateModalSC = ({ modalBasic, setModalBasic, scUpdate, winner }) => {
   const [collapse, setCollapse] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [success, setSuccess] = useState('');
@@ -50,45 +50,49 @@ const UpdateModalSC = ({ modalBasic, setModalBasic, scUpdate }) => {
               <FormUpdateSC scUpdate={scUpdate} />
             </ModalBody>
             <ModalFooter>
-              <Button
-                color="primary"
-                onClick={() => setCollapse(!collapse)}
-                className="mb-1"
-              >
-                Rate
-              </Button>
-              <Collapse isOpen={collapse}>
-                <>
-                  <Button
-                    color="danger"
-                    className="mb-0"
-                    onClick={() => ratingAPI(25)}
-                  >
-                    25
-                  </Button>
-                  <Button
-                    color="warning"
-                    className="mb-0"
-                    onClick={() => ratingAPI(50)}
-                  >
-                    50
-                  </Button>
-                  <Button
-                    color="secondary"
-                    className="mb-0"
-                    onClick={() => ratingAPI(75)}
-                  >
-                    75
-                  </Button>
+              {!winner && (
+                <div>
                   <Button
                     color="primary"
-                    className="mb-0"
-                    onClick={() => ratingAPI(100)}
+                    onClick={() => setCollapse(!collapse)}
+                    className="mb-1"
                   >
-                    100
+                    Rate
                   </Button>
-                </>
-              </Collapse>
+                  <Collapse isOpen={collapse}>
+                    <>
+                      <Button
+                        color="danger"
+                        className="mb-0"
+                        onClick={() => ratingAPI(25)}
+                      >
+                        25
+                      </Button>
+                      <Button
+                        color="warning"
+                        className="mb-0"
+                        onClick={() => ratingAPI(50)}
+                      >
+                        50
+                      </Button>
+                      <Button
+                        color="secondary"
+                        className="mb-0"
+                        onClick={() => ratingAPI(75)}
+                      >
+                        75
+                      </Button>
+                      <Button
+                        color="primary"
+                        className="mb-0"
+                        onClick={() => ratingAPI(100)}
+                      >
+                        100
+                      </Button>
+                    </>
+                  </Collapse>
+                </div>
+              )}
               <Button color="info" onClick={() => setModalBasic(false)}>
                 Cancel
               </Button>
