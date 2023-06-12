@@ -10,6 +10,7 @@ import { buyUrl, adminRoot } from 'constants/defaultValues';
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { GetListRecentReCipe } from 'services/Hung_Api/RecipeApi';
 import { GetListContest } from 'services/Sy_Api/ContestApi';
+import { getCurrentUser } from 'helpers/Utils';
 import Navbar from './components/Navbar';
 import NavbarDT from './components/NavbarDT';
 import Carousel from './components/Carousel';
@@ -42,14 +43,12 @@ const slideItems = [
   {
     icon: 'iconsminds-mouse-3',
     title: 'Right Click Menu',
-    detail:
-      'Certainly! I can review many of your cooking recipes.',
+    detail: 'Certainly! I can review many of your cooking recipes.',
   },
   {
     icon: 'iconsminds-electric-guitar',
     title: 'Video Player',
-    detail:
-      'Discover Unique Cooking Techniques through Engaging Videos.',
+    detail: 'Discover Unique Cooking Techniques through Engaging Videos.',
   },
   {
     icon: 'iconsminds-keyboard',
@@ -66,8 +65,7 @@ const slideItems = [
   {
     icon: 'simple-icon-diamond',
     title: 'Member',
-    detail:
-      'Join Us as a Member to Enjoy Delicious Eats.',
+    detail: 'Join Us as a Member to Enjoy Delicious Eats.',
   },
   // {
   //   icon: 'iconsminds-palette',
@@ -112,12 +110,12 @@ const slideItems = [
 //     detail:
 //       'Discover more than 16,470 recipes that showcase desserts in all forms, from fresh seasonal fruits to frozen, canned, dried–even freeze-dried!',
 //   },
-  // {
-  //   title: 'Smart Menu',
-  //   img: '/assets/img/landing-page/features/smart-menu.png',
-  //   detail:
-  //     'Instead of good old single panel menus with accordion structure that looks over complicated, we created 2 panels and categorized pages accordingly.<br><br>The default menu auto hides sub panel when resolution is under some breakpoint to open some space. You may also hide menu completely or use only main panel open only.',
-  // },
+// {
+//   title: 'Smart Menu',
+//   img: '/assets/img/landing-page/features/smart-menu.png',
+//   detail:
+//     'Instead of good old single panel menus with accordion structure that looks over complicated, we created 2 panels and categorized pages accordingly.<br><br>The default menu auto hides sub panel when resolution is under some breakpoint to open some space. You may also hide menu completely or use only main panel open only.',
+// },
 // ];
 
 // const contest = [
@@ -135,31 +133,31 @@ const slideItems = [
 //   },
 //   {
 //     title: 'Newest Contest',
-//     img: '/assets/img/landing-page/contests/contest-4.jpg', 
+//     img: '/assets/img/landing-page/contests/contest-4.jpg',
 //   },
-  // {
-  //   title: 'Thumb List',
-  //   img: '/assets/img/landing-page/layouts/thumb-list.jpg',
-  // },
-  // { title: 'Data List', img: '/assets/img/landing-page/layouts/data-list.jpg' },
-  // { title: 'Details', img: '/assets/img/landing-page/layouts/details.jpg' },
-  // {
-  //   title: 'Authentication',
-  //   img: '/assets/img/landing-page/layouts/authentication.jpg',
-  // },
-  // {
-  //   title: 'Search Results',
-  //   img: '/assets/img/landing-page/layouts/search-result.jpg',
-  // },
-  // {
-  //   title: 'Single Page Application',
-  //   img: '/assets/img/landing-page/layouts/spa.jpg',
-  // },
-  // {
-  //   title: 'Data List App Menu Hidden',
-  //   img: '/assets/img/landing-page/layouts/data-list-app-menu-hidden.jpg',
-  // },
-  // { title: 'Tabs', img: '/assets/img/landing-page/layouts/tabs.jpg' },
+// {
+//   title: 'Thumb List',
+//   img: '/assets/img/landing-page/layouts/thumb-list.jpg',
+// },
+// { title: 'Data List', img: '/assets/img/landing-page/layouts/data-list.jpg' },
+// { title: 'Details', img: '/assets/img/landing-page/layouts/details.jpg' },
+// {
+//   title: 'Authentication',
+//   img: '/assets/img/landing-page/layouts/authentication.jpg',
+// },
+// {
+//   title: 'Search Results',
+//   img: '/assets/img/landing-page/layouts/search-result.jpg',
+// },
+// {
+//   title: 'Single Page Application',
+//   img: '/assets/img/landing-page/layouts/spa.jpg',
+// },
+// {
+//   title: 'Data List App Menu Hidden',
+//   img: '/assets/img/landing-page/layouts/data-list-app-menu-hidden.jpg',
+// },
+// { title: 'Tabs', img: '/assets/img/landing-page/layouts/tabs.jpg' },
 // ];
 
 const members = [
@@ -262,8 +260,8 @@ const Home = () => {
   useEffect(() => {
     GetListContest().then((rs) => setContest(rs));
     GetListRecentReCipe().then((rs) => setRecipies(rs));
-  })
-
+  }, []);
+  const currentUser = getCurrentUser();
   return (
     <div
       className={classnames('landing-page', {
@@ -286,11 +284,11 @@ const Home = () => {
             slideSettings={slideSettings}
           />
           <div className="section">
-            <HomeRecipe recipies={recipies} />
+            <HomeRecipe recipies={recipies} currentUser={currentUser} />
           </div>
 
           <div className="section background">
-            <HomeContest contest={contest} />
+            <HomeContest contest={contest} currentUser={currentUser} />
           </div>
 
           <div className="section mb-0">
@@ -305,16 +303,19 @@ const Home = () => {
             />
           </div>
 
-          <div hidden = "hidden" className="section mb-0">
-            <Themes themes = {themes}/>
+          <div hidden="hidden" className="section mb-0">
+            <Themes themes={themes} />
           </div>
 
-          <div hidden = "hidden" className="section background background-no-bottom mb-0 pb-0">
-            <BuyNow buyUrl = {buyUrl}/>
+          <div
+            hidden="hidden"
+            className="section background background-no-bottom mb-0 pb-0"
+          >
+            <BuyNow buyUrl={buyUrl} />
           </div>
 
           <div className="section footer mb-0" ref={refSectionFooter}>
-            <Footer scrollTo = {scrollTo}/>
+            <Footer scrollTo={scrollTo} />
           </div>
         </div>
       </div>

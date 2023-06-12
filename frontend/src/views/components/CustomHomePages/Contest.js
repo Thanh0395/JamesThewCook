@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { Button } from 'reactstrap';
 
 function HomeContest(props) {
-  const { contest } = props;
+  const { contest, currentUser } = props;
   return (
     <div className="container" id="contest">
       <div className="row">
@@ -30,13 +30,23 @@ function HomeContest(props) {
               alt={l.title}
               src={`http://localhost:5013${l.featureImage}`}
             />
-            <Button color="primary" size="xs" className="mb-2">
-              <NavLink to="/login">
-                <h6>
-                  <i>Compete</i>
-                </h6>
-              </NavLink>
-            </Button>
+            {currentUser ? (
+              <Button color="primary" size="xs" className="mb-2">
+                <NavLink to="/app/home-user/home-page">
+                  <h6>
+                    <i>Compete</i>
+                  </h6>
+                </NavLink>
+              </Button>
+            ) : (
+              <Button color="primary" size="xs" className="mb-2">
+                <NavLink to="/login">
+                  <h6>
+                    <i>Compete</i>
+                  </h6>
+                </NavLink>
+              </Button>
+            )}
           </div>
         ))}
       </div>
