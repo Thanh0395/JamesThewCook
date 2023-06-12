@@ -32,38 +32,46 @@ import Participate from 'components/ContestComponent/Participate';
 import { GetListSCByContestId } from 'services/Sy_Api/SCApi';
 import { GetWinner } from 'services/Sy_Api/Rating';
 import { GetContest } from 'services/Sy_Api/ContestApi';
+import { getUserByIdAPI } from 'services/Thanh_Api/UserApi';
 
 const DetailsPages = ({ match, location }) => {
   // const { contest } = location.state;
   const [contest, setContest] = useState(location.state.contest);
   const [activeTab, setActiveTab] = useState('Entrys');
+  // const [noWinner, setNoWinner] = useState('');
   const [sc, setSc] = useState([]);
   const [reRender, setreRender] = useState(false);
-  console.log(setContest);
+  const [winner, setWinner] = useState();
   const getWinner = (contestId) => {
     GetWinner(contestId)
-      .then(() => GetContest(contest.contestId).then((rs) => setContest(rs)))
+      // .then(() => GetContest(contestId).then((rs) => setContest(rs)))
       .then(() => setreRender(!reRender))
       .catch((error) => {
-        if(error.response.data.status === 404){
-          GetContest(contest.contestId).then((rs) => setContest(rs))
-          setreRender(!reRender)
+        if (error.response.data.status === 404) {
+          GetContest(contestId).then((rs) => setContest(rs));
+          setreRender(!reRender);
         }
       });
   };
-
   useEffect(() => {
+    GetContest(contest.contestId).then((rs) => {
+      setContest(rs);
+      if (rs.winner != null) {
+        getUserByIdAPI(rs.winner).then((wn) => setWinner(wn));
+      }
+    });
     GetListSCByContestId(contest.contestId).then((rs) => setSc(rs));
   }, [reRender]);
+  console.log('Contest', contest);
+  console.log('Winner', winner);
   return (
     <>
       <Row>
         <Colxx xxs="12">
           <Breadcrumb match={match} />
           <Separator className="mb-5" />
-
           <Row>
-            <Colxx xxs="12" xl="12" className="col-left">
+            <Colxx xxs="12" xl="12">
               <Card className="mb-4">
                 <SingleLightbox
                   thumb={`http://localhost:5013${contest.featureImage}`}
@@ -104,6 +112,23 @@ const DetailsPages = ({ match, location }) => {
                           <strong>Still Available</strong>
                         )}
                       </p>
+                    </div>
+                    <div>
+                      {winner && (
+                        <div>
+                          <h5>
+                            <strong>Winner</strong>
+                          </h5>
+                          <h5>UserName: {winner.username}</h5>
+                          <h5>Email: {winner.email}</h5>
+                          <img
+                            className="card-img-left"
+                            src={`http://localhost:5013${winner.avatar}`}
+                            alt=""
+                            aria-hidden="true"
+                          />
+                        </div>
+                      )}
                     </div>
                     {!contest.endDate && (
                       <Button
