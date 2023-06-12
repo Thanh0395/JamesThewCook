@@ -39,14 +39,19 @@ function* loginWithEmailPassword({ payload }) {
   const { history } = payload;
   try {
     const loginUser = yield call(axios.post,"http://localhost:5013/api/Auth", {email,password});
+    let isMember = false;
     if (loginUser.status===200) {
-      
+      if(loginUser.data.isMembership === "Membership"){
+        isMember = true;
+      }
       const item = { token: loginUser.data.token, uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
-        img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };
+        img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:isMember,...currentUser };
         
       setCurrentUser(item);
       yield put(loginUserSuccess(item));
-      history.push(adminRoot);
+      // Hung sua cho nay
+      if(loginUser.data.role === "admin") history.push(adminRoot);
+      else history.push(`${adminRoot}/home-user`)
     } else {
       yield put(loginUserError(loginUser.data.message));
     }
@@ -69,7 +74,7 @@ const registerWithEmailPasswordAsync = async (email, password) =>{
   const loginUser = await axios.post("http://localhost:5013/api/Auth", {email,password});
   if (loginUser.status===200) {
       
-    const item = { uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
+    const item = { token: loginUser.data.token, uid: loginUser.data.uId,userName: loginUser.data.userName,email: loginUser.data.email,role: loginUser.data.role,
       img:`http://localhost:5013${loginUser.data.avatar}`,isMembership:loginUser.data.isMembership,...currentUser };
       
     setCurrentUser(item);

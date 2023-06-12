@@ -5,12 +5,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 const ListUser = React.lazy(() =>
   import(/* webpackChunkName: "dashboard-default" */ './listUser')
 );
-const UserProfile = React.lazy(() =>
-  import(/* webpackChunkName: "dashboard-content" */ './profile')
-);
-const UserDetail = React.lazy(() =>
-import(/* webpackChunkName: "dashboard-content" */ './detail')
-);
 
 const Users = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -19,14 +13,6 @@ const Users = ({ match }) => (
       <Route
         path={`${match.url}/listuser`}
         render={(props) => <ListUser {...props} />}
-      />
-      <Route
-        path={`${match.url}/profile`}
-        render={(props) => <UserProfile {...props} />}
-      />
-      <Route
-        path={`${match.url}/detail`}
-        render={(props) => <UserDetail {...props} />}
       />
       <Redirect to="/error" />
     </Switch>

@@ -10,7 +10,6 @@ import {
 } from 'reactstrap';
 
 import { Colxx } from 'components/common/CustomBootstrap';
-import IntlMessages from 'helpers/IntlMessages';
 
 const FormUpdateCategory = ({ categoryUpdate, setCategoryName }) => {
     const [categoryName,] = useState(categoryUpdate.categoryName);
@@ -22,7 +21,7 @@ const FormUpdateCategory = ({ categoryUpdate, setCategoryName }) => {
         <Card>
             <CardBody>
                 <CardTitle>
-                    <IntlMessages id="dashboards.form-country" />
+                    Category Form
                 </CardTitle>
                 <Form className="dashboard-quick-post">
                     <FormGroup row>

@@ -207,6 +207,15 @@ const TopNav = ({
     setAvatar(getCurrentUser().img);
     setUserName(getCurrentUser().userName);
   }, [userName]);
+
+  // handle change page to profile user
+  const {uid} = getCurrentUser();
+  const handleChangePageProfile = () => {
+    history.push({
+      pathname: `${adminRoot}/home-user/profile-user`,
+      state: { uid }
+    });
+  }
   return (
     <nav className="navbar fixed-top">
       <div className="d-flex align-items-center navbar-left">
@@ -271,7 +280,14 @@ const TopNav = ({
           </UncontrolledDropdown>
         </div>
         <div className="position-relative d-none d-none d-lg-inline-block">
-          <a
+        <a 
+            className="btn btn-outline-primary btn-sm ml-2 p-1 pt-2 pb-2"
+            target="_top"
+            href="/"
+          >
+            <IntlMessages id="Landing Page" />
+          </a>
+          <a hidden
             className="btn btn-outline-primary btn-sm ml-2"
             target="_top"
             href={buyUrl}
@@ -306,16 +322,23 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">{userName}</span>
+              <span className="name mr-1">{userName}
+                {(getCurrentUser().isMembership==='Membership')?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
+              </span>
               <span>
                 <img alt="Profile" src={avatar} />
               </span>
             </DropdownToggle>
             <DropdownMenu className="mt-3" right>
-              <DropdownItem>Account</DropdownItem>
-              <DropdownItem>Features</DropdownItem>
-              <DropdownItem>History</DropdownItem>
-              <DropdownItem>Support</DropdownItem>
+              <DropdownItem onClick={() => handleChangePageProfile()} >
+                Profile
+              </DropdownItem>
+              <DropdownItem>
+                Features
+              </DropdownItem>
+              <DropdownItem>
+                History
+              </DropdownItem>
               <DropdownItem divider />
               <DropdownItem onClick={() => handleLogout()}>
                 Sign out

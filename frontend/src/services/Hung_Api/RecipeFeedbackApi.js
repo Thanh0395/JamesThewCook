@@ -10,8 +10,8 @@ export const GetRecipeFeedbackByRfbId = async (rfbId) =>{
     return data.data.data;
 }
 
-export const PostRecipeFeedback = async (dataPost) => {
-    const response = await axios.post("http://localhost:5013/api/RecipeFeedbackFeedback", dataPost);
+export const PostRecipeFeedback = async (uId, rId, content) => {
+    const response = await axios.post("http://localhost:5013/api/RecipeFeedbackFeedback", {uId, rId, content});
     return response.data.data
 }
 

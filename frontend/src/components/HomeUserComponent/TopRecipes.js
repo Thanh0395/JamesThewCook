@@ -5,18 +5,24 @@ import { useHistory } from 'react-router-dom';
 // import { items } from 'data/carouselItems';
 import { Colxx } from 'components/common/CustomBootstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
+import { getCurrentUser } from 'helpers/Utils';
 import { GetRecipe } from 'services/Hung_Api/RecipeApi';
 import { adminRoot } from 'constants/defaultValues';
 
 
 const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) => {
   const history = useHistory();
+  const {isMembership} = getCurrentUser();
   const navigateToDetailPage = async (rId) => {
     const recipe = await GetRecipe(rId);
-    history.push({
-      pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
-      state: { recipe }
-    });
+    if(recipe.isFree === isMembership){
+      alert("You are not a member yet.")
+    }else{
+      history.push({
+        pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+        state: { recipe }
+      });
+    }
   };
   return (
     <div className="glide-item">

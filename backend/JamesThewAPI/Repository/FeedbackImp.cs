@@ -1,6 +1,7 @@
 ﻿using JamesThewAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using System.Security.Cryptography;
 
 namespace JamesThewAPI.Repository
 {
@@ -71,5 +72,14 @@ namespace JamesThewAPI.Repository
                 return null;
             }
         }
-    }
+
+		// Hung Them vao API GetFeedbackByPostId
+		public async Task<IEnumerable<Feedback>> GetFeedbackByPostId(int pId)
+        {
+			return await _context.Feedbacks
+			.Where(r => r.PId == pId)
+			.ToListAsync();
+		}
+
+	}
 }

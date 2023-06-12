@@ -19,7 +19,7 @@ const FormCategory = ({ setReRender }) => {
     const onSubmit = () => {
         PostCategory(categoryName).then((response) => {
             console.log('API post country', response);
-            setReRender(true);
+            setReRender(prev => !prev);
         });
     }
 

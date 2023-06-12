@@ -183,5 +183,11 @@ namespace JamesThewAPI.Repository
 			}).ToListAsync();
 			return query;
 		}
+
+		//Get list recipe by user id
+		public async Task<IEnumerable<Recipe>> GetListRecipeByUserId(int uId)
+		{
+			return await _dbContext.Recipes.Where(r => r.UId == uId).ToListAsync();
+		}
 	}
 }

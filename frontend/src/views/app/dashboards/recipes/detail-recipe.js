@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
-import { Row, Card, CardBody } from 'reactstrap';
+import { Row, Card, CardBody, InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 // import { NavLink } from 'react-router-dom';
 // import LinesEllipsis from 'react-lines-ellipsis';
 // import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC';
@@ -8,30 +8,32 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import SingleLightbox from 'components/pages/SingleLightbox';
 import VideoPlayer from 'components/common/VideoPlayer';
-// import { blogCategories } from 'data/blog';
-// import IntlMessages from 'helpers/IntlMessages';
-// import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import ImagesCardRecipe from 'containers/dashboards/RecipeContainers/detailRecipe/ImagesCardRecipe';
 import ComponentShowComment from 'components/Recipe/ComponentShowComment';
-import { GetRecipeFeedbackByRecipeId } from 'services/Hung_Api/RecipeFeedbackApi';
-
-
-// const recentPosts = blogData.slice(0, 4);
-// const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
+import { GetRecipeFeedbackByRecipeId, PostRecipeFeedback } from 'services/Hung_Api/RecipeFeedbackApi';
+import { getCurrentUser } from 'helpers/Utils';
 
 const DetailRecipePage = ({ match, location }) => {
-  // const { recipe } = location.state?.recipe;
   const recipe = location.state && location.state.recipe;
   const [feedbackRecipe, setFeedbackRecipe] = useState([]);
+  const [comment, setComment] = useState("")
+  const [reRender, setRender] = useState()
   useEffect(() => {
-    GetRecipeFeedbackByRecipeId(recipe.rId).then(rs => setFeedbackRecipe(rs))
-  }, [])
-  console.log(" :", feedbackRecipe);
+    GetRecipeFeedbackByRecipeId(recipe.rId)
+      .then(rs => setFeedbackRecipe(rs))
+      .then(setRender(false))
+  }, [reRender])
   const renderComments = (data) => {
     return data.map((item, index) => {
       return <ComponentShowComment data={item} key={index} />;
     });
   };
+  const handleSubmitFeedback = () => {
+    const {uid}= getCurrentUser();
+    PostRecipeFeedback(uid, recipe.rId, comment)
+    setRender(true)
+  }
+
   return (
     <>
       <Row>
@@ -105,6 +107,18 @@ const DetailRecipePage = ({ match, location }) => {
             <div className="mt-5 remove-last-border">
               <h5><strong>Comments</strong></h5>
               {renderComments(feedbackRecipe)}
+              <InputGroup className="comment-container">
+                <Input placeholder="add comments..." defaultValue={comment} onChange={e => setComment(e.target.value)} />
+                <InputGroupAddon addonType="append">
+                  <Button
+                    color="primary"
+                    onClick={() => handleSubmitFeedback()}
+                  >
+                    <span className="d-inline-block">sent</span>{' '}
+                    <i className="simple-icon-arrow-right ml-2" />
+                  </Button>
+                </InputGroupAddon>
+              </InputGroup>
             </div>
           </Card>
         </Colxx>

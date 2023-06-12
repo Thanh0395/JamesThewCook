@@ -9,6 +9,8 @@ import { forgotPassword } from 'redux/actions';
 import { NotificationManager } from 'components/common/react-notifications';
 import axios from 'axios';
 import { getCurrentUser } from 'helpers/Utils';
+import PopupMessage from 'views/components/CustomHomePages/PopupMessage';
+import '../components/CustomHomePages/Popup.css'
 
 const validateEmail = (value) => {
   let error;
@@ -29,6 +31,13 @@ const ForgotPassword = ({
   const [email] = useState(getCurrentUser() ? getCurrentUser().email : '');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Popup message
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [propMessage, setPropMessage] = useState();
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+  // End popupmessage
   const onForgotPassword = async (values) => {
     if (!loading) {
       if (values.email !== '') {
@@ -37,14 +46,19 @@ const ForgotPassword = ({
         try {
           const forgotPass = await axios.post('http://localhost:5013/api/Email/forgotpassword', { 'toMail': values.email });
           if (forgotPass) {
+            console.log(forgotPass);
             setIsLoading(false);
-            alert("Your Pass was reset, please check an email")
+            setPopupOpen(true);
+            setPropMessage(forgotPass.data.message)
+            // alert("Your Pass was reset, please check an email")
           }
         } catch (errorMsg) {
           if (errorMsg.response) {
             if (errorMsg.response.data.status === 404) {
               setIsLoading(false);
-              alert(errorMsg.response.data.message)
+              setPopupOpen(true);
+              setPropMessage(errorMsg.response.data.message)
+              // alert(errorMsg.response.data.message)
             }
           }
         }
@@ -77,6 +91,11 @@ const ForgotPassword = ({
 
   return (
     <Row className="h-100">
+      {/* Popup message */}
+      <div>
+        <PopupMessage isOpen={isPopupOpen} onClose={closePopup} message={propMessage} />
+      </div>
+      {/* End popup message */}
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
@@ -97,7 +116,7 @@ const ForgotPassword = ({
             <CardTitle className="mb-4">
               <IntlMessages id="user.forgot-password" />
             </CardTitle>
-
+            
             <Formik initialValues={initialValues} onSubmit={onForgotPassword}>
               {({ errors, touched }) => (
                 <Form className="av-tooltip tooltip-label-bottom">

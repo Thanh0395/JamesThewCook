@@ -31,14 +31,15 @@ const FormUpdateContest = ({ contest, setSelectedContestUpdate }) => {
     formData.append('endDate', values.endDate);
     formData.append('prize', values.prize);
     formData.append('file', inputFile);
-    setTimeout(() => {
-      PutContest(formData).then((res) => {
-        console.log('Put API :', res);
-        if (res.contestId != null) {
-          setSelectedContestUpdate(null);
-        }
-      });
-    }, 1000);
+    console.log("Payload :", values)
+    // setTimeout(() => {
+    //   PutContest(formData).then((res) => {
+    //     console.log('Put API :', res);
+    //     if (res.contestId != null) {
+    //       setSelectedContestUpdate(null);
+    //     }
+    //   });
+    // }, 1000);
   };
   return (
     <Row className="mb-4">

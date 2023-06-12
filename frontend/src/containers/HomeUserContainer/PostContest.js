@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Row,
     Card,
     CardBody,
-    Badge,
     CardTitle,
 } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
-import GalleryDetail from 'containers/pages/GalleryDetail';
 import { Colxx } from 'components/common/CustomBootstrap';
-import IntlMessages from 'helpers/IntlMessages';
 import SingleLightbox from 'components/pages/SingleLightbox';
 import whotoFollowData from 'data/follow';
 import UserFollow from 'components/common/UserFollow';
-import recentPostsData from 'data/recentposts';
-import RecentPost from 'components/common/RecentPost';
-import posts from 'data/posts';
-// import Post from 'components/cards/Post';
 import PostRecent from 'components/HomeUserComponent/PostRecent';
+import { GetListPosts } from 'services/Hung_Api/RecipeApi';
+import ContestRecentComponent from 'components/HomeUserComponent/ContestRecentComponent';
+import { GetListContest } from 'services/Sy_Api/ContestApi';
+import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 
 const followData = whotoFollowData.slice(0, 5);
 const PostAndContest = () => {
+    const [postList, setPostsList] = useState([])
+    const [contest, setContest] = useState([])
+    useEffect(() => {
+        GetListPosts()
+            .then(rs => setPostsList(rs))
+            .then(GetListContest().then(rs => setContest(rs)))
+    }, [])
     return (
         <Row>
             <Colxx xxs="12" className="mb-5">
@@ -35,92 +38,25 @@ const PostAndContest = () => {
             <Colxx xxs="12" lg="6" xl="6" className="col-left">
                 <Card className="mb-4">
                     <CardBody>
-                        <div className="text-center pt-4">
-                            <p className="list-item-heading pt-2">Sarah Cortney</p>
-                        </div>
-                        <p className="mb-3">
-                            I’m a web developer. I spend my whole day, practically
-                            every day, experimenting with HTML, CSS, and JavaScript;
-                            dabbling with Python and Ruby; and inhaling a wide
-                            variety of potentially useless information through a few
-                            hundred RSS feeds. I build websites that delight and
-                            inform. I do it well.
-                        </p>
-                        <p className="text-muted text-small mb-2">
-                            <IntlMessages id="pages.location" />
-                        </p>
-                        <p className="mb-3">Nairobi, Kenya</p>
-                        <p className="text-muted text-small mb-2">
-                            <IntlMessages id="pages.responsibilities" />
-                        </p>
-                        <p className="mb-3">
-                            <Badge
-                                color="outline-secondary"
-                                className="mb-1 mr-1"
-                                pill
-                            >
-                                FRONTEND
-                            </Badge>
-                            <Badge
-                                color="outline-secondary"
-                                className="mb-1 mr-1"
-                                pill
-                            >
-                                JAVASCRIPT
-                            </Badge>
-                            <Badge
-                                color="outline-secondary"
-                                className="mb-1 mr-1"
-                                pill
-                            >
-                                SECURITY
-                            </Badge>
-                            <Badge
-                                color="outline-secondary"
-                                className="mb-1 mr-1"
-                                pill
-                            >
-                                DESIGN
-                            </Badge>
-                        </p>
-                        <p className="text-muted text-small mb-2">
-                            <IntlMessages id="menu.contact" />
-                        </p>
-                        <div className="social-icons">
-                            <ul className="list-unstyled list-inline">
-                                <li className="list-inline-item">
-                                    <NavLink to="#">
-                                        <i className="simple-icon-social-facebook" />
-                                    </NavLink>
-                                </li>
-                                <li className="list-inline-item">
-                                    <NavLink to="#">
-                                        <i className="simple-icon-social-twitter" />
-                                    </NavLink>
-                                </li>
-                                <li className="list-inline-item">
-                                    <NavLink to="#">
-                                        <i className="simple-icon-social-instagram" />
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </div>
-                    </CardBody>
-                </Card>
-
-                <Card className="mb-4">
-                    <CardBody>
                         <CardTitle>
-                            <IntlMessages id="pages.similar-projects" />
+                            Our Contest
                         </CardTitle>
-                        <GalleryDetail />
+                        <div className="remove-last-border remove-last-margin remove-last-padding">
+                            {contest.map((itemData) => {
+                                return (
+                                    <ContestRecentComponent
+                                        data={itemData}
+                                        key={`recent_${itemData.contestId}`}
+                                    />
+                                );
+                            })}
+                        </div>
                     </CardBody>
                 </Card>
-
                 <Card className="mb-4">
                     <CardBody>
                         <CardTitle>
-                            <IntlMessages id="pages.who-to-follow" />
+                            Prize Winner
                         </CardTitle>
                         <div className="remove-last-border remove-last-margin remove-last-padding">
                             {followData.map((itemData) => {
@@ -134,31 +70,14 @@ const PostAndContest = () => {
                         </div>
                     </CardBody>
                 </Card>
-
-                <Card className="mb-4">
-                    <CardBody>
-                        <CardTitle>
-                            <IntlMessages id="pages.recent-posts" />
-                        </CardTitle>
-                        <div className="remove-last-border remove-last-margin remove-last-padding">
-                            {recentPostsData.map((itemData) => {
-                                return (
-                                    <RecentPost
-                                        data={itemData}
-                                        key={`recent_${itemData.key}`}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </CardBody>
-                </Card>
+                <RecentRecipe />
             </Colxx>
             <Colxx xxs="12" lg="6" xl="6" className="col-right">
-                {posts.map((itemData) => {
+                {postList.map((itemData) => {
                     return (
                         <PostRecent
                             data={itemData}
-                            key={`post_${itemData.key}`}
+                            key={`post_${itemData.pId}`}
                             className="mb-4"
                         />
                     );

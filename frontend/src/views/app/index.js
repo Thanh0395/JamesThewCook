@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import AppLayout from 'layout/AppLayout';
 import { ProtectedRoute } from 'helpers/authHelper';
 import { UserRole } from 'constants/defaultValues';
+import { getCurrentUser } from 'helpers/Utils';
 // import { ProtectedRoute, UserRole } from 'helpers/authHelper';
 
 const Dashboards = React.lazy(() =>
@@ -17,30 +18,51 @@ const Applications = React.lazy(() =>
   import(/* webpackChunkName: "applications" */ './applications')
 );
 const Ui = React.lazy(() => import(/* webpackChunkName: "ui" */ './ui'));
+const Pages = React.lazy(() => import(/* webpackChunkName: "ui" */ './pages'));
 const Menu = React.lazy(() => import(/* webpackChunkName: "menu" */ './menu'));
 const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './blank-page')
 );
 const HomeUser = React.lazy(() => import(/* webpackChunkName: "ui" */ './home-user'));
+const FeedbackPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FeedbackPage'));
+const FaqPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FaqPage'));
 
 const App = ({ match }) => {
+  const {role} = getCurrentUser();
   return (
     <AppLayout>
       <div className="dashboard-wrapper">
         <Suspense fallback={<div className="loading" />}>
           <Switch>
-            <Redirect
+            {role === "admin" ? (
+              <Redirect
               exact
               from={`${match.url}/`}
               to={`${match.url}/dashboards`}
             />
-            <Route
+            ) : (
+              <Redirect
+              exact
+              from={`${match.url}/`}
+              to={`${match.url}/home-user`}
+            />
+            )}
+            <ProtectedRoute
               path={`${match.url}/dashboards`}
-              render={(props) => <Dashboards {...props} />}
+              component={(props) => <Dashboards {...props} />}
+              roles={[UserRole.Admin]}
             />
             <Route
               path={`${match.url}/home-user`}
               render={(props) => <HomeUser {...props} />}
+            />
+            <Route
+              path={`${match.url}/feedback`}
+              render={(props) => <FeedbackPage {...props} />}
+            />
+            <Route
+              path={`${match.url}/faq`}
+              render={(props) => <FaqPage {...props} />}
             />
             {/* <Route
               path={`${match.url}/applications`}
@@ -51,10 +73,10 @@ const App = ({ match }) => {
               component={(props) => <Applications {...props} />}
               roles={[UserRole.Admin]}
             />
-            {/* <Route
+            <Route
               path={`${match.url}/pages`}
               render={(props) => <Pages {...props} />}
-            /> */}
+            />
             <Route
               path={`${match.url}/ui`}
               render={(props) => <Ui {...props} />}

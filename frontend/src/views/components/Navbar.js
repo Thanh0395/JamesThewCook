@@ -84,7 +84,7 @@ function Navbar(props) {
                   <button type="button"
                     style={{ border: "none", backgroundColor: "transparent" }}
                     onClick={handleLogout}
-                  ><a className="btn btn-outline-semi-light pr-4 pl-4 ml-4"
+                  ><a className="btn btn-outline-semi-light pr-2 pl-4 ml-4"
                     style={{ fontSize: "12pt" }}
                     rel="noopener noreferrer"
                     href="#foo"
@@ -92,7 +92,9 @@ function Navbar(props) {
                       Logout
                     </a>
                   </button>
-                  <p style={{ border: "none" }} className="nav-item btn btn-outline-semi-light mt-3">Hi, {userName}</p>
+                  <p style={{ border: "none" }} className="nav-item btn btn-outline-semi-light mt-3">Hi, {userName}
+                  {(getCurrentUser().isMembership==='Membership')?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
+                  </p>
                 </>
               ) : (
                 <Link to="/login" className="nav-item pl-4">

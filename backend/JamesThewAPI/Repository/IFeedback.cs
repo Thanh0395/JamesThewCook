@@ -9,5 +9,6 @@ namespace JamesThewAPI.Repository
         Task<Feedback> UpdateFeedback(Feedback feedback);   
         Task<bool> DeleteFeedback(int fbId);
         Task<Feedback> AddFeedback(Feedback feedback);
+        Task<IEnumerable<Feedback>> GetFeedbackByPostId(int pId);
     }
 }

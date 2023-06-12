@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Row,
   Card,
@@ -18,6 +18,9 @@ import { Colxx } from 'components/common/CustomBootstrap';
 // import { adminRoot } from 'constants/defaultValues';
 import axios from 'axios';
 import { Field, Formik } from 'formik';
+import { setCurrentUser } from 'helpers/Utils';
+import '../components/CustomHomePages/Popup.css'
+import PopupMessage from 'views/components/CustomHomePages/PopupMessage';
 
 const validateUsername = (value) => {
   let error;
@@ -47,32 +50,62 @@ const validatePassword = (value) => {
   return error;
 };
 
-const Register = ({history, registerUserAction }) => {
+const Register = (
+  // {history, registerUserAction }
+) => {
   // const [userName, setUserName] = useState('')
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')
-  
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Popup message
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [propMessage, setPropMessage] = useState();
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+  // End popupmessage
   const onUserRegister = async (values) => {
+
     const formdata = new FormData()
     formdata.append('username', values.userName)
     formdata.append('email', values.email)
     formdata.append('password', values.password)
     if (values.userName !== '' && values.email !== '' && values.password !== '') {
-      try{
-        const newUser =await axios.post('http://localhost:5013/api/User',formdata);
+      setIsLoading(!isLoading);
+      try {
+        const newUser = await axios.post('http://localhost:5013/api/User', formdata);
         if (newUser) {
-          registerUserAction(values,history)
-          history.push('/');
+          setCurrentUser()
+          // registerUserAction(values,history)
+          setIsLoading(false);
+          setPopupOpen(true);
+          setPropMessage("Please, login for new user")
+          // window.location.href = "/login"
+          // history.push('/');
         }
-      } catch(error) {
-        alert("Your email have been registed")
+      } catch (error) {
+        if (error.response) {
+          if (error.response.data.status === 404) {
+            setIsLoading(false);
+            setPopupOpen(true);
+            setPropMessage(error.response.data.message)
+            // alert(error.response.data.message)
+          }
+        }
       }
     }
     // call registerUserAction()
   };
-  
+
   return (
     <Row className="h-100">
+      {/* Popup message */}
+      <div>
+        <PopupMessage isOpen={isPopupOpen} onClose={closePopup} message={propMessage} />
+      </div>
+      {/* End popup message */}
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
@@ -93,14 +126,14 @@ const Register = ({history, registerUserAction }) => {
             <CardTitle className="mb-4">
               <IntlMessages id="user.register" />
             </CardTitle>
-            <Formik initialValues={{userName:"",email:"",password:""}} onSubmit={onUserRegister}>
-            {({ errors, touched, handleSubmit }) => (
-              <Form onSubmit={handleSubmit}>
-                <FormGroup className="form-group has-float-label  mb-4">
-                  <Label>
-                    <IntlMessages id="Your Name" />
-                  </Label>
-                  <Field
+            <Formik initialValues={{ userName: "", email: "", password: "" }} onSubmit={onUserRegister}>
+              {({ errors, touched, handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
+                  <FormGroup className="form-group has-float-label  mb-4">
+                    <Label>
+                      <IntlMessages id="Your Name" />
+                    </Label>
+                    <Field
                       className="form-control"
                       name="userName"
                       validate={validateUsername}
@@ -110,14 +143,14 @@ const Register = ({history, registerUserAction }) => {
                         {errors.userName}
                       </div>
                     )}
-                  {/* <Input type="name" defaultValue={userName} onChange={e => setUserName(e.target.value)}/> */}
-                </FormGroup>
+                    {/* <Input type="name" defaultValue={userName} onChange={e => setUserName(e.target.value)}/> */}
+                  </FormGroup>
 
-                <FormGroup className="form-group has-float-label  mb-4">
-                  <Label>
-                    <IntlMessages id="user.email" />
-                  </Label>
-                  <Field
+                  <FormGroup className="form-group has-float-label  mb-4">
+                    <Label>
+                      <IntlMessages id="user.email" />
+                    </Label>
+                    <Field
                       className="form-control"
                       name="email"
                       validate={validateEmail}
@@ -127,14 +160,14 @@ const Register = ({history, registerUserAction }) => {
                         {errors.email}
                       </div>
                     )}
-                  {/* <Input type="email" defaultValue={email} onChange={e => setEmail(e.target.value)}/> */}
-                </FormGroup>
+                    {/* <Input type="email" defaultValue={email} onChange={e => setEmail(e.target.value)}/> */}
+                  </FormGroup>
 
-                <FormGroup className="form-group has-float-label  mb-4">
-                  <Label>
-                    <IntlMessages id="user.password" />
-                  </Label>
-                  <Field
+                  <FormGroup className="form-group has-float-label  mb-4">
+                    <Label>
+                      <IntlMessages id="user.password" />
+                    </Label>
+                    <Field
                       className="form-control"
                       name="password"
                       type="password"
@@ -145,20 +178,20 @@ const Register = ({history, registerUserAction }) => {
                         {errors.password}
                       </div>
                     )}
-                  {/* <Input type="text" defaultValue={password} name='password' onChange={e => setPassword(e.target.value)}/> */}
-                </FormGroup>
+                    {/* <Input type="text" defaultValue={password} name='password' onChange={e => setPassword(e.target.value)}/> */}
+                  </FormGroup>
 
-                <div className="d-flex justify-content-end align-items-center">
-                  <Button
-                    color="primary"
-                    className="btn-shadow"
-                    size="lg"
-                    type="submit"
-                  >
-                    <IntlMessages id="user.register-button" />
-                  </Button>
-                </div>
-              </Form>
+                  <div className="d-flex justify-content-end align-items-center">
+                    <Button
+                      color="primary"
+                      className="btn-shadow"
+                      size="lg"
+                      type="submit"
+                    >
+                      <IntlMessages id="user.register-button" />
+                    </Button>
+                  </div>
+                </Form>
               )}
             </Formik>
           </div>
@@ -167,7 +200,7 @@ const Register = ({history, registerUserAction }) => {
     </Row>
   );
 };
-const mapStateToProps = () => {};
+const mapStateToProps = () => { };
 
 export default connect(mapStateToProps, {
   registerUserAction: registerUser,
