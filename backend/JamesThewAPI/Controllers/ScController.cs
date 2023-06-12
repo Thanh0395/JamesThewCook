@@ -142,10 +142,28 @@ namespace JamesThewAPI.Controllers
             }
         }
         [HttpGet("{contestId}/GetWinner")]
-        public async Task<User> GetWinner(int contestId)
+        public async Task<ActionResult<CustomRespone<User>>> GetWinner(int contestId)
         {
-            var resources = await scRepo.GetWinner(contestId);
-            return resources;
+            try
+            {
+                var resources = await scRepo.GetWinner(contestId);
+                if (resources != null)
+                {
+                    var response = new CustomRespone<User>
+                                (StatusCodes.Status200OK, "Winner updated", resources, null);
+                    return Ok(response);
+                }
+                else
+                {
+                    var response = new CustomRespone<User>(StatusCodes.Status404NotFound, "Update Winner failed!!!!!!", null, null);
+                    return NotFound(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new CustomRespone<User>(StatusCodes.Status500InternalServerError, "An error occured while retrived model", null, ex.Message);
+                return BadRequest(response);
+            }
         } 
 
         [HttpDelete("{ScId}")]

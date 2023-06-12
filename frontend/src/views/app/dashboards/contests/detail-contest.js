@@ -31,19 +31,29 @@ import Entry from 'components/ContestComponent/Entry';
 import Participate from 'components/ContestComponent/Participate';
 import { GetListSCByContestId } from 'services/Sy_Api/SCApi';
 import { GetWinner } from 'services/Sy_Api/Rating';
+import { GetContest } from 'services/Sy_Api/ContestApi';
 
 const DetailsPages = ({ match, location }) => {
-  const { contest } = location.state;
+  // const { contest } = location.state;
+  const [contest, setContest] = useState(location.state.contest);
   const [activeTab, setActiveTab] = useState('Entrys');
   const [sc, setSc] = useState([]);
   const [reRender, setreRender] = useState(false);
+  console.log(setContest);
   const getWinner = (contestId) => {
-    GetWinner(contestId).then(() => setreRender(!reRender));
+    GetWinner(contestId)
+      .then(() => GetContest(contest.contestId).then((rs) => setContest(rs)))
+      .then(() => setreRender(!reRender))
+      .catch((error) => {
+        if(error.response.data.status === 404){
+          GetContest(contest.contestId).then((rs) => setContest(rs))
+          setreRender(!reRender)
+        }
+      });
   };
-  console.log('SC truoc effect', sc);
+
   useEffect(() => {
     GetListSCByContestId(contest.contestId).then((rs) => setSc(rs));
-    console.log('SC sau effect', sc);
   }, [reRender]);
   return (
     <>
@@ -88,17 +98,17 @@ const DetailsPages = ({ match, location }) => {
                         <strong>EndDate</strong>
                       </h5>
                       <p>
-                        {contest.endDate ? contest.endDate : 'Still Available'}
+                        {contest.endDate ? (
+                          contest.endDate
+                        ) : (
+                          <strong>Still Available</strong>
+                        )}
                       </p>
                     </div>
-                    {contest.endDate ? (
-                      ''
-                    ) : (
+                    {!contest.endDate && (
                       <Button
                         color="primary"
-                        onClick={() => {
-                          getWinner(contest.contestId);
-                        }}
+                        onClick={() => getWinner(contest.contestId)}
                       >
                         End Contest
                       </Button>
@@ -143,15 +153,13 @@ const DetailsPages = ({ match, location }) => {
                     <Entry sc={sc} />
                   </TabPane>
                   <TabPane tabId="participate">
-                    {!contest.endDate ? (
+                    {!contest.endDate && (
                       <Participate
                         contestId={contest.contestId}
                         setreRender={setreRender}
                         reRender={reRender}
                         setActiveTab={setActiveTab}
                       />
-                    ) : (
-                      <strong>No time left to participate</strong>
                     )}
                   </TabPane>
                 </TabContent>

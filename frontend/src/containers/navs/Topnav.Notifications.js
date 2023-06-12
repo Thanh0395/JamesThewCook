@@ -34,7 +34,7 @@ const TopnavNotifications = () => {
   return (
     <div className="position-relative d-inline-block">
       <UncontrolledDropdown className="dropdown-menu-right">
-        <DropdownToggle
+        <DropdownToggle hidden="hidden"
           className="header-icon notificationButton"
           color="empty"
         >
