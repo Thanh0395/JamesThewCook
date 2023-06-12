@@ -75,7 +75,7 @@ const data = [
         subs:[
           {
             icon: 'simple-icon-list',
-            label: 'menu.contest.default',
+            label: 'menu.contest.list-contest',
             to: `${adminRoot}/dashboards/contests/default`,
             // roles: [UserRole.Admin],
           },

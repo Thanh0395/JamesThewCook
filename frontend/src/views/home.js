@@ -8,6 +8,8 @@ import { scroller } from 'react-scroll';
 // import GlideComponent from 'components/carousel/GlideComponent';
 import { buyUrl, adminRoot } from 'constants/defaultValues';
 // import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { GetListRecentReCipe } from 'services/Hung_Api/RecipeApi';
+import { GetListContest } from 'services/Sy_Api/ContestApi';
 import Navbar from './components/Navbar';
 import NavbarDT from './components/NavbarDT';
 import Carousel from './components/Carousel';
@@ -86,56 +88,55 @@ const slideItems = [
   //     'Custom Bootstrap 4 xxs & xxl classes delivers better experiences for smaller and larger screens.',
   // },
 ];
-
-const recipies = [
-  {
-    title: 'Italian recipes',
-    img: '/assets/img/landing-page/recipes/pasta-1.jpg',
-    detail: 'Indulge in the Flavors of Italy<br></br> Unique Italian Recipes from the Land of Pizza and Pasta.',
-  },
-  {
-    title: 'Vegetarian recipes,',
-    img: '/assets/img/landing-page/recipes/vegetarian-sala2.jpg',
-    detail:
-      'Plant-based Delights: Creative Recipes for Vegetarians<br></br>Exciting and Colorful Vegetarian Recipes',
-  },
-  {
-    title: 'Quick and Easy Recipes',
-    img: '/assets/img/landing-page/recipes/quick-easy-1.jpg',
-    detail:
-      'Explore hundreds of top-rated quick and easy recipes for breakfast, lunch, and dinner.',
-  },
-  {
-    title: 'Dessert Recipes',
-    img: '/assets/img/landing-page/recipes/dessert-1.jpg',
-    detail:
-      'Discover more than 16,470 recipes that showcase desserts in all forms, from fresh seasonal fruits to frozen, canned, dried–even freeze-dried!',
-  },
+// const recipies = [
+//   {
+//     title: 'Italian recipes',
+//     img: '/assets/img/landing-page/recipes/pasta-1.jpg',
+//     detail: 'Indulge in the Flavors of Italy<br></br> Unique Italian Recipes from the Land of Pizza and Pasta.',
+//   },
+//   {
+//     title: 'Vegetarian recipes,',
+//     img: '/assets/img/landing-page/recipes/vegetarian-sala2.jpg',
+//     detail:
+//       'Plant-based Delights: Creative Recipes for Vegetarians<br></br>Exciting and Colorful Vegetarian Recipes',
+//   },
+//   {
+//     title: 'Quick and Easy Recipes',
+//     img: '/assets/img/landing-page/recipes/quick-easy-1.jpg',
+//     detail:
+//       'Explore hundreds of top-rated quick and easy recipes for breakfast, lunch, and dinner.',
+//   },
+//   {
+//     title: 'Dessert Recipes',
+//     img: '/assets/img/landing-page/recipes/dessert-1.jpg',
+//     detail:
+//       'Discover more than 16,470 recipes that showcase desserts in all forms, from fresh seasonal fruits to frozen, canned, dried–even freeze-dried!',
+//   },
   // {
   //   title: 'Smart Menu',
   //   img: '/assets/img/landing-page/features/smart-menu.png',
   //   detail:
   //     'Instead of good old single panel menus with accordion structure that looks over complicated, we created 2 panels and categorized pages accordingly.<br><br>The default menu auto hides sub panel when resolution is under some breakpoint to open some space. You may also hide menu completely or use only main panel open only.',
   // },
-];
+// ];
 
-const contest = [
-  {
-    title: 'California Contest',
-    img: '/assets/img/landing-page/contests/contest-1.jpg',
-  },
-  {
-    title: 'Holdiday Contest',
-    img: '/assets/img/landing-page/contests/contest-3.jpg',
-  },
-  {
-    title: 'National Contest',
-    img: '/assets/img/landing-page/contests/contest-7.jpg',
-  },
-  {
-    title: 'Newest Contest',
-    img: '/assets/img/landing-page/contests/contest-4.jpg', 
-  },
+// const contest = [
+//   {
+//     title: 'California Contest',
+//     img: '/assets/img/landing-page/contests/contest-1.jpg',
+//   },
+//   {
+//     title: 'Holdiday Contest',
+//     img: '/assets/img/landing-page/contests/contest-3.jpg',
+//   },
+//   {
+//     title: 'National Contest',
+//     img: '/assets/img/landing-page/contests/contest-7.jpg',
+//   },
+//   {
+//     title: 'Newest Contest',
+//     img: '/assets/img/landing-page/contests/contest-4.jpg', 
+//   },
   // {
   //   title: 'Thumb List',
   //   img: '/assets/img/landing-page/layouts/thumb-list.jpg',
@@ -159,7 +160,7 @@ const contest = [
   //   img: '/assets/img/landing-page/layouts/data-list-app-menu-hidden.jpg',
   // },
   // { title: 'Tabs', img: '/assets/img/landing-page/layouts/tabs.jpg' },
-];
+// ];
 
 const members = [
   {
@@ -255,6 +256,13 @@ const Home = () => {
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+
+  const [recipies, setRecipies] = useState([]);
+  const [contest, setContest] = useState([]);
+  useEffect(() => {
+    GetListContest().then((rs) => setContest(rs));
+    GetListRecentReCipe().then((rs) => setRecipies(rs));
+  })
 
   return (
     <div

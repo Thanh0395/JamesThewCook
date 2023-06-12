@@ -119,7 +119,7 @@ const DetailsPages = ({ match, location }) => {
                           <h5>
                             <strong>Winner</strong>
                           </h5>
-                          <h5>UserName: {winner.username}</h5>
+                          <h5>UserName: {winner.userName}</h5>
                           <h5>Email: {winner.email}</h5>
                           <img
                             className="card-img-left"
@@ -175,7 +175,7 @@ const DetailsPages = ({ match, location }) => {
                 </CardHeader>
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId="Entrys">
-                    <Entry sc={sc} />
+                    <Entry sc={sc} winner = {winner}/>
                   </TabPane>
                   <TabPane tabId="participate">
                     {!contest.endDate && (
