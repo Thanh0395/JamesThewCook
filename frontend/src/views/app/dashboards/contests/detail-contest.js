@@ -160,14 +160,6 @@ const DetailsPages = ({ match, location }) => {
                     ) : (
                       ''
                     )}
-                    {/* {!contest.endDate && (
-                      <Button
-                        color="primary"
-                        onClick={() => getWinner(contest.contestId)}
-                      >
-                        End Contest
-                      </Button>
-                    )} */}
                   </div>
                 </CardBody>
               </Card>
