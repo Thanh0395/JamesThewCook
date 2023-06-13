@@ -7,8 +7,8 @@ import {
 } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
 import SingleLightbox from 'components/pages/SingleLightbox';
-import whotoFollowData from 'data/follow';
-import UserFollow from 'components/common/UserFollow';
+// import whotoFollowData from 'data/follow';
+// import UserFollow from 'components/common/UserFollow';
 import PostRecent from 'components/HomeUserComponent/PostRecent';
 import { GetListPosts } from 'services/Hung_Api/RecipeApi';
 import ContestRecentComponent from 'components/HomeUserComponent/ContestRecentComponent';
@@ -16,7 +16,7 @@ import { GetListContest } from 'services/Sy_Api/ContestApi';
 import RecentRecipe from 'containers/dashboards/RecipeContainers/defaultRecipe/RecentRecipe';
 import { getCurrentUser } from 'helpers/Utils';
 
-const followData = whotoFollowData.slice(0, 5);
+// const followData = whotoFollowData.slice(0, 5);
 const PostAndContest = () => {
     const [postList, setPostsList] = useState([])
     const [contest, setContest] = useState([])
@@ -60,7 +60,7 @@ const PostAndContest = () => {
                         <CardTitle>
                             Prize Winner
                         </CardTitle>
-                        <div className="remove-last-border remove-last-margin remove-last-padding">
+                        {/* <div className="remove-last-border remove-last-margin remove-last-padding">
                             {followData.map((itemData) => {
                                 return (
                                     <UserFollow
@@ -69,7 +69,7 @@ const PostAndContest = () => {
                                     />
                                 );
                             })}
-                        </div>
+                        </div> */}
                     </CardBody>
                 </Card>
                 <RecentRecipe />
