@@ -93,7 +93,7 @@ function Navbar(props) {
                     </a>
                   </button>
                   <p style={{ border: "none" }} className="nav-item btn btn-outline-semi-light mt-3">Hi, {userName}
-                  {(getCurrentUser().isMembership==='Membership')?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
+                  {(getCurrentUser().isMembership===true)?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
                   </p>
                 </>
               ) : (
