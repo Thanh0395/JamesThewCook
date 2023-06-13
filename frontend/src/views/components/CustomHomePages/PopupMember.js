@@ -8,6 +8,7 @@ const PopupMember = ({ isOpen, onClose, month }) => {
   const [otp, setOTP] = useState('');
   const [accountNumberError, setAccountNumberError] = useState('');
   const [otpError, setOtpError] = useState('');
+  const [announcement, setAnnouncement] = useState('');
 
   const changeAccountNumber = (value) => {
     setAccountNumber(value);
@@ -56,10 +57,14 @@ const PopupMember = ({ isOpen, onClose, month }) => {
           // setCurrentUser()
           window.location.href = "/login";
         } else {
-          alert(response.data.message)
+          event.preventDefault()
+          setAnnouncement(response.data.message)
+          return
         }
       } catch (error) {
-        alert("Session expired. Payment fail, relogin")
+        event.preventDefault()
+        setAnnouncement("Session expired. Payment fail, relogin")
+        return
       }
     } else {
       const text = `Your are not Login yet. Please login/register to pay for membership`
@@ -77,6 +82,7 @@ const PopupMember = ({ isOpen, onClose, month }) => {
         <h2 className='m-1'>with {(month === 1) ? ('10') : ('100')}$</h2>
         
         <Form onSubmit={handleSubmit} className='av-tooltip tooltip-label-right'>
+          <p className="alert-danger">{announcement}</p>
           <div className='form-group'>
             <Label htmlFor="accNum" ><strong>Account Number:</strong></Label>
             <input className='form-control'
