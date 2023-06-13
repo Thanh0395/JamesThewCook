@@ -323,7 +323,7 @@ const TopNav = ({
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
               <span className="name mr-1">{userName}
-                {(getCurrentUser().isMembership==='Membership')?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
+                {(getCurrentUser().isMembership===true)?<span style={{color: "yellow", fontSize:"18pt"}} className='glyph-icon iconsminds-crown-2'/>:''}
               </span>
               <span>
                 <img alt="Profile" src={avatar} />
