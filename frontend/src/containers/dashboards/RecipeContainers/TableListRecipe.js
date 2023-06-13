@@ -163,16 +163,12 @@ const TableListRecipe = ({ match }) => {
       {
         Header: 'Photo',
         accessor: 'featureImage',
-        cellClass: 'text-muted w-40',
+        cellClass: 'text-muted w-20',
         Cell: (props) =>
           <img
             src={`http://localhost:5013${props.value}`}
             style={{ width: '130px' }} alt="" aria-hidden="true"
           />,
-        // <img 
-        // src={`http://localhost:5013${images.find((item) => item.rId === props.row.original.rId)?.featureImage}`} 
-        //   style={{ width: '130px' }} alt="" aria-hidden="true" 
-        // />,
       },
       {
         Header: 'Ingredient',
@@ -194,7 +190,21 @@ const TableListRecipe = ({ match }) => {
         Header: 'CreatedAt',
         accessor: 'createdAt',
         cellClass: 'text-muted w-40',
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => {
+          const date = new Date(props.value);
+          const formattedDate = date.toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric'
+          });
+          return <>{formattedDate}</>;
+        },
+      },
+      {
+        Header: 'IsFree',
+        accessor: 'isFree',
+        cellClass: 'text-muted w-10',
+        Cell: (props) => (props.value ? <>Free</> : <>Private</>),
       },
       {
         Header: 'Action',
@@ -233,9 +243,6 @@ const TableListRecipe = ({ match }) => {
   return (
     <Card className="mb-4">
       <CardBody>
-        {/* <CardTitle>
-          <IntlMessages id="table.list-recipe" />
-        </CardTitle> */}
         {selectedRecipeUpdate && ( // Render the update component if a recipe is selected
           <UpdateRecipe recipe={selectedRecipeUpdate} setSelectedRecipeUpdate={setSelectedRecipeUpdate} />
         )}

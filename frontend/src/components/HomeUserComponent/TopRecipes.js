@@ -15,11 +15,17 @@ const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) 
   const {isMembership} = getCurrentUser();
   const navigateToDetailPage = async (rId) => {
     const recipe = await GetRecipe(rId);
-    if(recipe.isFree === isMembership){
-      alert("You are not a member yet.")
+    if(!isMembership){
+      if(!recipe.isFree) alert("You are not a member yet.")
+      else {
+        history.push({
+              pathname: `${adminRoot}/home-user/detail-recipe`,
+              state: { recipe }
+            });
+      } 
     }else{
       history.push({
-        pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+        pathname: `${adminRoot}/home-user/detail-recipe`,
         state: { recipe }
       });
     }

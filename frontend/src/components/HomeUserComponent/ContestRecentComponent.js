@@ -6,7 +6,13 @@ import { Badge } from 'reactstrap';
 const ContestRecentComponent = ({ data }) => {
   return (
     <div className="d-flex flex-row mb-3">
-      <NavLink className="d-block position-relative" to="#" location={{}}>
+      <NavLink 
+        className="d-block position-relative" 
+        to={{
+          pathname : '/app/home-user/detail-contest',
+          state : {contest: data}
+        }} 
+      >
         <img
           src={`http://localhost:5013${data.featureImage}`}
           alt="thumbnail"

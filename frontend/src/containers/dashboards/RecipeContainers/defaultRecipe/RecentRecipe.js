@@ -25,14 +25,28 @@ const RecentRecipe = () => {
   }, [])
   const {isMembership} = getCurrentUser();
   const handleSeeDetail = (recipe) => {
-    if(recipe.isFree === isMembership){
-      alert("You are not a member yet.")
+    if(!isMembership){
+      if(!recipe.isFree) alert("You are not a member yet.")
+      else {
+        history.push({
+              pathname: `${adminRoot}/home-user/detail-recipe`,
+              state: { recipe }
+            });
+      } 
     }else{
       history.push({
-        pathname: `${adminRoot}/dashboards/recipes/detail-recipe`,
+        pathname: `${adminRoot}/home-user/detail-recipe`,
         state: { recipe }
       });
     }
+    // if(recipe.isFree === isMembership){
+    //   alert("You are not a member yet.")
+    // }else{
+    //   history.push({
+    //     pathname: `${adminRoot}/home-user/detail-recipe`,
+    //     state: { recipe }
+    //   });
+    // }
   }
 
   return (

@@ -1,5 +1,5 @@
 
-import { UserRole, adminRoot } from './defaultValues';
+import { adminRoot } from './defaultValues';
 
 // UserRole
 
@@ -9,19 +9,19 @@ const data = [
     icon: 'iconsminds-shop-4',
     label: 'menu.dashboards',
     to: `${adminRoot}/dashboards`,
-    roles: [UserRole.Admin],
+    // roles: [UserRole.Admin],
     subs: [
       {
         icon: 'simple-icon-briefcase',
         label: 'menu.default',
         to: `${adminRoot}/dashboards/default`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin],
       },
       {
         icon: 'simple-icon-pie-chart',
         label: 'menu.analytics',
         to: `${adminRoot}/dashboards/analytics`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin],
       },
       // {
       //   icon: 'simple-icon-basket-loaded',
@@ -39,37 +39,37 @@ const data = [
         icon: 'simple-icon-book-open',
         label: 'menu.recipes',
         to: `${adminRoot}/dashboards/recipes`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin],
         subs:[
           {
             icon: 'simple-icon-list',
             label: 'menu.recipes.default',
             to: `${adminRoot}/dashboards/recipes/default`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
           {
             icon: 'simple-icon-book-open',
             label: 'menu.recipes.list-recipe',
             to: `${adminRoot}/dashboards/recipes/list-recipe`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
           {
             icon: 'simple-icon-plus',
             label: 'menu.create-recipe',
             to: `${adminRoot}/dashboards/recipes/create-recipe`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
           {
             icon: 'simple-icon-graph',
             label: 'menu.recipes.analytics-recipe',
             to: `${adminRoot}/dashboards/recipes/analytics-recipe`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
           {
             icon: 'simple-icon-notebook',
             label: 'menu.recipes.Category-Country',
             to: `${adminRoot}/dashboards/recipes/category-country`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
         ]
       },
@@ -77,19 +77,19 @@ const data = [
         icon: 'simple-icon-book-open',
         label: 'menu.contests',
         to: `${adminRoot}/dashboards/contests`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin],
         subs:[
           {
             icon: 'simple-icon-list',
             label: 'menu.contest.list-contest',
             to: `${adminRoot}/dashboards/contests/default`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
           {
             icon: 'simple-icon-plus',
             label: 'menu.create-contest',
             to: `${adminRoot}/dashboards/contests/create-contest`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
         ]
       },
@@ -97,13 +97,13 @@ const data = [
         icon: 'simple-icon-book-open',
         label: 'menu.user',
         to: `${adminRoot}/dashboards/user`,
-        roles: [UserRole.Admin],
+        // roles: [UserRole.Admin],
         subs:[
           {
             icon: 'simple-icon-list',
             label: 'menu.user.listuser',
             to: `${adminRoot}/dashboards/user/listuser`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           }
         ]
       },
@@ -116,13 +116,13 @@ const data = [
             icon: 'simple-icon-list',
             label: 'menu.post.list-post',
             to: `${adminRoot}/dashboards/post/list-post`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
           {
             icon: 'simple-icon-plus',
             label: 'menu.create-post',
             to: `${adminRoot}/dashboards/post/create-post`,
-            roles: [UserRole.Admin],
+            // roles: [UserRole.Admin],
           },
         ]
       }
@@ -148,11 +148,6 @@ const data = [
         id: 'home-user-create-post',
         label: 'menu.create-post',
         to: `${adminRoot}/home-user/create-post`,
-      },
-      {
-        id: 'home-user-search-recipe',
-        label: 'menu.search',
-        to: `${adminRoot}/home-user/search`,
       },
     ]
   },

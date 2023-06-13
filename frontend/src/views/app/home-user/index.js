@@ -26,6 +26,14 @@ const SearchUser = React.lazy(() =>
 import(/* webpackChunkName: "dashboard-default" */ './SearchRecipeAndPost')
 );
 
+const DetailContestUser = React.lazy(() =>
+import(/* webpackChunkName: "dashboard-default" */ './DetailContestUser')
+);
+
+const DetailPostUser = React.lazy(() =>
+import(/* webpackChunkName: "dashboard-default" */ './DetailPostUser')
+);
+
 const HomePageUser = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
@@ -53,6 +61,14 @@ const HomePageUser = ({ match }) => (
       <Route
         path={`${match.url}/search`}
         render={(props) => <SearchUser {...props} />}
+      />
+      <Route
+        path={`${match.url}/detail-contest`}
+        render={(props) => <DetailContestUser {...props} />}
+      />
+      <Route
+        path={`${match.url}/detail-post`}
+        render={(props) => <DetailPostUser {...props} />}
       />
       <Redirect to="/error" />
     </Switch>
