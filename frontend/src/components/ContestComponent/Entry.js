@@ -3,7 +3,7 @@ import UpdateModalSC from 'containers/dashboards/ContestContainers/UpdateModalSC
 import React, { useState } from 'react';
 import { Button, Card, CardBody, Row } from 'reactstrap';
 
-function Entry({ sc }) {
+function Entry({ sc, winner }) {
   const [modalBasic, setModalBasic] = useState(false);
   const [scUpdate, setScUpdate] = useState(null);
   const onUpdate = (sContest) => {
@@ -69,6 +69,7 @@ function Entry({ sc }) {
                       modalBasic={modalBasic}
                       setModalBasic={setModalBasic}
                       scUpdate={scUpdate}
+                      winner = {winner}
                     />
                   </Card>
                 </Colxx>

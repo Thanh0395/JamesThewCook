@@ -1,31 +1,36 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import IntlMessages from 'helpers/IntlMessages';
-import SingleLightbox from '../pages/SingleLightbox';
+import ScProfile from 'containers/dashboards/ContestContainers/ScProfile';
+import React, { useState } from 'react';
+import { Button } from 'reactstrap';
 
-const UserFollow = ({ data }) => {
+const UserFollow = ({ item }) => {
+  const [modalBasic, setModalBasic] = useState(false);
+  const [scUpdate, setScUpdate] = useState(null);
+  const onDetail = (sContest) => {
+    setScUpdate(sContest);
+    setModalBasic(true);
+  };
   return (
-    <div className="d-flex flex-row mb-3 pb-3 border-bottom justify-content-between align-items-center">
-      <SingleLightbox
-        thumb={data.thumb}
-        large={data.large}
-        className="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall"
+    <div className="d-flex flex-row mb-3">
+      <div className="d-block position-relative">
+        <img
+          src={`http://localhost:5013${item.image}`}
+          alt="thumbnail"
+          className="list-thumbnail border-0"
+        />
+      </div>
+      <div className="pl-3 pt-2 pr-2 pb-2">
+        <div className="d-block position-relative">
+          <p className="list-item-heading">Title: {item.title}</p>
+          <Button color="primary" outline onClick={() => onDetail(item)}>
+            View
+          </Button>
+        </div>
+      </div>
+      <ScProfile
+        modalBasic={modalBasic}
+        setModalBasic={setModalBasic}
+        scUpdate={scUpdate}
       />
-      <div className="pl-3 flex-fill">
-        <NavLink to="#" location={{}}>
-          <p className="font-weight-medium mb-0">{data.name}</p>
-          <p className="text-muted mb-0 text-small">{data.status}</p>
-        </NavLink>
-      </div>
-      <div>
-        <NavLink
-          className="btn btn-outline-primary btn-xs"
-          to="#"
-          location={{}}
-        >
-          <IntlMessages id="pages.follow" />
-        </NavLink>
-      </div>
     </div>
   );
 };

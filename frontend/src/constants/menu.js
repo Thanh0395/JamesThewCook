@@ -80,8 +80,8 @@ const data = [
         roles: [UserRole.Admin],
         subs:[
           {
-            icon: 'simple-icon-book-open',
-            label: 'menu.contest.default',
+            icon: 'simple-icon-list',
+            label: 'menu.contest.list-contest',
             to: `${adminRoot}/dashboards/contests/default`,
             roles: [UserRole.Admin],
           },
@@ -135,19 +135,24 @@ const data = [
     to:`${adminRoot}/home-user`,
     subs: [
       {
-        id: 'pages-authorization',
+        id: 'home-user-home-page',
         label: 'menu.home-page',
         to: `${adminRoot}/home-user/home-page`,
       },
       {
-        id: 'pages-authorization',
+        id: 'home-user-create-recipe',
         label: 'menu.create-recipe',
         to: `${adminRoot}/home-user/create-recipe`,
       },
       {
-        id: 'pages-authorization',
+        id: 'home-user-create-post',
         label: 'menu.create-post',
         to: `${adminRoot}/home-user/create-post`,
+      },
+      {
+        id: 'home-user-search-recipe',
+        label: 'menu.search',
+        to: `${adminRoot}/home-user/search`,
       },
     ]
   },

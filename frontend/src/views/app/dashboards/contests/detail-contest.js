@@ -32,27 +32,56 @@ import Participate from 'components/ContestComponent/Participate';
 import { GetListSCByContestId } from 'services/Sy_Api/SCApi';
 import { GetWinner } from 'services/Sy_Api/Rating';
 import { GetContest } from 'services/Sy_Api/ContestApi';
+import { getUserByIdAPI } from 'services/Thanh_Api/UserApi';
+import { getCurrentUser } from 'helpers/Utils';
 
 const DetailsPages = ({ match, location }) => {
   // const { contest } = location.state;
   const [contest, setContest] = useState(location.state.contest);
   const [activeTab, setActiveTab] = useState('Entrys');
+  // const [noWinner, setNoWinner] = useState('');
   const [sc, setSc] = useState([]);
   const [reRender, setreRender] = useState(false);
-  console.log(setContest);
+  const [winner, setWinner] = useState();
+  const currentUser = getCurrentUser();
+  // const renderButton = (text, disabled) => {
+  //   if (disabled) {
+  //     return (
+  //       <Button color="primary" size="xs" className="mb-2" disabled>
+  //         <h6>
+  //           <i>{text}</i>
+  //         </h6>
+  //       </Button>
+  //     );
+  //   }
+
+  //   return (
+  //     <Button color="primary" size="xs" className="mb-2">
+  //       <h6>
+  //         <i>{text}</i>
+  //       </h6>
+  //     </Button>
+  //   );
+  // };
   const getWinner = (contestId) => {
     GetWinner(contestId)
-      .then(() => GetContest(contest.contestId).then((rs) => setContest(rs)))
+      // .then(() => GetContest(contestId).then((rs) => setContest(rs)))
       .then(() => setreRender(!reRender))
       .catch((error) => {
-        if(error.response.data.status === 404){
-          GetContest(contest.contestId).then((rs) => setContest(rs))
-          setreRender(!reRender)
+        if (error.response.data.status === 404) {
+          GetContest(contestId).then((rs) => setContest(rs));
+          setreRender(!reRender);
         }
       });
   };
-
   useEffect(() => {
+    GetContest(contest.contestId).then((rs) => {
+      setContest(rs);
+      if (rs.winner != null) {
+        console.log('winner', rs.winner);
+        getUserByIdAPI(rs.winner).then((wn) => setWinner(wn));
+      }
+    });
     GetListSCByContestId(contest.contestId).then((rs) => setSc(rs));
   }, [reRender]);
   return (
@@ -61,9 +90,8 @@ const DetailsPages = ({ match, location }) => {
         <Colxx xxs="12">
           <Breadcrumb match={match} />
           <Separator className="mb-5" />
-
           <Row>
-            <Colxx xxs="12" xl="12" className="col-left">
+            <Colxx xxs="12" xl="12">
               <Card className="mb-4">
                 <SingleLightbox
                   thumb={`http://localhost:5013${contest.featureImage}`}
@@ -105,14 +133,41 @@ const DetailsPages = ({ match, location }) => {
                         )}
                       </p>
                     </div>
-                    {!contest.endDate && (
+                    <div>
+                      {winner && (
+                        <div>
+                          <h5>
+                            <strong>Winner</strong>
+                          </h5>
+                          <h5>UserName: {winner.userName}</h5>
+                          <h5>Email: {winner.email}</h5>
+                          <img
+                            className="card-img-left"
+                            src={`http://localhost:5013${winner.avatar}`}
+                            alt=""
+                            aria-hidden="true"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    {currentUser.role === 'admin' && !contest.endDate ? (
                       <Button
                         color="primary"
                         onClick={() => getWinner(contest.contestId)}
                       >
                         End Contest
                       </Button>
+                    ) : (
+                      ''
                     )}
+                    {/* {!contest.endDate && (
+                      <Button
+                        color="primary"
+                        onClick={() => getWinner(contest.contestId)}
+                      >
+                        End Contest
+                      </Button>
+                    )} */}
                   </div>
                 </CardBody>
               </Card>
@@ -150,7 +205,7 @@ const DetailsPages = ({ match, location }) => {
                 </CardHeader>
                 <TabContent activeTab={activeTab}>
                   <TabPane tabId="Entrys">
-                    <Entry sc={sc} />
+                    <Entry sc={sc} winner={winner} />
                   </TabPane>
                   <TabPane tabId="participate">
                     {!contest.endDate && (

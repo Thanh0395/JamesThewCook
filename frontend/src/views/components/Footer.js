@@ -21,11 +21,11 @@ function Footer(props) {
                     href="#scroll"
                     onClick={(event) => scrollTo(event, 'home')}
                   >
-                    {/* <img 
+                    <img 
                       className="footer-logo"
                       alt="footer logo"
-                      src="/assets/logos/white-full.svg"
-                    /> */}
+                      src="/assets/logos/logo_JameThew.svg"
+                    />
                   </a>
                 </div>
               </div>

@@ -51,7 +51,7 @@ const Participate = ({ contestId, setreRender, setActiveTab, reRender }) => {
           console.log('error', error.response.data.status);
           if (error.response.data.status === 400) {
             setSuccessMsg('');
-            setErrorMsg('You already participate');
+            setErrorMsg('You already participated');
           }
         });
     }, 1000);

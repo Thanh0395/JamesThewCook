@@ -13,7 +13,7 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import SingleLightbox from 'components/pages/SingleLightbox';
-import whotoFollowData from 'data/follow';
+// import whotoFollowData from 'data/follow';
 import UserFollow from 'components/common/UserFollow';
 import recentPostsData from 'data/recentposts';
 import RecentPost from 'components/common/RecentPost';
@@ -25,8 +25,9 @@ import { getCurrentUser } from 'helpers/Utils';
 import { NavLink } from 'react-router-dom';
 import { adminRoot } from 'constants/defaultValues';
 import BlogListRecipes from 'components/HomeUserComponent/BlogListAllRecipes';
+import { GetListSCByUId } from 'services/Sy_Api/SCApi';
 
-const followData = whotoFollowData.slice(0, 5);
+// const followData = whotoFollowData.slice(0, 5);
 
 const ProfileUser = ({ match, location }) => {
     const uId = location.state && location.state.uid;
@@ -34,6 +35,7 @@ const ProfileUser = ({ match, location }) => {
     const [reRender, setRender] = useState(false)
     const [postList, setPostsList] = useState([])
     const [recipes, setRecipes] = useState([])
+    const [sc, setSc] = useState([])
     useEffect(() => {
         GetPostByUserId(uId)
             .then(rs => setPostsList(rs))
@@ -45,6 +47,7 @@ const ProfileUser = ({ match, location }) => {
             }))
     }, [reRender, uId])
     useEffect(() => {
+        GetListSCByUId(uId).then((rs) => setSc(rs))
         getUserByIdAPI(uId).then(rs => {
             setUser(rs)
             setRender(false)
@@ -151,13 +154,13 @@ const ProfileUser = ({ match, location }) => {
                                 <Card className="mb-4">
                                     <CardBody>
                                         <CardTitle>
-                                            <IntlMessages id="pages.who-to-follow" />
+                                            <p>{user.userName}&apos;s Entry</p>
                                         </CardTitle>
                                         <div className="remove-last-border remove-last-margin remove-last-padding">
-                                            {followData.map((itemData) => {
+                                            {sc.map((itemData) => {
                                                 return (
                                                     <UserFollow
-                                                        data={itemData}
+                                                        item={itemData}
                                                         key={`follow_${itemData.key}`}
                                                     />
                                                 );
