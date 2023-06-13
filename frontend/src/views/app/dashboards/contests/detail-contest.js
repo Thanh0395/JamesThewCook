@@ -57,6 +57,7 @@ const DetailsPages = ({ match, location }) => {
     GetContest(contest.contestId).then((rs) => {
       setContest(rs);
       if (rs.winner != null) {
+        console.log("winner", rs.winner)
         getUserByIdAPI(rs.winner).then((wn) => setWinner(wn));
       }
     });

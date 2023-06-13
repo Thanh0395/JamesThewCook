@@ -22,7 +22,7 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Colxx } from 'components/common/CustomBootstrap';
 // import IntlMessages from 'helpers/IntlMessages';
 // import SingleLightbox from 'components/pages/SingleLightbox';
-import whotoFollowData from 'data/follow';
+// import whotoFollowData from 'data/follow';
 // import UserFollow from 'components/common/UserFollow';
 import UserCardBasic from 'components/cards/UserCardBasic';
 import HomeRecipes from 'containers/HomeUserContainer/HomeRecipes';
@@ -33,7 +33,7 @@ import HomeAuthor from 'containers/HomeUserContainer/HomeAuthor';
 // import posts from 'data/posts';
 // import Post from 'components/cards/Post';
 
-const friendsData = whotoFollowData.slice();
+// const friendsData = whotoFollowData.slice();
 // const followData = whotoFollowData.slice(0, 5);
 
 const HomePage = ({ match }) => {
@@ -94,7 +94,7 @@ const HomePage = ({ match }) => {
                 to="#"
                 location={{}}
               >
-                Winer
+                Winner
               </NavLink>
             </NavItem>
           </Nav>
@@ -111,18 +111,9 @@ const HomePage = ({ match }) => {
             </TabPane>
             <TabPane tabId="friends">
               <Row>
-                {friendsData.map((itemData) => {
-                  return (
-                    <Colxx
-                      xxs="12"
-                      md="6"
-                      lg="4"
-                      key={`friend_${itemData.key}`}
-                    >
-                      <UserCardBasic data={itemData} />
-                    </Colxx>
-                  );
-                })}
+                <Colxx xxs="12" md="6" lg="4">
+                  <UserCardBasic/>
+                </Colxx>
               </Row>
             </TabPane>
           </TabContent>
