@@ -41,15 +41,18 @@ const UserCardBasic = ({ link = '#' }) => {
                 <div className=" d-flex flex-grow-1 min-width-zero">
                   <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                     <div className="min-width-zero">
+                      <CardSubtitle className="truncate mb-1">
+                        {item.title}
+                      </CardSubtitle>
                       <NavLink
                         to={{
                           pathname: '/app/home-user/profile-user',
                           state: { uid: it.uId },
                         }}
                       >
-                        <CardSubtitle className="truncate mb-1">
+                        <CardText className="text-muted text-small mb-2">
                           {it.email}
-                        </CardSubtitle>
+                        </CardText>
                       </NavLink>
                       <CardText className="text-muted text-small mb-2">
                         {it.userName}
