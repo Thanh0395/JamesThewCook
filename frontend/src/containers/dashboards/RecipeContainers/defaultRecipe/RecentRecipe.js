@@ -23,17 +23,22 @@ const RecentRecipe = () => {
       .then(GetListCountry().then(rs => setCountries(rs))
         .then(GetListCategory().then(rs => setCategories(rs))))
   }, [])
-  const {isMembership} = getCurrentUser();
+  const { isMembership } = getCurrentUser();
   const handleSeeDetail = (recipe) => {
-    if(!isMembership){
-      if(!recipe.isFree) alert("You are not a member yet.")
+    if (!isMembership) {
+      if (!recipe.isFree) {
+        const text = "You are not member yet! Get member now!"
+        if (window.confirm(text) === true) {
+          history.push("/app/member")
+        }
+      }
       else {
         history.push({
-              pathname: `${adminRoot}/home-user/detail-recipe`,
-              state: { recipe }
-            });
-      } 
-    }else{
+          pathname: `${adminRoot}/home-user/detail-recipe`,
+          state: { recipe }
+        });
+      }
+    } else {
       history.push({
         pathname: `${adminRoot}/home-user/detail-recipe`,
         state: { recipe }

@@ -12,18 +12,23 @@ import { adminRoot } from 'constants/defaultValues';
 
 const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) => {
   const history = useHistory();
-  const {isMembership} = getCurrentUser();
+  const { isMembership } = getCurrentUser();
   const navigateToDetailPage = async (rId) => {
     const recipe = await GetRecipe(rId);
-    if(!isMembership){
-      if(!recipe.isFree) alert("You are not a member yet.")
+    if (!isMembership) {
+      if (!recipe.isFree) {
+        const text = "You are not member yet! Get member now!"
+        if (window.confirm(text) === true) {
+          history.push("/app/member")
+        }
+      }
       else {
         history.push({
-              pathname: `${adminRoot}/home-user/detail-recipe`,
-              state: { recipe }
-            });
-      } 
-    }else{
+          pathname: `${adminRoot}/home-user/detail-recipe`,
+          state: { recipe }
+        });
+      }
+    } else {
       history.push({
         pathname: `${adminRoot}/home-user/detail-recipe`,
         state: { recipe }
@@ -47,7 +52,7 @@ const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) 
           <h6 className="mb-4">{recipeTitle}</h6>
           <footer>
             <p className="text-muted text-small mb-0 font-weight-light">
-              <Button onClick={()=> {
+              <Button onClick={() => {
                 navigateToDetailPage(recipeId)
               }} >
                 View More

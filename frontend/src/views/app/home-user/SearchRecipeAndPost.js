@@ -112,12 +112,12 @@ const Search = ({ match }) => {
                                                 )}
                                                 {item.recipeType && (
                                                     <p className="mb-1 text-muted text-small">
-                                                        Products | {item.recipeType}
+                                                        Type | {item.recipeType}
                                                     </p>
                                                 )}
                                                 {item.postType && (
                                                     <p className="mb-1 text-muted text-small">
-                                                        Products | {item.postType}
+                                                        Type | {item.postType}
                                                     </p>
                                                 )}
                                                 {item.recipeImage && (
