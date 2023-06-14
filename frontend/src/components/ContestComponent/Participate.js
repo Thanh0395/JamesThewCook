@@ -38,17 +38,14 @@ const Participate = ({ contestId, setreRender, setActiveTab, reRender }) => {
     formData.append('contestId', contestId);
     formData.append('file', values.file);
     setTimeout(() => {
-      console.log('payload:', payload);
       PostSc(formData)
         .then((rs) => {
-          console.log('rs:', rs.data);
           setreRender(!reRender);
           setActiveTab('Entrys');
           setSuccessMsg('Participate successfully');
           setErrorMsg('');
         })
         .catch((error) => {
-          console.log('error', error.response.data.status);
           if (error.response.data.status === 400) {
             setSuccessMsg('');
             setErrorMsg('You already participated');

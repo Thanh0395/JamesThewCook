@@ -15,6 +15,7 @@ import { DeleteRecipe, GetListRecipe } from 'services/Hung_Api/RecipeApi';
 import UpdateRecipe from 'views/app/dashboards/recipes/update-recipe';
 // import DetailRecipePage from 'views/app/dashboards/recipes/detail-recipe';
 import { DeleteImagesByRecipeId, GetListImages } from 'services/Hung_Api/MultiFileApi';
+import { DeleteRecipeFeedbackbyRecipeId } from 'services/Hung_Api/RecipeFeedbackApi';
 import UseModal from './UseModal';
 import DetailRecipeModal from './detailRecipe/DetailModal';
 // import DetailRecipeModal from './DetailModal';
@@ -132,13 +133,27 @@ const TableListRecipe = ({ match }) => {
   const handleDelete = (Id) => {
     DeleteImagesByRecipeId(Id).then(rs => {
       if (rs.status === 201) {
-        DeleteRecipe(Id).then(data => {
-          if (data.status === 200) {
-            setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
-          } else {
-            console.log(data);
+        DeleteRecipeFeedbackbyRecipeId(Id).then(result => {
+          if(result.status === 200 || !result){
+            DeleteRecipe(Id).then(data => {
+              if (data.status === 200) {
+                setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
+              } else {
+                console.log(data);
+              }
+            }).catch(
+              setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id))
+            )
           }
-        })
+        }).catch(
+          DeleteRecipe(Id).then(data => {
+            if (data.status === 200) {
+              setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
+            } else {
+              console.log(data);
+            }
+          })
+        )
       }
     })
   }
@@ -163,16 +178,12 @@ const TableListRecipe = ({ match }) => {
       {
         Header: 'Photo',
         accessor: 'featureImage',
-        cellClass: 'text-muted w-40',
+        cellClass: 'text-muted w-20',
         Cell: (props) =>
           <img
             src={`http://localhost:5013${props.value}`}
             style={{ width: '130px' }} alt="" aria-hidden="true"
           />,
-        // <img 
-        // src={`http://localhost:5013${images.find((item) => item.rId === props.row.original.rId)?.featureImage}`} 
-        //   style={{ width: '130px' }} alt="" aria-hidden="true" 
-        // />,
       },
       {
         Header: 'Ingredient',
@@ -194,7 +205,21 @@ const TableListRecipe = ({ match }) => {
         Header: 'CreatedAt',
         accessor: 'createdAt',
         cellClass: 'text-muted w-40',
-        Cell: (props) => <>{props.value}</>,
+        Cell: (props) => {
+          const date = new Date(props.value);
+          const formattedDate = date.toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric'
+          });
+          return <>{formattedDate}</>;
+        },
+      },
+      {
+        Header: 'IsFree',
+        accessor: 'isFree',
+        cellClass: 'text-muted w-10',
+        Cell: (props) => (props.value ? <>Free</> : <>Private</>),
       },
       {
         Header: 'Action',
@@ -233,9 +258,6 @@ const TableListRecipe = ({ match }) => {
   return (
     <Card className="mb-4">
       <CardBody>
-        {/* <CardTitle>
-          <IntlMessages id="table.list-recipe" />
-        </CardTitle> */}
         {selectedRecipeUpdate && ( // Render the update component if a recipe is selected
           <UpdateRecipe recipe={selectedRecipeUpdate} setSelectedRecipeUpdate={setSelectedRecipeUpdate} />
         )}

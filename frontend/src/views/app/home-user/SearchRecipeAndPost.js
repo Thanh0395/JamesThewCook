@@ -9,6 +9,7 @@ import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import { GetRecipe, SearchRecipeAndPost } from 'services/Hung_Api/RecipeApi';
 import { adminRoot } from 'constants/defaultValues';
 import { getCurrentUser } from 'helpers/Utils';
+import { GetPost } from 'services/Nhan_API/PostAPI';
 
 const Search = ({ match }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -33,9 +34,13 @@ const Search = ({ match }) => {
     const handleDetailItem = (item) => {
         if (isMembership === false) {
             if (!item.isFree) {
-                alert("You not have a member yet!")
+                const text = "You are not member yet! Get member now!"
+                if(window.confirm(text) === true){
+                    history.push("/app/member")
+                }
             } else {
                 const { recipeId } = item;
+                const {postId} = item;
                 if (recipeId) {
                     GetRecipe(recipeId)
                         .then(rs => {
@@ -44,10 +49,18 @@ const Search = ({ match }) => {
                                 state: { recipe: rs }
                             })
                         })
+                }else{
+                    GetPost(postId).then(rs => {
+                        history.push({
+                            pathname: `${adminRoot}/home-user/detail-post`,
+                            state: { post: rs }
+                        })
+                    })
                 }
             }
         } else {
             const { recipeId } = item;
+            const {postId} = item;
             if (recipeId) {
                 GetRecipe(recipeId)
                     .then(rs => {
@@ -56,6 +69,13 @@ const Search = ({ match }) => {
                             state: { recipe: rs }
                         })
                     })
+            }else{
+                GetPost(postId).then(rs => {
+                    history.push({
+                        pathname: `${adminRoot}/home-user/detail-post`,
+                        state: { post: rs }
+                    })
+                })
             }
         }
     }
@@ -92,12 +112,12 @@ const Search = ({ match }) => {
                                                 )}
                                                 {item.recipeType && (
                                                     <p className="mb-1 text-muted text-small">
-                                                        Products | {item.recipeType}
+                                                        Type | {item.recipeType}
                                                     </p>
                                                 )}
                                                 {item.postType && (
                                                     <p className="mb-1 text-muted text-small">
-                                                        Products | {item.postType}
+                                                        Type | {item.postType}
                                                     </p>
                                                 )}
                                                 {item.recipeImage && (

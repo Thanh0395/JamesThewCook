@@ -56,16 +56,22 @@ namespace JamesThewAPI.Repository
 			}
 		}
 
-		public async Task<bool> DeleteRecipeFeedback(int rfbId)
+		public async Task<bool> DeleteRecipeFeedback(int rId)
 		{
-			var recipeFeedbackDb = await _dbContext.RecipeFeedbacks.FindAsync(rfbId);
-			if(recipeFeedbackDb != null)
+			var recipeFeedbacks = await _dbContext.RecipeFeedbacks
+				.Where(r => r.RId == rId)
+				.ToListAsync();
+
+			if (recipeFeedbacks.Count > 0)
 			{
-				_dbContext.RecipeFeedbacks.Remove(recipeFeedbackDb);
+				_dbContext.RecipeFeedbacks.RemoveRange(recipeFeedbacks);
 				await _dbContext.SaveChangesAsync();
 				return true;
 			}
-			else { return false; }
+			else
+			{
+				return false;
+			}
 		}
 
 		public async Task<IEnumerable<RecipeFeedback>> GetListRecipeFeedbackByRecipeId(int rId)
