@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Lightbox from 'react-image-lightbox';
+import React from 'react';
+// import { NavLink } from 'react-router-dom';
+// import Lightbox from 'react-image-lightbox';
 
-const SingleLightbox = ({ thumb, className, large }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const SingleLightbox = ({ thumb, className }) => {
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <NavLink to="#" location={{}} onClick={() => setIsOpen(true)}>
+      {/* <NavLink to="#" onClick={() => setIsOpen(false)}> */}
         <img src={thumb} alt="thumbnail" className={className} />
-      </NavLink>
+      {/* </NavLink> */}
 
-      {isOpen && (
+      {/* {isOpen && (
         <Lightbox mainSrc={large} onCloseRequest={() => setIsOpen(false)} />
-      )}
+      )} */}
     </>
   );
 };
