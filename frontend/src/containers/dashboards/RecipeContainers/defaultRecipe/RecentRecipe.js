@@ -81,20 +81,37 @@ const RecentRecipe = () => {
                       alt=''
                       className="list-thumbnail border-0"
                     />
-                    <Badge
-                      key={index}
-                      className="position-absolute badge-top-right"
-                      color="theme-3"
-                      pill
-                    >
-                      {countries
-                        .filter(country => country.countryId === item.countryId)
-                        .map(filteredCountry => (
-                          <p className="text-muted mb-1 text-small" key={index}>
-                            {filteredCountry.countryName}
-                          </p>
-                        ))}
-                    </Badge>
+                    {countries
+                      .filter(country => country.countryId === item.countryId)
+                      .map(filteredCountry => (
+                        <Badge
+                          key={index}
+                          className="position-absolute badge-top-right"
+                          color="primary"
+                          pill
+                        >
+                          {filteredCountry.countryName}
+                        </Badge>
+                      ))}
+                    {item.isFree ? (
+                      <Badge
+                        key={index}
+                        className="position-absolute badge-top-right-2"
+                        color="secondary"
+                        pill
+                      >
+                        Free
+                      </Badge>
+                    ) : (
+                      <Badge
+                        key={index}
+                        className="position-absolute badge-top-right-2"
+                        color="secondary"
+                        pill
+                      >
+                        For Member
+                      </Badge>
+                    )}
                   </Card>
 
                   <div className="pl-3 pt-2 pr-2 pb-2">
