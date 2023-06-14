@@ -26,6 +26,7 @@ const BlankPage = React.lazy(() =>
 const HomeUser = React.lazy(() => import(/* webpackChunkName: "ui" */ './home-user'));
 const FeedbackPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FeedbackPage'));
 const FaqPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './FaqPage'));
+const MemberPage = React.lazy(() => import(/* webpackChunkName: "ui" */ './MemberPage'));
 
 const App = ({ match }) => {
   const {role} = getCurrentUser();
@@ -63,6 +64,10 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/faq`}
               render={(props) => <FaqPage {...props} />}
+            />
+            <Route
+              path={`${match.url}/member`}
+              render={(props) => <MemberPage {...props} />}
             />
             {/* <Route
               path={`${match.url}/applications`}

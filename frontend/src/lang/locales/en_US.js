@@ -176,6 +176,7 @@ module.exports = {
   "menu.feedback-to-page":"Feedback Page",
   "menu.faq-page":"FAQ",
   "menu.feedback": "feedback",
+  "menu.member": "Member",
 
   /* Sy COntest */
   'menu.contests': 'Contest',

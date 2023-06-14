@@ -25,6 +25,7 @@ const SignupSchema = Yup.object().shape({
 
 const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
     const [inputFile, setInputFile] = useState(null)
+    const {role} = getCurrentUser();
     const handleFileChange = (e) => {
         setInputFile(e.target.files[0]);
     };
@@ -189,7 +190,8 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
                                             </div>
                                         ) : null}
                                     </FormGroup>
-                                    <FormGroup className="error-l-100">
+                                    {(role === "admin") && (
+                                        <FormGroup className="error-l-100">
                                         <Label className="d-block">
                                             <IntlMessages id="form-recipe-create.isfree" />
                                         </Label>
@@ -201,6 +203,7 @@ const FormUpdateRecipe = ({ recipe, setSelectedRecipeUpdate }) => {
                                             onBlur={setFieldTouched}
                                         />
                                     </FormGroup>
+                                    )}
                                     <FormGroup className="error-l-100">
                                         <Label>Image Current</Label>
                                         <div>
