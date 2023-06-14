@@ -7,7 +7,6 @@ function Entry({ sc, winner }) {
   const [modalBasic, setModalBasic] = useState(false);
   const [scUpdate, setScUpdate] = useState(null);
   const onUpdate = (sContest) => {
-    console.log('sContest :', sContest);
     setScUpdate(sContest);
     setModalBasic(true);
   };

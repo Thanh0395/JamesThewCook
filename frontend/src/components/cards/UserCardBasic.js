@@ -20,8 +20,6 @@ const UserCardBasic = ({ link = '#' }) => {
       });
     });
   }, []);
-  console.log('Contest', contest);
-  console.log('Winner', winner);
   return (
     <>
       {contest.map((item) => {
