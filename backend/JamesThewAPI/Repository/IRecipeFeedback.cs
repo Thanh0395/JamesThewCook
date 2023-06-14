@@ -9,7 +9,7 @@ namespace JamesThewAPI.Repository
 		Task<RecipeFeedback> GetRecipeFeedback(int rfbId);
 		Task<RecipeFeedback> AddRecipeFeedback(RecipeFeedback recipeFeedback);
 		Task<RecipeFeedback> UpdateRecipeFeedback(RecipeFeedback recipeFeedback);
-		Task<bool> DeleteRecipeFeedback(int rfbId);
+		Task<bool> DeleteRecipeFeedback(int rId);
 		Task<IEnumerable<RecipeFeedback>> GetListRecipeFeedbackByRecipeId(int rId);
 		Task<IEnumerable<RecipebyFeedbackCountModel>> GetListByRecipeIdByRIdCount();
 

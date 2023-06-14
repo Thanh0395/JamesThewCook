@@ -36,7 +36,7 @@ const Search = ({ match }) => {
             if (!item.isFree) {
                 const text = "You are not member yet! Get member now!"
                 if(window.confirm(text) === true){
-                    window.open("/#member", "_blank")
+                    history.push("/app/member")
                 }
             } else {
                 const { recipeId } = item;

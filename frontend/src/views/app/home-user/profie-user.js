@@ -13,10 +13,7 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import SingleLightbox from 'components/pages/SingleLightbox';
-// import whotoFollowData from 'data/follow';
 import UserFollow from 'components/common/UserFollow';
-import recentPostsData from 'data/recentposts';
-import RecentPost from 'components/common/RecentPost';
 import { getUserByIdAPI } from 'services/Thanh_Api/UserApi';
 import FormUpdateProfile from 'components/HomeUserComponent/FormUpdateProfile';
 import PostRecent from 'components/HomeUserComponent/PostRecent';
@@ -27,7 +24,6 @@ import { adminRoot } from 'constants/defaultValues';
 import BlogListRecipes from 'components/HomeUserComponent/BlogListAllRecipes';
 import { GetListSCByUId } from 'services/Sy_Api/SCApi';
 
-// const followData = whotoFollowData.slice(0, 5);
 
 const ProfileUser = ({ match, location }) => {
     const uId = location.state && location.state.uid;
@@ -162,24 +158,6 @@ const ProfileUser = ({ match, location }) => {
                                                     <UserFollow
                                                         item={itemData}
                                                         key={`follow_${itemData.key}`}
-                                                    />
-                                                );
-                                            })}
-                                        </div>
-                                    </CardBody>
-                                </Card>
-
-                                <Card className="mb-4">
-                                    <CardBody>
-                                        <CardTitle>
-                                            <IntlMessages id="pages.recent-posts" />
-                                        </CardTitle>
-                                        <div className="remove-last-border remove-last-margin remove-last-padding">
-                                            {recentPostsData.map((itemData) => {
-                                                return (
-                                                    <RecentPost
-                                                        data={itemData}
-                                                        key={`recent_${itemData.key}`}
                                                     />
                                                 );
                                             })}

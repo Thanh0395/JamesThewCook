@@ -20,8 +20,8 @@ export const PutRecipeFeedback = async (dataPut) => {
     return data.data.data
 }
 
-export const DeleteRecipeFeedback = async (rfbId) => {
-    const data = await axios.delete(`http://localhost:5013/api/RecipeFeedbackFeedback/${rfbId}`)
+export const DeleteRecipeFeedbackbyRecipeId = async (rId) => {
+    const data = await axios.delete(`http://localhost:5013/api/RecipeFeedbackFeedback/${rId}`)
     return data.data;
 }
 

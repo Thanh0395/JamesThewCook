@@ -164,6 +164,12 @@ const data = [
     to:`${adminRoot}/faq`
   },
   {
+    id:'member-page',
+    icon:'simple-icon-present',
+    label:'menu.member',
+    to:`${adminRoot}/member`
+  },
+  {
     id: 'pages',
     icon: 'iconsminds-digital-drawing',
     label: 'menu.pages',

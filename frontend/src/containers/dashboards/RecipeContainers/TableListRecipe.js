@@ -15,6 +15,7 @@ import { DeleteRecipe, GetListRecipe } from 'services/Hung_Api/RecipeApi';
 import UpdateRecipe from 'views/app/dashboards/recipes/update-recipe';
 // import DetailRecipePage from 'views/app/dashboards/recipes/detail-recipe';
 import { DeleteImagesByRecipeId, GetListImages } from 'services/Hung_Api/MultiFileApi';
+import { DeleteRecipeFeedbackbyRecipeId } from 'services/Hung_Api/RecipeFeedbackApi';
 import UseModal from './UseModal';
 import DetailRecipeModal from './detailRecipe/DetailModal';
 // import DetailRecipeModal from './DetailModal';
@@ -132,13 +133,27 @@ const TableListRecipe = ({ match }) => {
   const handleDelete = (Id) => {
     DeleteImagesByRecipeId(Id).then(rs => {
       if (rs.status === 201) {
-        DeleteRecipe(Id).then(data => {
-          if (data.status === 200) {
-            setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
-          } else {
-            console.log(data);
+        DeleteRecipeFeedbackbyRecipeId(Id).then(result => {
+          if(result.status === 200 || !result){
+            DeleteRecipe(Id).then(data => {
+              if (data.status === 200) {
+                setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
+              } else {
+                console.log(data);
+              }
+            }).catch(
+              setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id))
+            )
           }
-        })
+        }).catch(
+          DeleteRecipe(Id).then(data => {
+            if (data.status === 200) {
+              setRecipies(prevRecipies => prevRecipies.filter(item => item.rId !== Id));
+            } else {
+              console.log(data);
+            }
+          })
+        )
       }
     })
   }
