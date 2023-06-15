@@ -10,7 +10,7 @@ import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { adminRoot } from 'constants/defaultValues';
 import * as Yup from 'yup';
-import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon } from 'reactstrap';
+import { Row, Card, CardBody, FormGroup, Label, Button, InputGroup, InputGroupAddon, CardTitle } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { FormikCustomRadioGroup } from 'containers/dashboards/RecipeContainers/formsRecipe/FormikFields';
@@ -87,6 +87,9 @@ const FormCreateRecipeUser = () => {
             </Colxx>
             <Colxx xxs="12">
                 <Card>
+                    <CardTitle>
+                        <h2>Create Recipe Form</h2>
+                    </CardTitle>
                     <CardBody>
                         <Formik
                             initialValues={{
