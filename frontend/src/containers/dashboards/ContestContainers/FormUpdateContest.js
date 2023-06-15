@@ -28,7 +28,7 @@ const FormUpdateContest = ({ contest, setSelectedContestUpdate }) => {
     formData.append('title', values.title);
     formData.append('description', values.description);
     formData.append('startDate', values.startDate);
-    formData.append('endDate', values.endDate);
+    // formData.append('endDate', values.endDate);
     formData.append('prize', values.prize);
     formData.append('file', inputFile);
     console.log("Payload :", values)
@@ -53,7 +53,7 @@ const FormUpdateContest = ({ contest, setSelectedContestUpdate }) => {
                 title: contest.title,
                 description: contest.description,
                 startDate: contest.startDate,
-                endDate: contest.endDate,
+                // endDate: contest.endDate,
                 prize: contest.prize,
               }}
               onSubmit={onSubmit}
@@ -99,7 +99,7 @@ const FormUpdateContest = ({ contest, setSelectedContestUpdate }) => {
                       onChange={handleChange}
                     />
                   </FormGroup>
-                  <FormGroup className="error-l-100">
+                  {/* <FormGroup className="error-l-100">
                     <Label>EndDate</Label>
                     <input
                       type="datetime-local"
@@ -108,7 +108,7 @@ const FormUpdateContest = ({ contest, setSelectedContestUpdate }) => {
                       value={values.endDate}
                       onChange={handleChange}
                     />
-                  </FormGroup>
+                  </FormGroup> */}
                   <FormGroup className="error-l-100">
                     <Label>
                       <IntlMessages id="form-contest-create.prize" />

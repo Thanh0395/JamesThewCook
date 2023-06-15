@@ -6,5 +6,6 @@
         public string recipeTitle { get; set; }
         public int recipeIdCount { get; set; }
         public string recipeImg { get; set; }
+        public bool? IsFree { get; set; }
     }
 }

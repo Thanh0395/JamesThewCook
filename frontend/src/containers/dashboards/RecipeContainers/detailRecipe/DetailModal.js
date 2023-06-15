@@ -55,7 +55,7 @@ const DetailRecipeModal = ({ isShow, hide, recipe }) => {
                         See Detail
                       </Button>{" "}
                       <Button color="secondary" onClick={toggle}>
-                        Cancel
+                        Close
                       </Button>
                     </ModalFooter>
                   </Modal>

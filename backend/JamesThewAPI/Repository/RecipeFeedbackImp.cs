@@ -91,6 +91,7 @@ namespace JamesThewAPI.Repository
 					recipeTitle = string.Empty,
 					recipeIdCount = group.Count(),
 					recipeImg = string.Empty,
+					IsFree = null,
 				})
 				.ToListAsync();
 			foreach (var item in query)
@@ -100,6 +101,7 @@ namespace JamesThewAPI.Repository
 				{
 					item.recipeTitle = recipe.Title;
 					item.recipeImg = recipe.FeatureImage;
+					item.IsFree = recipe.IsFree;
 				}
 			}
 

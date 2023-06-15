@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { Button, Card, CardBody } from 'reactstrap';
+import { Badge, Button, Card, CardBody } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 // import { items } from 'data/carouselItems';
 import { Colxx } from 'components/common/CustomBootstrap';
@@ -10,7 +10,7 @@ import { GetRecipe } from 'services/Hung_Api/RecipeApi';
 import { adminRoot } from 'constants/defaultValues';
 
 
-const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) => {
+const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg, isFree }) => {
   const history = useHistory();
   const { isMembership } = getCurrentUser();
   const navigateToDetailPage = async (rId) => {
@@ -46,6 +46,25 @@ const CarouselNoControl = ({ recipeId, recipeTitle, recipeIdCount, recipeImg }) 
           >
             {recipeIdCount}Comments
           </span>
+          {isFree ? (
+            <Badge
+              key={`isFree_${recipeId}`}
+              color="secondary"
+              pill
+              className="position-absolute badge-top-left-2"
+            >
+              Free
+            </Badge>
+          ) : (
+            <Badge
+              key={`isFree_${recipeId}`}
+              color="secondary"
+              pill
+              className="position-absolute badge-top-left-2"
+            >
+              For Member
+            </Badge>
+          )}
 
         </div>
         <CardBody>

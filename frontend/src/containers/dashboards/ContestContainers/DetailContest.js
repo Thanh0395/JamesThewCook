@@ -58,7 +58,7 @@ const DetailContest = ({ isShow, hide, contest }) => {
                         See All Entries
                       </Button>{" "}
                       <Button color="secondary" onClick={toggle}>
-                        Cancel
+                        Close
                       </Button>
                     </ModalFooter>
                   </Modal>

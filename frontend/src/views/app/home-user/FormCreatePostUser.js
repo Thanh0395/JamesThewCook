@@ -15,6 +15,7 @@ import {
     FormGroup,
     Label,
     Button,
+    CardTitle,
 } from 'reactstrap';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
@@ -68,6 +69,9 @@ const FormCreatePostUser = () => {
             </Colxx>
             <Colxx xxs="12">
                 <Card>
+                    <CardTitle>
+                        <h2>Create Post Form</h2>
+                    </CardTitle>
                     <CardBody>
                         <Formik
                             initialValues={{
