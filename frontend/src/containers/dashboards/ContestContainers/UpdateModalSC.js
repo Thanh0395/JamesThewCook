@@ -30,6 +30,7 @@ const UpdateModalSC = ({ modalBasic, setModalBasic, scUpdate, winner }) => {
         }
       });
   };
+  console.log('scUpdate', scUpdate);
   return (
     <Card className="mb-4">
       <CardBody>
@@ -50,7 +51,7 @@ const UpdateModalSC = ({ modalBasic, setModalBasic, scUpdate, winner }) => {
               <FormUpdateSC scUpdate={scUpdate} />
             </ModalBody>
             <ModalFooter>
-              {!winner && (
+              {!winner && (scUpdate && (scUpdate.uId === getCurrentUser().uid)) ? (
                 <div>
                   <Button
                     color="primary"
@@ -92,9 +93,11 @@ const UpdateModalSC = ({ modalBasic, setModalBasic, scUpdate, winner }) => {
                     </>
                   </Collapse>
                 </div>
+              ) : (
+                ''
               )}
               <Button color="info" onClick={() => setModalBasic(false)}>
-                Cancel
+                Close
               </Button>
             </ModalFooter>
           </Modal>
