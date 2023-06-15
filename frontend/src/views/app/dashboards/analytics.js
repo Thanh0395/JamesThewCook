@@ -1,28 +1,28 @@
 import React from 'react';
-import { Row, Card, CardBody, CardSubtitle } from 'reactstrap';
+import { Row, Card, CardBody } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
-import IntlMessages from 'helpers/IntlMessages';
+// import IntlMessages from 'helpers/IntlMessages';
 
-import {
-    // DoughnutChart,
-    // PolarAreaChart,
-    AreaChart,
-    // ScatterChart,
-    BarChart,
-    // RadarChart,
-    // PieChart,
-} from 'components/charts';
+// import {
+//     // DoughnutChart,
+//     // PolarAreaChart,
+//     AreaChart,
+//     // ScatterChart,
+//     BarChart,
+//     // RadarChart,
+//     // PieChart,
+// } from 'components/charts';
 
-import {
-    // polarAreaChartData,
-    areaChartData,
-    // scatterChartData,
-    barChartData,
-    // radarChartData,
-    // pieChartData,
-    // doughnutChartData,
-} from 'data/charts';
+// import {
+//     // polarAreaChartData,
+//     areaChartData,
+//     // scatterChartData,
+//     barChartData,
+//     // radarChartData,
+//     // pieChartData,
+//     // doughnutChartData,
+// } from 'data/charts';
 import ChartRecipeCategory from 'containers/dashboards/RecipeContainers/ChartRecipeCategory';
 
 const AnalyticsPage = ({ match }) => {
@@ -45,7 +45,7 @@ const AnalyticsPage = ({ match }) => {
                 </Colxx>
             </Row>
 
-            <Row className="mb-4">
+            {/* <Row className="mb-4">
                 <Colxx xxs="12">
                     <Card>
                         <CardBody>
@@ -73,7 +73,7 @@ const AnalyticsPage = ({ match }) => {
                         </CardBody>
                     </Card>
                 </Colxx>
-            </Row>
+            </Row> */}
 
         </>
     );

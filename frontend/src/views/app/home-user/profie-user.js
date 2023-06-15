@@ -78,13 +78,13 @@ const ProfileUser = ({ match, location }) => {
                                                 <IntlMessages id="menu.create-post" />
                                             </NavLink>
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        {/* <DropdownItem>
                                             <IntlMessages id="pages.another-action" />
                                         </DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem>
                                             <IntlMessages id="pages.another-action" />
-                                        </DropdownItem>
+                                        </DropdownItem> */}
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             )}

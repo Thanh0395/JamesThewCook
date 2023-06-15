@@ -30,7 +30,7 @@ import(/* webpackChunkName: "dashboard-content" */ './category-country')
 const Recipes = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
     <Switch>
-      <Redirect exact from={`${match.url}/`} to={`${match.url}/default`} />
+      <Redirect exact from={`${match.url}/`} to={`${match.url}/list-recipe'`} />
       <Route
         path={`${match.url}/default`}
         render={(props) => <RecipesDefault {...props} />}

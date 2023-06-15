@@ -334,12 +334,12 @@ const TopNav = ({
               <DropdownItem onClick={() => handleChangePageProfile()} >
                 Profile
               </DropdownItem>
-              <DropdownItem>
+              {/* <DropdownItem>
                 Features
               </DropdownItem>
               <DropdownItem>
                 History
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem divider />
               <DropdownItem onClick={() => handleLogout()}>
                 Sign out
